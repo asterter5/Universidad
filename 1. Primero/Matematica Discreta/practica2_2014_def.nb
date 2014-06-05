@@ -1,0 +1,1066 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     33457,       1057]
+NotebookOptionsPosition[     30614,        967]
+NotebookOutlinePosition[     30950,        982]
+CellTagsIndexPosition[     30907,        979]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ StyleBox[
+  RowBox[{"ASTOR", " ", "PRIETO", " ", "DEHGHAN", " ", "POUR"}],
+  FontSize->36]], "Input",
+ CellChangeTimes->{
+  3.60256410256954*^9, 3.602564141644103*^9, {3.6025656960576963`*^9, 
+   3.602565703042205*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.60256413318808*^9, 3.6025641351476917`*^9}},
+ FontSize->36],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Pr\[AGrave]ctica 2: Algorisme de divisi\[OAcute]",
+ FontFamily->"Arial"]], "Title",
+ TextAlignment->Center],
+
+Cell["", "Text",
+ TextAlignment->Center,
+ FontSize->36],
+
+Cell[TextData[StyleBox["En aquesta pr\[AGrave]ctica compararem dos \
+m\[EGrave]todes per calcular el m\[AGrave]xim com\[UAcute] divisor i m\
+\[IAcute]nim com\[UAcute] m\[UAcute]ltiple de dos nombres enters no nuls. Per \
+definici\[OAcute]:",
+ FontFamily->"Times New Roman"]], "Text",
+ FontSize->36],
+
+Cell[BoxData[
+ FormBox[
+  StyleBox[
+   RowBox[{"\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"mcd", "(", 
+       RowBox[{"a", ",", "b"}], ")"}], "=", 
+      RowBox[{"max", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"n", "\[Element]", 
+          RowBox[{"\[DoubleStruckCapitalN]", ":", 
+           RowBox[{"n", "|", "a"}]}]}], ",", " ", 
+         RowBox[{"n", "|", "b"}]}], "}"}]}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"mcm", "(", 
+       RowBox[{"a", ",", "b"}], ")"}], "=", 
+      RowBox[{"min", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"n", "\[Element]", 
+           RowBox[{"\[DoubleStruckCapitalN]", ":", 
+            RowBox[{"a", "|", "n"}]}]}], ",", " ", 
+          RowBox[{"b", "|", "n"}]}], "}"}], "."}]}]}]}]}],
+   FontFamily->"Times New Roman"], TraditionalForm]], "DisplayFormula",
+ CellChangeTimes->{3.6025613840625*^9},
+ TextAlignment->Center,
+ FontSize->36],
+
+Cell["\<\
+Aquestes definicions no s\[OAcute]n efectives, \[EAcute]s a dir, no mostren \
+un m\[EGrave]tode per calcular all\[OGrave] que defineixen. Per\[OGrave] es \
+pot comprovar que donades dues factoritzacions:\
+\>", "Text",
+ FontSize->36],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"a", "=", 
+     RowBox[{
+      SuperscriptBox[
+       SubscriptBox["p", "0"], 
+       SubscriptBox["\[Alpha]", "0"]], "\[CenterDot]", "\[Ellipsis]", 
+      "\[CenterDot]", 
+      SuperscriptBox[
+       SubscriptBox["p", "s"], 
+       SubscriptBox["\[Alpha]", "s"]]}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{"b", "=", 
+     RowBox[{
+      SuperscriptBox[
+       SubscriptBox["p", "0"], 
+       SubscriptBox["\[Beta]", "0"]], "\[CenterDot]", "\[Ellipsis]", 
+      "\[CenterDot]", 
+      SuperscriptBox[
+       SubscriptBox["p", "s"], 
+       SubscriptBox["\[Beta]", "s"]]}]}], ","}]}], 
+  TraditionalForm]], "DisplayFormula",
+ CellChangeTimes->{3.602561382125*^9},
+ TextAlignment->Center,
+ FontSize->36],
+
+Cell[TextData[{
+ "amb ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[Alpha]", "i"], "\[GreaterEqual]", "0"}], 
+   TraditionalForm]]],
+ " y ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["\[Beta]", "i"], "\[GreaterEqual]", "0"}], TraditionalForm]]],
+ ", aleshores el m\[AGrave]xim com\[UAcute] divisor i el m\[IAcute]nim com\
+\[UAcute] m\[UAcute]ltiple es poden calcular aix\[IAcute]:"
+}], "Text",
+ FontSize->36],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"mcd", "(", 
+      RowBox[{"a", ",", "b"}], ")"}], "=", 
+     RowBox[{
+      SuperscriptBox[
+       SubscriptBox["p", "0"], 
+       SubscriptBox["m", "0"]], "\[CenterDot]", "\[Ellipsis]", "\[CenterDot]", 
+      SuperscriptBox[
+       SubscriptBox["p", "s"], 
+       SubscriptBox["m", "s"]]}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"mcm", "(", 
+      RowBox[{"a", ",", "b"}], ")"}], "=", 
+     RowBox[{
+      SuperscriptBox[
+       SubscriptBox["p", "0"], 
+       SubscriptBox["M", "0"]], "\[CenterDot]", "\[Ellipsis]", "\[CenterDot]", 
+      SuperscriptBox[
+       SubscriptBox["p", "s"], 
+       SubscriptBox["M", "s"]]}]}], ","}]}], 
+  TraditionalForm]], "DisplayFormula",
+ CellChangeTimes->{3.6025613810625*^9},
+ TextAlignment->Center,
+ FontSize->36],
+
+Cell[TextData[{
+ "\non ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["m", "i"], "=", 
+    RowBox[{"min", 
+     RowBox[{"{", 
+      RowBox[{
+       SubscriptBox["\[Alpha]", "i"], ",", 
+       SubscriptBox["\[Beta]", "i"]}], "}"}]}]}], TraditionalForm]]],
+ " i ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["M", "i"], "=", 
+    RowBox[{"max", 
+     RowBox[{"{", 
+      RowBox[{
+       SubscriptBox["\[Alpha]", "i"], ",", 
+       SubscriptBox["\[Beta]", "i"]}], "}"}]}]}], TraditionalForm]]],
+ ". Donades aquestes igualtats, \[EAcute]s evident la f\[OAcute]rmula:"
+}], "Text",
+ CellChangeTimes->{3.602561376328125*^9},
+ FontSize->36],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"a", "\[CenterDot]", "b"}], "=", 
+    RowBox[{
+     RowBox[{"mcd", "(", 
+      RowBox[{"a", ",", "b"}], ")"}], "\[CenterDot]", 
+     RowBox[{
+      RowBox[{"mcm", "(", 
+       RowBox[{"a", ",", "b"}], ")"}], "."}]}]}]}], 
+  TraditionalForm]], "DisplayFormula",
+ CellChangeTimes->{3.602561377703125*^9},
+ TextAlignment->Center,
+ FontSize->36],
+
+Cell["\<\
+
+Amb la qual cosa, el c\[AGrave]lcul del m\[IAcute]nim com\[UAcute] \
+m\[UAcute]ltiple es redueix al c\[AGrave]lcul del m\[AGrave]xim com\[UAcute] \
+divisor, ja que\
+\>", "Text",
+ CellChangeTimes->{3.602561375359375*^9},
+ FontSize->36],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"mcm", "(", 
+     RowBox[{"a", ",", "b"}], ")"}], "=", 
+    RowBox[{"a", "\[CenterDot]", 
+     RowBox[{"b", "/", 
+      RowBox[{
+       RowBox[{"mcd", "(", 
+        RowBox[{"a", ",", "b"}], ")"}], ".", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]}]}]}], 
+  TraditionalForm]], "DisplayFormula",
+ CellChangeTimes->{{3.602501178965536*^9, 3.6025012067591257`*^9}, {
+   3.6025018102666445`*^9, 3.6025018126487813`*^9}, 3.602561379453125*^9},
+ TextAlignment->Center,
+ FontSize->36],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6025052342054825`*^9, 3.6025052348415194`*^9}},
+ FontSize->36],
+
+Cell[TextData[{
+ "\nEl problema \[EAcute]s, per tant, saber factoritzar enters. ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " disposa de diverses funcions per treballar amb nombres enters, com ara, ",
+ StyleBox["FactorInteger[]", "Program"],
+ ", ",
+ StyleBox["Prime[]", "Program"],
+ ", ",
+ StyleBox["PrimeQ[]", "Program"],
+ ", ... (esbrina qu\[EGrave] fan). \n\nCalculem el ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"mcd", "(", 
+    RowBox[{"1083815", ",", "234023984234"}], ")"}], TraditionalForm]]],
+ ":"
+}], "Text",
+ CellChangeTimes->{{3.602501224504141*^9, 3.6025017817860155`*^9}, {
+  3.6025018246174655`*^9, 3.602501933979721*^9}, {3.602501966883603*^9, 
+  3.6025019699877806`*^9}, {3.602502005087788*^9, 3.602502091963757*^9}, {
+  3.6025021584335585`*^9, 3.6025021654689612`*^9}, {3.602505240649852*^9, 
+  3.6025052431059923`*^9}, {3.6025613648125*^9, 3.602561366515625*^9}},
+ FontSize->36],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"FactorInteger", "[", "1083815", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"FactorInteger", "[", "234023984234", "]"}]}], "Input",
+ CellChangeTimes->{3.602561543453125*^9},
+ FontSize->36],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"5", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"43", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"71", ",", "2"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.60256434954314*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"2", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"43", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"71", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"891323", ",", "1"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.602564349554014*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "\nAix\[IAcute] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"mcd", "(", 
+     RowBox[{"1083815", ",", "234023984234"}], ")"}], "=", 
+    RowBox[{
+     RowBox[{
+      SuperscriptBox["2", "0"], 
+      SuperscriptBox["5", "0"], 
+      SuperscriptBox["43", "1"], 
+      SuperscriptBox["71", "1"], 
+      SuperscriptBox["891323", "0"]}], "=", 
+     RowBox[{"43", "*", "71"}]}]}], TraditionalForm]]],
+ ". Efectivament:"
+}], "Text",
+ CellChangeTimes->{3.60256155490625*^9},
+ FontSize->36],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"GCD", "[", 
+    RowBox[{"1083815", ",", "234023984234"}], "]"}], "\[Equal]", 
+   RowBox[{"43", "*", "71"}]}]}]], "Input",
+ CellChangeTimes->{3.60256157171875*^9},
+ FontSize->36],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{3.602564406546712*^9}]
+}, Open  ]],
+
+Cell["\<\
+
+L\[CloseCurlyQuote]algorisme \[EAcute]s el seg\[UDoubleDot]ent:\
+\>", "Text",
+ CellChangeTimes->{{3.6024981453723993`*^9, 3.60249819584247*^9}, 
+   3.60256138896875*^9},
+ FontSize->36],
+
+Cell["", "Text",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellChangeTimes->{{3.602498519542923*^9, 3.602498524002929*^9}, 
+   3.60249861744306*^9},
+ FontSize->36],
+
+Cell[BoxData[{
+ RowBox[{
+  StyleBox[
+   RowBox[{
+    RowBox[{"Llegir", " ", 
+     FormBox["a",
+      TraditionalForm], " ", "i", " ", 
+     FormBox["b",
+      TraditionalForm]}], ",", "\n", 
+    RowBox[{
+     FormBox[
+      RowBox[{"l", "\[LongLeftArrow]"}],
+      TraditionalForm], "llista", " ", "dels", " ", "factors", "  ", "amb", 
+     " ", "els", " ", "corresponents", " ", "exponents", "  ", "de", "  ", 
+     FormBox[
+      FormBox[
+       RowBox[{"a", " ", "i", " ", "de", " ", 
+        FormBox[
+         RowBox[{
+          FormBox[
+           RowBox[{"b", " ", "ordenats"}],
+           TraditionalForm], " ", "respecte", " ", "als", " ", "factors"}],
+         TraditionalForm]}],
+       TraditionalForm],
+      TraditionalForm]}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"i", "\[LongLeftArrow]", " ", "longitud"}], " ", "de", " ", 
+     "l"}], ",", "\n", 
+    RowBox[{"t", "\[LongLeftArrow]", 
+     RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{"1", "\[LongLeftArrow]", "s"}]}], "Program"], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"Mentres", "  ", 
+     FormBox[
+      RowBox[{"i", ">", "0"}],
+      TraditionalForm]}], ":", "\n", "\t", 
+    RowBox[{"Mentres", " ", 
+     FormBox[
+      RowBox[{" ", 
+       RowBox[{
+        SubscriptBox["l", "11"], "\[NotEqual]", 
+        RowBox[{
+         SubscriptBox["l", "12"], ":", "\[IndentingNewLine]", "        ", 
+         RowBox[{
+          RowBox[{"l", "\[LongLeftArrow]", " ", "l"}], "-", 
+          SubscriptBox["l", "11"]}]}]}]}],
+      TraditionalForm]}]}], ",", "\[IndentingNewLine]", 
+   "                    ", 
+   RowBox[{
+    RowBox[{"i", "\[LongLeftArrow]", " ", "i"}], "-", "1"}], ",", 
+   "\[IndentingNewLine]", "                         ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Si", " ", "i"}], "\[LessSlantEqual]", " ", "1"}], ":", " ", 
+     "surt"}], ";"}]}], "Program"], "\n", 
+ RowBox[{
+  StyleBox["             ", "Program"], 
+  StyleBox[
+   RowBox[{
+    RowBox[{"fi", " ", "Mentres"}], ";"}], "Program"], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  StyleBox["\t              ", "Program"], 
+  StyleBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"Si", " ", "i"}], ">", "1"}], ":", "\[IndentingNewLine]", 
+     "                           ", 
+     RowBox[{
+      RowBox[{"t", "\[LongLeftArrow]", " ", "t"}], " ", "\[SquareUnion]", " ", 
+      RowBox[{"{", " ", 
+       RowBox[{
+        SubscriptBox["l", "11"], ",", 
+        RowBox[{"min", 
+         RowBox[{"{", 
+          RowBox[{
+           SubscriptBox["l", "21"], ",", 
+           SubscriptBox["l", "22"]}], "}"}]}]}], "}"}]}]}], ",", 
+    "\[IndentingNewLine]", "                          ", 
+    RowBox[{
+     RowBox[{"fi", " ", "Si"}], ";"}]}], "Program"], "\[IndentingNewLine]", 
+  StyleBox["    ", "Program"]}], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{"               ", 
+   FormBox[
+    RowBox[{
+     RowBox[{"l", "\[LongLeftArrow]", " ", "l"}], " ", "\\", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       SubscriptBox["l", "1"], ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          FormBox[
+           RowBox[{
+            RowBox[{
+             SubscriptBox["l", "2"], "}"}], ",", "\[IndentingNewLine]", 
+            "     "}],
+           TraditionalForm], "  ", 
+          RowBox[{"i", "\[LongLeftArrow]", " ", "i"}]}], "-", "2"}], 
+        ";"}]}]}]}],
+    TraditionalForm]}], "Program"], "\n", 
+ RowBox[{
+  StyleBox["    ", "Program"], 
+  StyleBox[
+   RowBox[{
+    RowBox[{"fi", " ", "Mentres"}], ";"}], "Program"], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{"   ", 
+   RowBox[{
+    RowBox[{"Si", " ", "t"}], "\[NotEqual]", 
+    RowBox[{"{", "}"}]}], " "}], "Program"], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{"        ", 
+   RowBox[{"s", "\[LongLeftArrow]", 
+    RowBox[{
+     UnderoverscriptBox["\[Product]", 
+      RowBox[{"i", "=", "1"}], 
+      RowBox[{"longitut", 
+       RowBox[{"(", "t", ")"}]}]], 
+     SuperscriptBox[
+      RowBox[{"(", 
+       SubscriptBox["t", "i1"], ")"}], 
+      SubscriptBox["t", "i2"]]}]}], "    "}], 
+  "Program"], "\[IndentingNewLine]", 
+ RowBox[{
+  StyleBox["   ", "Program"], 
+  StyleBox[
+   RowBox[{
+    RowBox[{"fi", " ", "Si"}], ";"}], "Program"], 
+  "\[IndentingNewLine]"}], "\n", 
+ StyleBox[
+  RowBox[{"Escriure", " ", 
+   RowBox[{
+    FormBox["s",
+     TraditionalForm], ".", "\[IndentingNewLine]"}]}], "Program"]}], "Input",
+ CellFrame->{{0, 0}, {0.5, 0}},
+ CellChangeTimes->{{3.602498223372508*^9, 3.602498223372508*^9}, 
+   3.6024986941031675`*^9, {3.6024987370398664`*^9, 3.6024988226837645`*^9}, {
+   3.602498909444727*^9, 3.6024989906983747`*^9}, {3.6024990213771296`*^9, 
+   3.6024991135694027`*^9}, {3.6024991774920588`*^9, 
+   3.6024991898947678`*^9}, {3.60249922035151*^9, 3.602499526093998*^9}, {
+   3.602499912960125*^9, 3.602500227330106*^9}, {3.6025002610100327`*^9, 
+   3.6025003055755816`*^9}, {3.6025003766336455`*^9, 
+   3.6025003906594477`*^9}, {3.6025004585753326`*^9, 
+   3.6025005292733765`*^9}, {3.602500577524136*^9, 3.602500700619177*^9}, {
+   3.6025007346801248`*^9, 3.6025009457911997`*^9}, {3.602506408905672*^9, 
+   3.6025064954026194`*^9}, 3.6025065826476097`*^9, {3.602506692966919*^9, 
+   3.602506705542639*^9}, {3.6025067868922915`*^9, 3.6025067887783995`*^9}},
+ EmphasizeSyntaxErrors->True,
+ FontSize->36],
+
+Cell["", "Text",
+ FontSize->36],
+
+Cell["\<\
+Com programar\[IAcute]em una funci\[OAcute] que fes tot aix\[OGrave] per \
+nosaltres? M\[EAcute]s o menys aix\[IAcute]:\
+\>", "Text",
+ FontSize->36],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"mcd", "[", 
+    RowBox[{"a_Integer", ",", "b_Integer"}], "]"}], ":=", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"l", "=", 
+        RowBox[{"Sort", "[", 
+         RowBox[{"Join", "[", 
+          RowBox[{
+           RowBox[{"FactorInteger", "[", "a", "]"}], ",", 
+           RowBox[{"FactorInteger", "[", "b", "]"}]}], "]"}], "]"}]}], ",", 
+       RowBox[{"s", "=", "1"}], ",", 
+       RowBox[{"t", "=", 
+        RowBox[{"{", "}"}]}], ",", "i"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"i", "=", 
+       RowBox[{"Length", "[", "l", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"While", "[", 
+       RowBox[{
+        RowBox[{"i", ">", "1"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"While", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"l", "[", 
+             RowBox[{"[", 
+              RowBox[{"1", ",", "1"}], "]"}], "]"}], "\[NotEqual]", 
+            RowBox[{"l", "[", 
+             RowBox[{"[", 
+              RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"l", "=", 
+             RowBox[{"Delete", "[", 
+              RowBox[{"l", ",", "1"}], "]"}]}], ";", 
+            RowBox[{"i", "--"}], ";", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"i", "\[LessEqual]", "1"}], ",", 
+              RowBox[{"Break", "[", "]"}]}], "]"}]}]}], "]"}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"i", ">", "1"}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"t", ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"l", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"1", ",", "1"}], "]"}], "]"}], ",", 
+                RowBox[{"Min", "[", 
+                 RowBox[{
+                  RowBox[{"l", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"1", ",", "2"}], "]"}], "]"}], ",", 
+                  RowBox[{"l", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"2", ",", "2"}], "]"}], "]"}]}], "]"}]}], "}"}]}],
+              "]"}], ";", "\[IndentingNewLine]", 
+            RowBox[{"l", "=", 
+             RowBox[{"Delete", "[", 
+              RowBox[{"l", ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"{", "1", "}"}], ",", 
+                 RowBox[{"{", "2", "}"}]}], "}"}]}], "]"}]}], ";", " ", 
+            RowBox[{"i", "--"}], ";", 
+            RowBox[{"i", "--"}]}]}], "]"}]}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"t", "\[Equal]", 
+         RowBox[{"{", "}"}]}], ",", ",", 
+        RowBox[{"s", "=", 
+         RowBox[{"Product", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"t", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "1"}], "]"}], "]"}], "^", 
+            RowBox[{"t", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "2"}], "]"}], "]"}]}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "1", ",", 
+             RowBox[{"Length", "[", "t", "]"}]}], "}"}]}], "]"}]}]}], "]"}], 
+      ";", "\[IndentingNewLine]", "s"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{3.602561397125*^9},
+ FontSize->36],
+
+Cell["", "Text",
+ FontSize->36],
+
+Cell[TextData[{
+ "Tracta d'entendre qu\[EGrave] fa aquesta funci\[OAcute]. Prova amb alguns \
+nombres i comprova que el resultat \[EAcute]s el mateix que l'obtingut amb la \
+funci\[OAcute] ",
+ StyleBox["GCD[]", "Program"],
+ ". \n\nAnem a comprovar els temps que triguen l'una i l'altra en fer el \
+mateix. Per aix\[OGrave] les provem en una parella d'enters una mica grans. ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " disposa de la funci\[OAcute] ",
+ StyleBox["Timing[]", "Program"],
+ " per mesurar temps. Esbrina qu\[EGrave] fa aquesta funci\[OAcute].\n"
+}], "Text",
+ CellChangeTimes->{{3.60256140184375*^9, 3.60256142834375*^9}},
+ FontSize->36],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[GridBox[{
+   {
+    RowBox[{
+     RowBox[{
+      RowBox[{
+      "m", "=", "322846917176927696384727753249524795345953886519498890"}], 
+      ";"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+      "n", "=", "885399287125513421574365237912948961084941395131814"}], 
+      ";"}]}]},
+   {"\[Placeholder]"}
+  }]], "Input",
+ CellChangeTimes->{{3.412321328671875*^9, 3.412321334234375*^9}, {
+  3.602561180390625*^9, 3.6025612013125*^9}},
+ FontSize->36],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    SuperscriptBox["Null", "2"], "}"}], ",", 
+   RowBox[{"{", "\[Placeholder]", "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.602564711720936*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Timing", "[", 
+  RowBox[{"mcd", "[", 
+   RowBox[{"m", ",", "n"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.602561105109375*^9, 3.602561113171875*^9}, {
+  3.60256121225*^9, 3.602561213515625*^9}},
+ FontSize->36],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0.2400150000000001`", ",", "2"}], "}"}]], "Output",
+ CellChangeTimes->{{3.602564716861915*^9, 3.602564723820826*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Timing", "[", 
+  RowBox[{"GCD", "[", 
+   RowBox[{"m", ",", "n"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.602561118171875*^9, 3.602561121375*^9}, {
+  3.60256119596875*^9, 3.602561209453125*^9}, {3.60256159175*^9, 
+  3.60256159315625*^9}},
+ FontSize->36],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0.`", ",", "2"}], "}"}]], "Output",
+ CellChangeTimes->{{3.602564718613385*^9, 3.602564722391152*^9}}]
+}, Open  ]],
+
+Cell[TextData[{
+ "\nLa nostra funci\[OAcute] \[EAcute]s m\[EAcute]s lenta que la de ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ". Per\[OGrave] aix\[OGrave] no \[EAcute]s el pitjor: la funci\[OAcute] mcd \
+no trigar\[AGrave] un temps raonable si s'escullen nombres una mica \
+m\[EAcute]s grans (150 xifres, p.e.). El problema \[EAcute]s que aquest m\
+\[EGrave]tode dep\[EGrave]n de la factoritzaci\[OAcute] de nombres enters."
+}], "Text",
+ CellChangeTimes->{3.6025614311875*^9},
+ FontSize->36],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{3.6025057897902603`*^9},
+ FontSize->36],
+
+Cell[TextData[{
+ "\[CapitalEAcute]s evident que podem calcular el mcd dels enters \
+a=3452645387 i b=3452645388, com que s\[OAcute]n consecutius no poden tenir \
+cap factor en com\[UAcute], i el mcd \[EAcute]s 1=b-a.\n\nEn general, el m\
+\[AGrave]xim com\[UAcute] divisor d de dos enters (a,b) satisf\[AGrave] la \
+propietat seg\[UDoubleDot]ent:   d \[EAcute]s el m\[IAcute]nim enter positiu \
+que es pot escriure de la forma\n\n                                           \
+                                          d=a\[CenterDot]x+b\[CenterDot]y \n\n\
+on x, y s\[OAcute]n enters. Aquesta identitat que relaciona d amb a i b es \
+coneix com a Identitat de B\[EAcute]zout.\n\nPer obtenir els coeficients \
+(x,y) de la identitat de B\[EAcute]zout el ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " t\[EAcute] la comanda ExtendedGCD[,]\n"
+}], "Text",
+ CellChangeTimes->{{3.602505366819068*^9, 3.602505648916203*^9}, {
+  3.6025058013319206`*^9, 3.602505817835865*^9}, {3.602505851970817*^9, 
+  3.6025059043278117`*^9}, {3.60256145515625*^9, 3.602561460609375*^9}},
+ FontSize->36],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ExtendedGCD", "[", 
+  RowBox[{"51", ",", "21"}], "]"}]], "Input",
+ CellChangeTimes->{{3.602505847505562*^9, 3.602505848329609*^9}, {
+  3.6025059087830667`*^9, 3.6025059272271214`*^9}, {3.6025060026034327`*^9, 
+  3.602506076671669*^9}},
+ FontSize->36],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"3", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", "5"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.60256484467202*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.602507646947484*^9, 3.6025076469564843`*^9}},
+ FontSize->36],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6025059513275003`*^9, 3.602505951362502*^9}, {
+  3.6025060540403748`*^9, 3.6025060551414375`*^9}, {3.60256146446875*^9, 
+  3.602561467203125*^9}},
+ FontSize->36],
+
+Cell[TextData[{
+ "Observeu que:\n\n                                 3 = 51\[CenterDot](-2) + \
+21\[CenterDot](5)\n  \nL\[CloseCurlyQuote]algorisme que fa servir el ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " per calcular el mcd es basa en la propietat esmentada anteriorment, i per \
+tant com en el cas del mcd de dos enters consecutius, no requereix la \
+descomposici\[OAcute] factorial de a i b.                                "
+}], "Text",
+ CellChangeTimes->{{3.602505939984851*^9, 3.6025059657823267`*^9}, {
+  3.60250608752429*^9, 3.6025062415531*^9}, {3.6025063370655627`*^9, 
+  3.602506337610594*^9}, {3.602561468796875*^9, 3.602561469328125*^9}},
+ FontSize->36],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6025021106908283`*^9, 3.602502123434557*^9}, {
+  3.602505237018644*^9, 3.6025052380957055`*^9}},
+ FontSize->36],
+
+Cell[TextData[StyleBox[" L'algorisme \[EAcute]s el seg\[UDoubleDot]ent:", \
+"DisplayFormula"]], "Text",
+ CellChangeTimes->{{3.6025062781361923`*^9, 3.6025063257599163`*^9}},
+ FontSize->36],
+
+Cell[TextData[{
+ "Llegir ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]]],
+ " i ",
+ Cell[BoxData[
+  FormBox["b", TraditionalForm]]],
+ ",\n",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     FormBox[
+      SubscriptBox["a", "0"],
+      TraditionalForm], "\[LongLeftArrow]", "max"}], 
+    RowBox[{"{", 
+     RowBox[{"a", ",", "b"}], "}"}]}], TraditionalForm]]],
+ ",\n",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     FormBox[
+      SubscriptBox["b", "0"],
+      TraditionalForm], "\[LongLeftArrow]", "min"}], 
+    RowBox[{"{", 
+     RowBox[{"a", ",", "b"}], "}"}]}], TraditionalForm]]],
+ ",\n",
+ Cell[BoxData[
+  FormBox["r", TraditionalForm]]],
+ "\[LongLeftArrow]residu de la divisi\[OAcute] de ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "0"], TraditionalForm]]],
+ " entre ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["b", "0"], TraditionalForm]]],
+ ",\nMentres ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"r", "\[NotEqual]", "0"}], TraditionalForm]]],
+ ":\n\t",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["a", "0"], "\[LongLeftArrow]", 
+    SubscriptBox["b", "0"]}], TraditionalForm]]],
+ ",\n\t",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["b", "0"], "\[LongLeftArrow]", "r"}], TraditionalForm]]],
+ ",\n\t",
+ Cell[BoxData[
+  FormBox["r", TraditionalForm]]],
+ "\[LongLeftArrow]residu de la divisi\[OAcute] ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "0"], TraditionalForm]]],
+ " entre ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["b", "0"], TraditionalForm]]],
+ ",\nEscriure ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["b", "0"], TraditionalForm]]],
+ "."
+}], "Program",
+ FontSize->36],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{3.60256148484375*^9}],
+
+Cell[CellGroupData[{
+
+Cell["Exercicis per trametre", "Subsubsection",
+ CellChangeTimes->{{3.6019687464076552`*^9, 3.601968751156927*^9}, {
+  3.60256147428125*^9, 3.60256148103125*^9}},
+ FontSize->36],
+
+Cell[TextData[{
+ "1.- Implementa una funci\[OAcute] ",
+ StyleBox["mcdEu[a_,b_]", "Program"],
+ " que calculi el m\[AGrave]xim com\[UAcute] divisor de ",
+ StyleBox["a",
+  FontSlant->"Italic"],
+ " i ",
+ StyleBox["b",
+  FontSlant->"Italic"],
+ " mitjan\[CCedilla]ant l'algorisme d'Euclides."
+}], "Text",
+ CellChangeTimes->{{3.60256098346875*^9, 3.602560983640625*^9}, {
+  3.60256549859442*^9, 3.602565504041026*^9}},
+ FontSize->36],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"GCD", "[", 
+  RowBox[{"51", ",", " ", "21"}], "]"}]], "Input",
+ CellChangeTimes->{{3.602566373046496*^9, 3.602566379941175*^9}}],
+
+Cell[BoxData["3"], "Output",
+ CellChangeTimes->{3.602566380797295*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"mcdEu", "[", 
+    RowBox[{"a_Integer", ",", "b_Integer"}], "]"}], ":=", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"a0", "=", 
+        RowBox[{"Max", "[", 
+         RowBox[{"a", ",", "b"}], "]"}]}], ",", " ", 
+       RowBox[{"b0", "=", 
+        RowBox[{"Min", "[", 
+         RowBox[{"a", ",", "b"}], "]"}]}], ",", " ", 
+       RowBox[{"r", "=", 
+        RowBox[{"Mod", "[", 
+         RowBox[{"a", ",", "b"}], "]"}]}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"While", "[", 
+       RowBox[{
+        RowBox[{"r", " ", ">", "0"}], ",", 
+        RowBox[{
+         RowBox[{"a0", "=", "b0"}], ";", " ", 
+         RowBox[{"r", "=", 
+          RowBox[{"Mod", "[", 
+           RowBox[{"a0", ",", "b0"}], "]"}]}], ";", " ", 
+         RowBox[{"b0", "=", "r"}]}]}], "]"}], ";", " ", "a0"}]}], "]"}]}], 
+  "\[IndentingNewLine]", "\t\t", "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.602565507294094*^9, 3.602565629966489*^9}, {
+   3.602565733468697*^9, 3.6025657545065613`*^9}, {3.602565850795854*^9, 
+   3.6025659233941517`*^9}, {3.602565986677*^9, 3.602566067141082*^9}, {
+   3.6025661327433243`*^9, 3.602566164739682*^9}, {3.6025662017075377`*^9, 
+   3.60256622593926*^9}, {3.602566416793425*^9, 3.602566430473246*^9}, {
+   3.602566509780279*^9, 3.6025665120248137`*^9}, {3.6025666606523952`*^9, 
+   3.602566834716628*^9}, {3.6025669037480717`*^9, 3.602566995058646*^9}, 
+   3.602567036371307*^9, {3.602567074994464*^9, 3.6025671050355597`*^9}, {
+   3.602567193458323*^9, 3.6025671958823547`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"mcdEu", "[", 
+  RowBox[{"51", ",", "21"}], "]"}]], "Input",
+ CellChangeTimes->{{3.602565931926342*^9, 3.602565947736713*^9}}],
+
+Cell[BoxData["21"], "Output",
+ CellChangeTimes->{{3.602565948902285*^9, 3.602565964466331*^9}, 
+   3.602566172069498*^9, 3.602566391595469*^9, 3.602566503370359*^9, 
+   3.6025667938986692`*^9, 3.602566845135869*^9, {3.602566897767457*^9, 
+   3.602566924834283*^9}, {3.6025669723913927`*^9, 3.602566998550572*^9}, 
+   3.602567041378049*^9, {3.602567079701056*^9, 3.602567108469969*^9}, {
+   3.602567173639784*^9, 3.602567199462265*^9}}]
+}, Open  ]],
+
+Cell["\<\
+2.- Compara el temps de c\[AGrave]lcul, tal i com s'ha fet a la \
+pr\[AGrave]ctica, de les tres funcions.\
+\>", "Text",
+ FontSize->36],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"m", " ", "=", " ", "1243333123"}], ";", " ", 
+   RowBox[{"n", " ", "=", " ", "456233333414"}], ";"}], " "}]], "Input",
+ CellChangeTimes->{{3.602567139925364*^9, 3.602567164466549*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Timing", "[", 
+    RowBox[{"mcd", "[", 
+     RowBox[{"m", ",", " ", "n"}], "]"}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{"Timing", "[", 
+    RowBox[{"GCD", "[", 
+     RowBox[{"m", ",", " ", "n"}], "]"}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{"Timing", "[", 
+    RowBox[{"mcdEu", "[", 
+     RowBox[{"m", ",", "n"}], "]"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.602567016473221*^9, 3.602567072854024*^9}, {
+  3.602567136683919*^9, 3.6025671418455553`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1920, 1025},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"8.0 for Linux x86 (64-bit) (November 7, 2010)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 234, 6, 56, "Input"],
+Cell[794, 28, 108, 2, 56, "Input"],
+Cell[CellGroupData[{
+Cell[927, 34, 131, 2, 82, "Title"],
+Cell[1061, 38, 55, 2, 56, "Text"],
+Cell[1119, 42, 298, 5, 101, "Text"],
+Cell[1420, 49, 960, 29, 164, "DisplayFormula"],
+Cell[2383, 80, 242, 5, 101, "Text"],
+Cell[2628, 87, 787, 25, 159, "DisplayFormula"],
+Cell[3418, 114, 436, 15, 56, "Text"],
+Cell[3857, 131, 868, 27, 159, "DisplayFormula"],
+Cell[4728, 160, 654, 24, 101, "Text"],
+Cell[5385, 186, 423, 14, 104, "DisplayFormula"],
+Cell[5811, 202, 245, 7, 101, "Text"],
+Cell[6059, 211, 593, 16, 263, "DisplayFormula"],
+Cell[6655, 229, 111, 2, 56, "Input"],
+Cell[6769, 233, 904, 22, 237, "Text"],
+Cell[CellGroupData[{
+Cell[7698, 259, 209, 4, 109, "Input"],
+Cell[7910, 265, 273, 9, 29, "Output"],
+Cell[8186, 276, 338, 11, 29, "Output"]
+}, Open  ]],
+Cell[8539, 290, 507, 18, 101, "Text"],
+Cell[CellGroupData[{
+Cell[9071, 312, 247, 7, 109, "Input"],
+Cell[9321, 321, 73, 1, 29, "Output"]
+}, Open  ]],
+Cell[9409, 325, 195, 6, 101, "Text"],
+Cell[9607, 333, 154, 4, 64, "Text"],
+Cell[9764, 339, 5411, 156, 1474, "Input"],
+Cell[15178, 497, 31, 1, 56, "Text"],
+Cell[15212, 500, 158, 4, 56, "Text"],
+Cell[15373, 506, 3509, 95, 629, "Input"],
+Cell[18885, 603, 31, 1, 56, "Text"],
+Cell[18919, 606, 657, 14, 328, "Text"],
+Cell[CellGroupData[{
+Cell[19601, 624, 468, 15, 153, "Input"],
+Cell[20072, 641, 205, 6, 35, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20314, 652, 239, 6, 56, "Input"],
+Cell[20556, 660, 157, 3, 29, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20750, 668, 283, 7, 56, "Input"],
+Cell[21036, 677, 141, 3, 29, "Output"]
+}, Open  ]],
+Cell[21192, 683, 502, 10, 191, "Text"],
+Cell[21697, 695, 104, 2, 109, "Input"],
+Cell[21804, 699, 1083, 18, 551, "Text"],
+Cell[CellGroupData[{
+Cell[22912, 721, 274, 6, 56, "Input"],
+Cell[23189, 729, 184, 6, 29, "Output"]
+}, Open  ]],
+Cell[23388, 738, 109, 2, 56, "Input"],
+Cell[23500, 742, 210, 4, 56, "Input"],
+Cell[23713, 748, 679, 12, 326, "Text"],
+Cell[24395, 762, 160, 3, 56, "Input"],
+Cell[24558, 767, 188, 3, 56, "Text"],
+Cell[24749, 772, 1635, 70, 402, "Program"],
+Cell[26387, 844, 86, 1, 48, "Input"],
+Cell[CellGroupData[{
+Cell[26498, 849, 177, 3, 55, "Subsubsection"],
+Cell[26678, 854, 426, 13, 102, "Text"],
+Cell[CellGroupData[{
+Cell[27129, 871, 152, 3, 29, "Input"],
+Cell[27284, 876, 70, 1, 29, "Output"]
+}, Open  ]],
+Cell[27369, 880, 1650, 39, 102, "Input"],
+Cell[CellGroupData[{
+Cell[29044, 923, 149, 3, 29, "Input"],
+Cell[29196, 928, 435, 6, 29, "Output"]
+}, Open  ]],
+Cell[29646, 937, 144, 4, 56, "Text"],
+Cell[29793, 943, 254, 5, 48, "Input"],
+Cell[30050, 950, 536, 13, 84, "Input"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

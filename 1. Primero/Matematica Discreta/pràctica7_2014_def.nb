@@ -1,0 +1,1566 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     55064,       1557]
+NotebookOptionsPosition[     50444,       1403]
+NotebookOutlinePosition[     51112,       1429]
+CellTagsIndexPosition[     50984,       1423]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  StyleBox[
+   RowBox[{"ASTOR", " ", "PRIETO", " ", "DEHGHAN", " ", "POUR"}],
+   FontSize->36]}]], "Input",
+ CellChangeTimes->{{3.605584042315516*^9, 3.6055840481985483`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Pr\[AGrave]ctica 7: Combinat\[OGrave]ria (3)",
+ FontSize->72]], "Title",
+ CellChangeTimes->{{3.6054338281872377`*^9, 3.6054338473723354`*^9}, {
+  3.605434845690436*^9, 3.6054348467234945`*^9}},
+ TextAlignment->Center,
+ FontSize->24],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.605434900435567*^9, 3.605434901501628*^9}}],
+
+Cell[TextData[{
+ "En aquesta pr\[AGrave]ctica utilitzem les t\[EGrave]cniques apreses de \
+combinat\[OGrave]ria per a resoldre alguns problemes. Com de costum, \
+utilitzarem el ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " per comprovar experimentalment alguns resultats. "
+}], "Text",
+ CellChangeTimes->{{3.605433858446969*^9, 3.605433864390309*^9}},
+ FontSize->24],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Variacions amb repetici\[OAcute]:",
+ FontSize->36,
+ FontColor->RGBColor[0.6, 0.4, 0.2]]], "Section",
+ CellChangeTimes->{{3.6053564017879815`*^9, 3.605356405453988*^9}, 
+   3.605435482074835*^9},
+ FontSize->24],
+
+Cell[TextData[{
+ StyleBox["Les variacions amb repetici\[OAcute] de n objectes agafats de r en \
+r ",
+  FontColor->RGBColor[0, 0, 1]],
+ "s\[OAcute]n els diferents grups de r elements seleccionats entre els n \
+objectes, i on poden haver-hi repeticions. El seu nombre \[EAcute]s ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["n", "r"], TraditionalForm]]],
+ ".\n\nPer exemple, quants nombres de tel\[EAcute]fon fix comencen amb 93?  \n\
+En aquest cas n=10 (0,1,2,3,4,5,6,7,8,9) i els seleccionem de 7 en 7 (r=7), \
+per tant el resultat \[EAcute]s 10^7.\n\[LineSeparator]La funci\[OAcute] seg\
+\[UDoubleDot]ent genera ",
+ StyleBox["r",
+  FontSlant->"Italic"],
+ " nombres aleatoris entre 1 i ",
+ StyleBox["n",
+  FontSlant->"Italic"],
+ ". "
+}], "Text",
+ CellChangeTimes->{{3.6054247222740645`*^9, 3.605424766437742*^9}, {
+  3.60542482007903*^9, 3.6054252173847284`*^9}, {3.605425249598571*^9, 
+  3.6054253216216908`*^9}, {3.6054253562586713`*^9, 3.605425397284018*^9}, {
+  3.6054338849334836`*^9, 3.6054339008033915`*^9}, {3.6054353247338357`*^9, 
+  3.605435335758466*^9}, {3.60543558950998*^9, 3.6054355980734696`*^9}, {
+  3.6054388753769207`*^9, 3.6054389006723676`*^9}, {3.6054389476300535`*^9, 
+  3.60543895963374*^9}, {3.6054390082985234`*^9, 3.60543901540493*^9}},
+ FontSize->24],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"VR", "[", 
+   RowBox[{"n_Integer", ",", "r_Integer"}], "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"Random", "[", 
+     RowBox[{"Integer", ",", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "n"}], "}"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "r"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{3.415446851565077*^9},
+ FontSize->24],
+
+Cell["\<\
+Per exemple, vuit tirades successives d'un dau podrien donar com a resultat\
+\>", "Text",
+ CellChangeTimes->{{3.605584223284279*^9, 3.605584224067287*^9}},
+ FontSize->24],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"VR", "[", 
+  RowBox[{"6", ",", "8"}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.415446856330702*^9, {3.605439138633978*^9, 3.6054391387559853`*^9}},
+ FontSize->24],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "2", ",", "2", ",", "5", ",", "5", ",", "1", ",", "2", ",", "6", ",", "5"}],
+   "}"}]], "Output",
+ CellChangeTimes->{3.605584074717334*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6053566430590053`*^9, 3.605356643963807*^9}},
+ FontSize->24]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "\n",
+ StyleBox["Combinacions amb repetici\[OAcute]:",
+  FontSize->36,
+  FontColor->RGBColor[0.6, 0.4, 0.2]]
+}], "Section",
+ CellChangeTimes->{{3.6053563840975504`*^9, 3.6053563931299663`*^9}, 
+   3.60543546625493*^9},
+ FontSize->24],
+
+Cell[TextData[{
+ StyleBox["Les ",
+  FontColor->RGBColor[0, 0, 1]],
+ StyleBox["combinacions amb repetici\[OAcute] de n elements distribu\
+\[IDoubleDot]ts en k tipus diferents",
+  FontSlant->"Italic",
+  FontColor->RGBColor[0, 0, 1]],
+ " s\[OAcute]n les maneres de distribuir n objectes indistingibles en k \
+capses diferents. Es poden veure com les solucions de \
+l\[CloseCurlyQuote]equaci\[OAcute]:\n                                         \
+                \n                                                         ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "1"], TraditionalForm]]],
+ "+....+",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "k"], TraditionalForm]]],
+ "=n, \n\non la inc\[OGrave]gnita  (",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "1"], TraditionalForm]]],
+ ",.....,",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "k"], TraditionalForm]]],
+ ")  est\[AGrave] formada per k enters no negatius. \n\nPer exemple, volem \
+repartir 100 cadires entre 5 aules diferents. De quantes maneres es pot fer?\n\
+Sigui xi el nombre de cadires de l\[CloseCurlyQuote]aula i-\[EGrave]sima. \
+Aleshores una distribuci\[OAcute] correspon a una soluci\[OAcute] de l\
+\[CloseCurlyQuote]equaci\[OAcute]\n\n                                         \
+                ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "1"], TraditionalForm]]],
+ "+",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "2"], TraditionalForm]]],
+ "+",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "3"], TraditionalForm]]],
+ "+",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "4"], TraditionalForm]]],
+ "+",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "5"], TraditionalForm]]],
+ "=100\n\nPer exemple s\[OAcute]n solucions diferents  (20,30,10,20,20), \
+(20,20,20,30,10).\n\nEs plantegen dos problemes: comptar quantes n\
+\[CloseCurlyQuote]hi ha i donar-ne una llista de totes.\n\n\nPer generar \
+combinacions amb repetici\[OAcute] es pot fer generant variacions amb \
+repetici\[OAcute] i ignorar l'ordre dels resultats. Altrament, nosaltres ho \
+farem generant llistes formades per n uns i k-1 zeros, que corresponen a \
+solucions de l\[CloseCurlyQuote]equaci\[OAcute] anterior. Els zeros \
+corresponen a les divisions entre les capses (o als signes + de l\
+\[CloseCurlyQuote]equaci\[OAcute]).  D\[CloseCurlyQuote]aqu\[IAcute] surt la \
+f\[OAcute]rmula  ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", GridBox[{
+      {
+       RowBox[{"n", "+", "k", "-", "1"}]},
+      {"n"}
+     }], ")"}], TraditionalForm]]],
+ " pel nombre de les combinacions amb repetici\[OAcute] de n elements \
+distribu\[IDoubleDot]ts en k tipus.\n\nEn l\[CloseCurlyQuote]exemple de les \
+cadires, el resultat seria  ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", GridBox[{
+      {
+       RowBox[{"100", "+", "5", "-", "1"}]},
+      {"100"}
+     }], ")"}], TraditionalForm]]],
+ " . La seg\[UDoubleDot]ent funci\[OAcute] genera de manera aleat\[OGrave]ria \
+10 combinacions amb repetici\[OAcute] de n elements distribuits en k tipus."
+}], "Text",
+ CellChangeTimes->{
+  3.415446889424452*^9, 3.415447361815077*^9, {3.6052784251686234`*^9, 
+   3.605278435059041*^9}, {3.6052784905171385`*^9, 3.6052785388616233`*^9}, {
+   3.6053578014724417`*^9, 3.6053578419909077`*^9}, {3.605418949580059*^9, 
+   3.6054189818253155`*^9}, {3.605419124768367*^9, 3.6054191292767744`*^9}, {
+   3.605419325556319*^9, 3.6054193427007494`*^9}, {3.605419501836629*^9, 
+   3.6054196330016594`*^9}, {3.605419698818175*^9, 3.605419759892282*^9}, {
+   3.6054198019031563`*^9, 3.6054198873757057`*^9}, {3.605419943863405*^9, 
+   3.605420099021278*^9}, {3.6054201331541376`*^9, 3.605420307656044*^9}, {
+   3.6054203414613037`*^9, 3.6054203497917185`*^9}, {3.605420386186582*^9, 
+   3.605420598190954*^9}, {3.6054206375966234`*^9, 3.6054207303397865`*^9}, {
+   3.6054207854078836`*^9, 3.605420790197092*^9}, {3.605420991905446*^9, 
+   3.6054210297043123`*^9}, {3.6054210876896143`*^9, 3.60542109656603*^9}, 
+   3.6054211702761593`*^9, {3.605425471186245*^9, 3.6054254936905317`*^9}, {
+   3.605439208653983*^9, 3.605439224731903*^9}, {3.6054392569897475`*^9, 
+   3.605439292837798*^9}, {3.6054393536982794`*^9, 3.6054393546653347`*^9}, 
+   3.605439409292459*^9, {3.605439459849351*^9, 3.6054395149185004`*^9}, {
+   3.605439734907083*^9, 3.6054397943704844`*^9}, {3.6054417603819337`*^9, 
+   3.6054418494120255`*^9}},
+ FontSize->24],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CR", "[", 
+   RowBox[{"n_Integer", ",", "k_Integer"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"i", "=", "0"}], ",", 
+      RowBox[{"L", "=", 
+       RowBox[{"{", "}"}]}], ",", 
+      RowBox[{"P", "=", 
+       RowBox[{"{", "}"}]}]}], "}"}], ",", " ", 
+    RowBox[{
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{"i", "<", "10"}], ",", 
+       RowBox[{
+        RowBox[{"L", "=", " ", 
+         RowBox[{"RandomInteger", "[", 
+          RowBox[{"1", ",", 
+           RowBox[{"n", "+", "k", "-", "1"}]}], "]"}]}], ";", " ", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Count", "[", 
+            RowBox[{"L", ",", "0"}], "]"}], "\[Equal]", 
+           RowBox[{"k", "-", "1"}]}], ",", 
+          RowBox[{
+           RowBox[{"AppendTo", "[", 
+            RowBox[{"P", ",", "L"}], "]"}], ";", 
+           RowBox[{"i", "++"}]}]}], "]"}]}]}], "]"}], ";", "P"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.6054196954797688`*^9, 3.605419696462571*^9}, {
+  3.605425569639876*^9, 3.605425572998068*^9}, {3.6054256591519957`*^9, 
+  3.6054258404793673`*^9}, {3.6054396296450624`*^9, 3.605439653589432*^9}},
+ FontSize->24],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CR", "[", 
+  RowBox[{"10", ",", "3"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6054257750786266`*^9, 3.605425783269095*^9}, {
+  3.6054258716641507`*^9, 3.6054258750653453`*^9}, {3.60558489507491*^9, 
+  3.605584897002283*^9}},
+ FontSize->24],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+    "1", ",", "0", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1",
+      ",", "1", ",", "0", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1",
+      ",", "0", ",", "1", ",", "0", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "0", ",", "1", ",", "0",
+      ",", "1", ",", "1", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "1", ",", "1", ",", "1", ",", "1", ",", "0", ",", "0", ",", "1", ",", "1",
+      ",", "1", ",", "1", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "0", ",", "1",
+      ",", "1", ",", "0", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "1", ",", "0", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1",
+      ",", "1", ",", "1", ",", "0", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "1", ",", "1", ",", "0", ",", "1", ",", "1", ",", "1", ",", "0", ",", "1",
+      ",", "1", ",", "1", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "0", ",", "1", ",", "1", ",", "0", ",", "1", ",", "1", ",", "1", ",", "1",
+      ",", "1", ",", "1", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "1", ",", "1", ",", "1", ",", "0", ",", "1", ",", "1", ",", "0", ",", "1",
+      ",", "1", ",", "1", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "0", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1",
+      ",", "1", ",", "0", ",", "1", ",", "1"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.6055848791010933`*^9, 3.6055848978507013`*^9}}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{
+  3.415446888299452*^9, 3.415447368705702*^9, {3.6052784280078287`*^9, 
+   3.6052784321730356`*^9}, {3.605419692110163*^9, 3.6054196929837646`*^9}, 
+   3.6054200923756657`*^9},
+ FontSize->24],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "\n",
+ StyleBox["Exercici per trametre:",
+  FontSize->36,
+  FontColor->RGBColor[1, 0, 0]]
+}], "Subsection",
+ CellChangeTimes->{{3.6052627190738096`*^9, 3.6052627225160065`*^9}, 
+   3.6053580965629473`*^9},
+ FontSize->24],
+
+Cell[TextData[{
+ "1) Volem repartir 8 boles diferents {",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["B", "1"], TraditionalForm]]],
+ ",",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["B", "2"], TraditionalForm]]],
+ ",",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["B", "3"], TraditionalForm]]],
+ ",",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["B", "4"], TraditionalForm]]],
+ ",",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["B", "5"], TraditionalForm]]],
+ ",",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["B", "6"], TraditionalForm]]],
+ ",",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["B", "7"], TraditionalForm]]],
+ ",",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["B", "8"], TraditionalForm]]],
+ "} en 4 capses diferents {",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["C", "1"], TraditionalForm]]],
+ ",",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["C", "2"], TraditionalForm]]],
+ ",",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["C", "3"], TraditionalForm]]],
+ ",",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["C", "4"], TraditionalForm]]],
+ "}. Quin tipus de problema combinatori \[EAcute]s?  De quantes maneres ho \
+podem fer?\nDe quantes maneres ho podem fer sense deixar cap capsa buida?\n"
+}], "Text",
+ CellChangeTimes->{{3.605262728245334*^9, 3.605262843709938*^9}, {
+   3.6052687207280846`*^9, 3.605268760038333*^9}, {3.6053581057357635`*^9, 
+   3.6053581075609665`*^9}, {3.60542253708816*^9, 3.605422640531942*^9}, 
+   3.6054349612210436`*^9, 3.6055852800965548`*^9},
+ FontSize->24],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+  "Es", " ", "un", " ", "problema", " ", "de", " ", "Variacions", " ", "amb", 
+   " ", 
+   RowBox[{"Repeticio", ".", "\[IndentingNewLine]", "El"}], " ", "seguent", 
+   " ", "experiment", " ", "ens", " ", "diu", " ", "la", " ", "quantitat", 
+   " ", "de", " ", "cops", " ", "que", " ", "alguna", " ", "capsa", " ", "ha",
+    " ", "quedat", " ", 
+   RowBox[{"buida", ".", " "}]}],
+  FontSize->18]], "Input",
+ CellChangeTimes->{{3.605434970407569*^9, 3.60543497041757*^9}, {
+  3.605585240815106*^9, 3.605585285103003*^9}, {3.605585515911598*^9, 
+  3.605585518655129*^9}, {3.605585696381948*^9, 3.6055857323360147`*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6055855005596647`*^9, 3.6055855008690443`*^9}}],
+
+Cell["\<\
+Simulem l'experiment anterior i comptem quants cops ha quedat alguna capsa \
+buida. Concorda aix\[OGrave] amb els vostres c\[AGrave]lculs?\
+\>", "Text",
+ CellChangeTimes->{
+  3.605269552024632*^9, {3.6054259895668945`*^9, 3.60542598982891*^9}, {
+   3.6054265067214737`*^9, 3.6054265087465897`*^9}, {3.6054350427417064`*^9, 
+   3.605435045563868*^9}},
+ FontSize->24],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"n", "=", "10000"}], ";", 
+  RowBox[{"Count", "[", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Length", "[", 
+        RowBox[{"Union", "[", 
+         RowBox[{"VR", "[", 
+          RowBox[{"4", ",", "8"}], "]"}], "]"}], "]"}], "<", "4"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "n"}], "}"}]}], "]"}], ",", "True"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.411731136578125*^9, 3.411731155890625*^9}, {
+   3.415426320174452*^9, 3.415426322580702*^9}, 3.415446896143202*^9, 
+   3.415447277330702*^9, {3.605262851699395*^9, 3.605262852339432*^9}, {
+   3.6052695319284825`*^9, 3.605269541178012*^9}, {3.6054260000914965`*^9, 
+   3.6054260128642273`*^9}, {3.6054261095467567`*^9, 3.60542612707876*^9}, {
+   3.605426205899268*^9, 3.605426300312668*^9}, {3.6054263419140477`*^9, 
+   3.6054263698606462`*^9}, {3.6054264623519363`*^9, 
+   3.6054264692803326`*^9}, {3.6054349740127754`*^9, 3.605434975385854*^9}, {
+   3.6054399959390135`*^9, 3.6054400320790806`*^9}},
+ FontSize->24],
+
+Cell[BoxData["3694"], "Output",
+ CellChangeTimes->{{3.605585533980872*^9, 3.605585552203335*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+  "Aquesta", " ", "segona", " ", "prova", " ", "diu", " ", "la", " ", 
+   "quantitat", " ", "de", " ", "cops", " ", "que", " ", "CAP", " ", "capsa", 
+   " ", "queda", " ", 
+   RowBox[{"buida", "."}]}],
+  FontSize->18]], "Input",
+ CellChangeTimes->{{3.605586806298221*^9, 3.605586810548018*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{"n", "=", "10000"}], ";", 
+   RowBox[{"Count", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Length", "[", 
+         RowBox[{"Union", "[", 
+          RowBox[{"VR", "[", 
+           RowBox[{"4", ",", "8"}], "]"}], "]"}], "]"}], "==", "4"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "n"}], "}"}]}], "]"}], ",", "True"}], "]"}]}],
+  FontSize->24]], "Input",
+ CellChangeTimes->{{3.605585765768353*^9, 3.605585773849188*^9}}],
+
+Cell[BoxData["6261"], "Output",
+ CellChangeTimes->{3.605585777580724*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.605585190610025*^9, 3.605585190957941*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["", "Subsubsection",
+ CellChangeTimes->{{3.6052629082106276`*^9, 3.6052629092366867`*^9}},
+ FontSize->24],
+
+Cell[TextData[{
+ "2) De quantes maneres podem repartir 8 boles indistingibles \
+{B,B,B,B,B,B,B,B} en 4 capses diferents {",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["C", "1"], TraditionalForm]]],
+ ",",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["C", "2"], TraditionalForm]]],
+ ",",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["C", "3"], TraditionalForm]]],
+ ",",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["C", "4"], TraditionalForm]]],
+ "}? Quin tipus de problema combinatori \[EAcute]s? De quantes maneres ho \
+podem fer sense deixar cap capsa buida? \n"
+}], "Text",
+ CellChangeTimes->{{3.6052628918046894`*^9, 3.6052629845089917`*^9}, 
+   3.605278342004877*^9, {3.605358120493389*^9, 3.6053581211329904`*^9}, {
+   3.6054265286877303`*^9, 3.6054265411574435`*^9}, 3.605435021624499*^9, {
+   3.605440097445819*^9, 3.605440153497025*^9}, {3.605440488337177*^9, 
+   3.6054404920063868`*^9}, {3.6055850910449963`*^9, 3.6055850923489313`*^9}},
+ FontSize->24],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+  "Es", " ", "un", " ", "problema", " ", "de", " ", "Combinacions", " ", 
+   "amb", " ", 
+   RowBox[{"Repeticions", "."}]}],
+  FontSize->18]], "Input",
+ CellChangeTimes->{{3.605440543830351*^9, 3.6054405475095615`*^9}, {
+  3.60558508726379*^9, 3.605585111481866*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"n", "=", "10000"}], ";", 
+  RowBox[{"Count", "[", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Length", "[", 
+        RowBox[{"Union", "[", 
+         RowBox[{"VR", "[", 
+          RowBox[{"4", ",", "8"}], "]"}], "]"}], "]"}], "==", "4"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "n"}], "}"}]}], "]"}], ",", "True"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.6054265693160543`*^9, 3.605426569328055*^9}, {
+  3.6055858204169607`*^9, 3.605585861577702*^9}, {3.6055861117124643`*^9, 
+  3.605586119792017*^9}, {3.605587014050048*^9, 3.605587015626213*^9}},
+ FontSize->24],
+
+Cell[BoxData["6251"], "Output",
+ CellChangeTimes->{{3.605585843144206*^9, 3.6055858630337763`*^9}, {
+   3.60558611329608*^9, 3.605586121608687*^9}, 3.605587016762186*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6052716182328124`*^9, 3.605271622345048*^9}},
+ FontSize->24],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6054350981638765`*^9, 3.605435098371888*^9}}],
+
+Cell[TextData[{
+ StyleBox["Nombre de Stirling de segona esp\[EGrave]cie:", "Subtitle",
+  FontSize->36,
+  FontColor->RGBColor[0.6, 0.4, 0.2]],
+ StyleBox["\n", "Subtitle"],
+ "\n",
+ StyleBox["El nombre de Stirling de segona esp\[EAcute]cie S(n,k)",
+  FontColor->RGBColor[0, 0, 1]],
+ ", d\[OAcute]na el n\[UAcute]mero de maneres diferents en que podem partir \
+un conjunt de n elements diferents en k blocs no buits. Amb el ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " es calcula amb la comanda seg\[UDoubleDot]ent:",
+ StyleBox["\[LineSeparator]\n", "Input"]
+}], "Text",
+ CellChangeTimes->{{3.605358391777866*^9, 3.6053586107710505`*^9}, {
+   3.60535868446558*^9, 3.605358687991186*^9}, {3.605422858605725*^9, 
+   3.60542316310946*^9}, 3.6054268918895044`*^9, {3.6054291138215914`*^9, 
+   3.605429212296224*^9}, 3.605429242558955*^9, {3.6054302101232967`*^9, 
+   3.6054302141075244`*^9}, {3.605430648199353*^9, 3.605430675869936*^9}},
+ FontSize->24],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "StirlingS2"}]], "Input",
+ CellChangeTimes->{{3.6054292501943917`*^9, 3.605429263086129*^9}},
+ FontSize->24],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox["\<\"\\!\\(\\*RowBox[{\\\"StirlingS2\\\", \\\"[\\\", \
+RowBox[{StyleBox[\\\"n\\\", \\\"TI\\\"], \\\",\\\", StyleBox[\\\"m\\\", \
+\\\"TI\\\"]}], \\\"]\\\"}]\\) gives the Stirling number of the second kind \
+\\!\\(\\*SubsuperscriptBox[\\\"\[ScriptCapitalS]\\\", StyleBox[\\\"n\\\", \
+\\\"TI\\\"], RowBox[{\\\"(\\\", StyleBox[\\\"m\\\", \\\"TI\\\"], \\\")\\\"}]]\
+\\). \"\>", "MSG"], "\[NonBreakingSpace]", 
+  ButtonBox[
+   StyleBox["\[RightSkeleton]", "SR"],
+   Active->True,
+   BaseStyle->"Link",
+   ButtonData->"paclet:ref/StirlingS2"]}]], "Print", "PrintUsage",
+ CellChangeTimes->{3.605429266454322*^9},
+ FontSize->24,
+ CellTags->"Info3605436464-1126550"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"StirlingS2", "[", 
+  RowBox[{"2", ",", "1"}], "]"}]], "Input",
+ CellChangeTimes->{{3.605429299707224*^9, 3.605429310599847*^9}},
+ FontSize->24],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{3.605585868263288*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"StirlingS2", "[", 
+  RowBox[{"5", ",", "2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6054293138780346`*^9, 3.6054293267137685`*^9}},
+ FontSize->24],
+
+Cell[BoxData["15"], "Output",
+ CellChangeTimes->{3.6055858696010303`*^9}]
+}, Open  ]],
+
+Cell["\<\
+Feu servir el nombre de Stirling per resoldre el seg\[UDoubleDot]ent problema \
+:\
+\>", "Input",
+ CellChangeTimes->{{3.6054296666442113`*^9, 3.605429667464258*^9}, 
+   3.605429753061154*^9, 3.605429799057785*^9},
+ FontSize->24],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.605358394523471*^9, 3.6053584014654827`*^9}, {
+  3.6054293997039433`*^9, 3.605429403249146*^9}, {3.6054295037718954`*^9, 
+  3.6054295056880054`*^9}, {3.6054295496935225`*^9, 3.6054295552958426`*^9}},
+ FontSize->24],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{"3", ")"}], "De", "quantes", "maneres", "podem", "repartir", "8", 
+   "boles", "distingibles", 
+   RowBox[{"{", 
+    RowBox[{
+     FormBox[
+      SubscriptBox["B", "1"],
+      TraditionalForm], ",", 
+     FormBox[
+      SubscriptBox["B", "2"],
+      TraditionalForm], ",", 
+     FormBox[
+      SubscriptBox["B", "3"],
+      TraditionalForm], ",", 
+     FormBox[
+      SubscriptBox["B", "4"],
+      TraditionalForm], ",", 
+     FormBox[
+      SubscriptBox["B", "5"],
+      TraditionalForm], ",", 
+     FormBox[
+      SubscriptBox["B", "6"],
+      TraditionalForm], ",", 
+     FormBox[
+      SubscriptBox["B", "7"],
+      TraditionalForm], ",", 
+     FormBox[
+      SubscriptBox["B", "8"],
+      TraditionalForm]}], "}"}], "en", "4", "capses", "indistingibles", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      FormBox["C",
+       TraditionalForm], ",", 
+      FormBox["C",
+       TraditionalForm], ",", 
+      FormBox["C",
+       TraditionalForm], ",", 
+      FormBox["C",
+       TraditionalForm]}], "}"}], "?", "De"}], " ", "quantes", " ", "maneres",
+    " ", "ho", " ", "podem", " ", "fer", " ", "sense", " ", "deixar", " ", 
+   "cap", " ", "capsa", " ", 
+   RowBox[{"buida", "?", "\[IndentingNewLine]"}]}],
+  FontFamily->"Arial"]], "Text",
+ CellChangeTimes->{{3.6054296877924213`*^9, 3.6054297508730288`*^9}, {
+   3.6054298080643*^9, 3.6054298606473074`*^9}, {3.6054299624861326`*^9, 
+   3.605429999367242*^9}, {3.6054300317900963`*^9, 3.605430103245184*^9}, {
+   3.6054301375631466`*^9, 3.6054301573922806`*^9}, {3.6054304443836956`*^9, 
+   3.605430484583995*^9}, {3.6054306035027966`*^9, 3.605430624625005*^9}, 
+   3.6054310990401397`*^9, {3.605441420127472*^9, 3.605441427211877*^9}, {
+   3.6054417066498604`*^9, 3.6054417280530844`*^9}, {3.6054419176409283`*^9, 
+   3.6054419220721817`*^9}, {3.605585951084167*^9, 3.605585952249098*^9}, 
+   3.605586059393832*^9},
+ TextAlignment->Left,
+ TextJustification->1,
+ FontSize->24],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+  "Aixo", " ", "es", " ", "el", " ", "numero", " ", "de", " ", "formes", " ", 
+   "que", " ", "ho", " ", "podem", " ", "fer", " ", "sense", " ", "deixar", 
+   " ", "cap", " ", "capsa", " ", "buida"}], "Text",
+  FontSize->18]], "Input",
+ CellChangeTimes->{{3.6055861461577663`*^9, 3.605586146472788*^9}, 
+   3.605586257714056*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"StirlingS2", "[", 
+  RowBox[{"8", ",", " ", "4"}], "]"}]], "Input",
+ CellChangeTimes->{{3.605430242793165*^9, 3.6054302475034347`*^9}, {
+  3.605585955026228*^9, 3.6055859859713173`*^9}, {3.6055861496825647`*^9, 
+  3.605586271513989*^9}},
+ FontSize->24],
+
+Cell[BoxData["1701"], "Output",
+ CellChangeTimes->{3.605586272196789*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{
+   "Aixo", " ", "es", " ", "el", " ", "numero", " ", "de", " ", 
+    "combinacions", " ", "que", " ", "podem", " ", "fer"}], ",", " ", 
+   RowBox[{
+   "incloent", " ", "les", " ", "opcions", " ", "amb", " ", "capses", " ", 
+    "buides"}]}],
+  FontSize->18]], "Input",
+ CellChangeTimes->{{3.605586332245915*^9, 3.60558636852276*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"StirlingS2", "[", 
+   RowBox[{"8", ",", " ", "1"}], "]"}], " ", "+", " ", 
+  RowBox[{"StirlingS2", "[", 
+   RowBox[{"8", ",", " ", "2"}], "]"}], " ", "+", " ", 
+  RowBox[{"StirlingS2", "[", 
+   RowBox[{"8", ",", " ", "3"}], "]"}], " ", "+", " ", "1701"}]], "Input",
+ CellChangeTimes->{
+  3.6054308570122967`*^9, 3.6054312868108797`*^9, {3.605586288463944*^9, 
+   3.605586325915391*^9}},
+ FontSize->24],
+
+Cell[BoxData["2795"], "Output",
+ CellChangeTimes->{3.605586327853112*^9}]
+}, Open  ]],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{3.605586900487772*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"L", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "6", ",", "7", ",", 
+     "8"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"While", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Length", "[", "L", "]"}], "<", "11"}], ",", " ", 
+    RowBox[{
+     RowBox[{"q", "=", 
+      RowBox[{"RandomInteger", "[", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", 
+         RowBox[{"Length", "[", "L", "]"}]}], "}"}], "]"}]}], ";", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"L", "[", 
+         RowBox[{"[", "q", "]"}], "]"}], "\[NotEqual]", "0"}], ",", 
+       RowBox[{"L", "=", 
+        RowBox[{"Insert", "[", 
+         RowBox[{"L", ",", "0", ",", "q"}], "]"}]}]}], "]"}]}]}], "]"}], ";", 
+  "L"}]}], "Input",
+ CellChangeTimes->{{3.605431681231439*^9, 3.605431760671983*^9}, {
+  3.6054317913277364`*^9, 3.6054318738184547`*^9}, {3.6054319098135133`*^9, 
+  3.6054319428404026`*^9}, {3.6054320036238785`*^9, 3.6054320054549837`*^9}, {
+  3.6054320927279754`*^9, 3.605432132223234*^9}, {3.6054351455935893`*^9, 
+  3.6054351597684*^9}, {3.6055860709225893`*^9, 3.605586073355044*^9}},
+ FontSize->24],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "1", ",", "0", ",", "2", ",", "3", ",", "0", ",", "4", ",", "0", ",", "5", 
+   ",", "6", ",", "7", ",", "8"}], "}"}]], "Output",
+ CellChangeTimes->{3.605585900989375*^9, 3.605586076040329*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"j", "=", "0"}], ";", 
+  RowBox[{"P", "=", 
+   RowBox[{"{", "}"}]}], ";", 
+  RowBox[{"While", "[", 
+   RowBox[{
+    RowBox[{"j", "<", "2795"}], ",", 
+    RowBox[{
+     RowBox[{"L", "=", 
+      RowBox[{"{", 
+       RowBox[{
+       "1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "6", ",", "7", ",", 
+        "8"}], "}"}]}], ";", 
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Length", "[", "L", "]"}], "<", "11"}], ",", " ", 
+       RowBox[{
+        RowBox[{"q", "=", 
+         RowBox[{"RandomInteger", "[", 
+          RowBox[{"{", 
+           RowBox[{"1", ",", 
+            RowBox[{"Length", "[", "L", "]"}]}], "}"}], "]"}]}], ";", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"L", "[", 
+            RowBox[{"[", "q", "]"}], "]"}], "\[NotEqual]", "0"}], ",", 
+          RowBox[{"L", "=", 
+           RowBox[{"Insert", "[", 
+            RowBox[{"L", ",", "0", ",", "q"}], "]"}]}]}], "]"}]}]}], "]"}], 
+     ";", 
+     RowBox[{"AppendTo", "[", 
+      RowBox[{"P", ",", "L"}], "]"}], ";", 
+     RowBox[{"j", "++"}]}]}], "]"}], ";", "P"}]], "Input",
+ CellChangeTimes->{{3.6054322952895613`*^9, 3.605432406393916*^9}, 
+   3.6054325189413533`*^9, {3.60543274634136*^9, 3.605432766062488*^9}, {
+   3.605432820249587*^9, 3.6054328222307005`*^9}, {3.605432885479318*^9, 
+   3.605432891356654*^9}, 3.605586277598976*^9},
+ FontSize->24],
+
+Cell[BoxData[
+ InterpretationBox[
+  TagBox[
+   PanelBox[GridBox[{
+      {
+       StyleBox[
+        StyleBox[
+         DynamicBox[ToBoxes[
+           FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"], 
+           StandardForm],
+          ImageSizeCache->{413., {3., 11.}}],
+         StripOnInput->False,
+         DynamicUpdating->True], "Panel",
+        StripOnInput->False,
+        Background->None]},
+      {
+       ItemBox[
+        TagBox[
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "1", ",", "0", ",", "2", ",", "3", ",", "4", ",", "5", 
+             ",", "0", ",", "6", ",", "7", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "2", ",", "0", ",", "3", ",", "4", ",", "0", ",", "5", 
+             ",", "6", ",", "7", ",", "0", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "2", ",", "3", ",", "4", ",", "0", ",", "5", ",", "0", 
+             ",", "6", ",", "0", ",", "7", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "1", ",", "2", ",", "3", ",", "0", ",", "4", ",", "0", 
+             ",", "5", ",", "6", ",", "7", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "1", ",", "2", ",", "0", ",", "3", ",", "0", ",", "4", 
+             ",", "5", ",", "6", ",", "7", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "2", ",", "3", ",", "0", ",", "4", ",", "5", ",", "6", 
+             ",", "0", ",", "7", ",", "0", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "2", ",", "3", ",", "0", ",", "4", ",", "0", ",", "5", 
+             ",", "6", ",", "7", ",", "0", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "0", ",", "2", ",", "3", ",", "0", ",", "4", ",", "0", 
+             ",", "5", ",", "6", ",", "7", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "1", ",", "2", ",", "0", ",", "3", ",", "4", ",", "5", 
+             ",", "6", ",", "7", ",", "0", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "0", ",", "2", ",", "3", ",", "4", ",", "0", ",", "5", 
+             ",", "6", ",", "7", ",", "0", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "0", ",", "2", ",", "3", ",", "4", ",", "5", ",", "6", 
+             ",", "0", ",", "7", ",", "0", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "6", 
+             ",", "0", ",", "7", ",", "0", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "2", ",", "3", ",", "4", ",", "0", ",", "0", ",", "5", 
+             ",", "6", ",", "0", ",", "7", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "2", ",", "3", ",", "0", ",", "4", ",", "5", ",", "6", 
+             ",", "0", ",", "7", ",", "0", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "2", ",", "3", ",", "4", ",", "0", ",", "5", ",", "6", 
+             ",", "0", ",", "7", ",", "0", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "1", ",", "2", ",", "3", ",", "0", ",", "4", ",", "5", 
+             ",", "0", ",", "6", ",", "7", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "1", ",", "0", ",", "2", ",", "0", ",", "3", ",", "4", 
+             ",", "5", ",", "6", ",", "7", ",", "8"}], "}"}], ",", 
+           RowBox[{"\[LeftSkeleton]", "2761", "\[RightSkeleton]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "0", ",", "2", ",", "3", ",", "4", ",", "0", ",", "5", 
+             ",", "0", ",", "6", ",", "7", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "2", ",", "3", ",", "4", ",", "0", ",", "5", ",", "0", 
+             ",", "0", ",", "6", ",", "7", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "1", ",", "2", ",", "0", ",", "3", ",", "4", ",", "5", 
+             ",", "6", ",", "0", ",", "7", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "6", 
+             ",", "0", ",", "7", ",", "0", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "0", ",", "6", 
+             ",", "0", ",", "7", ",", "0", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "2", ",", "0", ",", "0", ",", "3", ",", "0", ",", "4", 
+             ",", "5", ",", "6", ",", "7", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "1", ",", "0", ",", "2", ",", "3", ",", "4", ",", "5", 
+             ",", "6", ",", "7", ",", "0", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "0", 
+             ",", "6", ",", "7", ",", "0", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "0", ",", "2", ",", "3", ",", "4", ",", "0", ",", "5", 
+             ",", "6", ",", "0", ",", "7", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "1", ",", "0", ",", "2", ",", "3", ",", "4", ",", "5", 
+             ",", "6", ",", "0", ",", "7", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "2", ",", "0", ",", "3", ",", "4", ",", "0", ",", "5", 
+             ",", "6", ",", "7", ",", "0", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "1", ",", "0", ",", "2", ",", "3", ",", "4", ",", "5", 
+             ",", "6", ",", "0", ",", "7", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "1", ",", "2", ",", "3", ",", "4", ",", "5", ",", "0", 
+             ",", "6", ",", "0", ",", "7", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "0", ",", "1", ",", "2", ",", "3", ",", "4", ",", "0", ",", "5", 
+             ",", "6", ",", "7", ",", "0", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "0", ",", "2", ",", "3", ",", "4", ",", "5", ",", "0", 
+             ",", "6", ",", "7", ",", "0", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "2", ",", "0", ",", "3", ",", "0", ",", "4", ",", "0", 
+             ",", "5", ",", "6", ",", "7", ",", "8"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+            "1", ",", "2", ",", "3", ",", "4", ",", "0", ",", "5", ",", "0", 
+             ",", "6", ",", "0", ",", "7", ",", "8"}], "}"}]}], "}"}],
+         Short[#, 5]& ],
+        Background->GrayLevel[1],
+        BaseStyle->{Deployed -> False},
+        Frame->True,
+        FrameStyle->GrayLevel[0, 0.2],
+        StripOnInput->False]},
+      {
+       RowBox[{
+        ButtonBox[
+         StyleBox[
+          StyleBox[
+           DynamicBox[ToBoxes[
+             FEPrivate`FrontEndResource["FEStrings", "sizeShowLess"], 
+             StandardForm],
+            ImageSizeCache->{73., {0., 11.}}],
+           StripOnInput->False,
+           DynamicUpdating->True], "Panel",
+          StripOnInput->False,
+          Background->None],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 45, 23629602693128596225, 5/2],
+         Enabled->True,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         StyleBox[
+          StyleBox[
+           DynamicBox[ToBoxes[
+             FEPrivate`FrontEndResource["FEStrings", "sizeShowMore"], 
+             StandardForm],
+            ImageSizeCache->{78., {0., 11.}}],
+           StripOnInput->False,
+           DynamicUpdating->True], "Panel",
+          StripOnInput->False,
+          Background->None],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 45, 23629602693128596225, 5 2],
+         Enabled->True,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         StyleBox[
+          StyleBox[
+           DynamicBox[ToBoxes[
+             FEPrivate`FrontEndResource["FEStrings", "sizeShowAll"], 
+             StandardForm],
+            ImageSizeCache->{121., {3., 11.}}],
+           StripOnInput->False,
+           DynamicUpdating->True], "Panel",
+          StripOnInput->False,
+          Background->None],
+         Appearance->Automatic,
+         ButtonFunction:>OutputSizeLimit`ButtonFunction[
+          Identity, 45, 23629602693128596225, Infinity],
+         Enabled->True,
+         Evaluator->Automatic,
+         Method->"Queued"], "\[ThinSpace]", 
+        ButtonBox[
+         StyleBox[
+          StyleBox[
+           DynamicBox[ToBoxes[
+             FEPrivate`FrontEndResource["FEStrings", "sizeChangeLimit"], 
+             StandardForm],
+            ImageSizeCache->{109., {0., 11.}}],
+           StripOnInput->False,
+           DynamicUpdating->True], "Panel",
+          StripOnInput->False,
+          Background->None],
+         Appearance->Automatic,
+         ButtonFunction:>FrontEndExecute[{
+            FrontEnd`SetOptions[
+            FrontEnd`$FrontEnd, 
+             FrontEnd`PreferencesSettings -> {"Page" -> "Evaluation"}], 
+            FrontEnd`FrontEndToken["PreferencesDialog"]}],
+         Evaluator->None,
+         Method->"Preemptive"]}]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+       "RowsIndexed" -> {}},
+     GridBoxDividers->{
+      "Columns" -> {{False}}, "ColumnsIndexed" -> {}, "Rows" -> {{False}}, 
+       "RowsIndexed" -> {}},
+     GridBoxItemSize->{
+      "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.5599999999999999]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[1.2]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    DefaultBaseStyle->{},
+    FrameMargins->5],
+   Deploy,
+   DefaultBaseStyle->{Deployed -> True}],
+  Out[45]]], "Output",
+ CellChangeTimes->{3.605586278411324*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.605432578658769*^9, 3.605432588196315*^9}, {
+   3.6054328496282673`*^9, 3.605432858269762*^9}, {3.605432907842597*^9, 
+   3.60543291715213*^9}, 3.6054412369529953`*^9},
+ FontSize->24],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6054312476786413`*^9, 3.6054312729960895`*^9}, {
+  3.6054315078185205`*^9, 3.605431529011733*^9}},
+ FontSize->24]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Particions:",
+ FontSize->36,
+ FontColor->RGBColor[0.6, 0.4, 0.2]]], "Subtitle",
+ CellChangeTimes->{{3.605433981949033*^9, 3.605434020623245*^9}}],
+
+Cell[TextData[{
+ StyleBox["Les particions de un nombre enter positiu n",
+  FontColor->RGBColor[0, 0, 1]],
+ ", p(n) ,s\[OAcute]n les diferents maneres en que es pot escriure aquest \
+nombre com a suma d\[CloseCurlyQuote]enters positius, on \
+l\[CloseCurlyQuote]ordre dels sumands es irrellevant. Per exemple, en el cas \
+del n\[UAcute]mero 5:\n\n                                                 5\n \
+                                                4+1\n                         \
+                        3+2\n                                                 \
+3+1+1\n                                                 2+2+1\n               \
+                                  2+1+1+1\n                                   \
+              1+1+1+1+1 \n        \n Per tant p(5)=6."
+}], "Text",
+ CellChangeTimes->{{3.6054340621946225`*^9, 3.6054341149446397`*^9}, {
+   3.6054341877788057`*^9, 3.605434440077236*^9}, 3.605434512252364*^9, {
+   3.6054412688248177`*^9, 3.605441284917739*^9}},
+ FontSize->24],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6054343896023493`*^9, 3.605434391657467*^9}},
+ FontSize->24],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6054292758728604`*^9, 3.6054292758738604`*^9}, {
+  3.6054295295213685`*^9, 3.6054295452042656`*^9}, {3.6054310836732607`*^9, 
+  3.6054310849543343`*^9}, {3.6054329576904483`*^9, 3.605432958002466*^9}, {
+  3.6054340240374403`*^9, 3.6054340396033306`*^9}},
+ FontSize->24],
+
+Cell[TextData[StyleBox["4) De quantes maneres podem repartir 8 boles \
+indistingibles {B, B, B, B, B, B, B, B} en 4 capses indistingibles\n {C, C, \
+C, C}? De quantes maneres ho podem fer sense deixar cap capsa buida? \n ",
+ FontFamily->"Arial",
+ FontWeight->"Plain"]], "Input",
+ CellChangeTimes->{{3.6054310914297047`*^9, 3.6054310931318016`*^9}, {
+  3.605433463131358*^9, 3.6054334651294727`*^9}, {3.605433544484011*^9, 
+  3.605433632962072*^9}, {3.6054337349719067`*^9, 3.605433737221035*^9}, {
+  3.605435640130875*^9, 3.605435643548071*^9}, {3.6054363064459867`*^9, 
+  3.6054363238699827`*^9}, {3.6054414078897724`*^9, 3.605441411781995*^9}},
+ FontSize->24],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "IntegerPartitions"}]], "Input",
+ CellChangeTimes->{{3.60543319758317*^9, 3.605433211437962*^9}},
+ FontSize->24],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox["\<\"\!\(\*RowBox[{\\\"IntegerPartitions\\\", \\\"[\\\", StyleBox[\
+\\\"n\\\", \\\"TI\\\"], \\\"]\\\"}]\) gives a list of all possible ways to \
+partition the integer \!\(\*StyleBox[\\\"n\\\", \\\"TI\\\"]\) into smaller \
+integers. \\n\!\(\*RowBox[{\\\"IntegerPartitions\\\", \\\"[\\\", \
+RowBox[{StyleBox[\\\"n\\\", \\\"TI\\\"], \\\",\\\", StyleBox[\\\"k\\\", \
+\\\"TI\\\"]}], \\\"]\\\"}]\) gives partitions into at most \
+\!\(\*StyleBox[\\\"k\\\", \\\"TI\\\"]\) integers. \
+\\n\!\(\*RowBox[{\\\"IntegerPartitions\\\", \\\"[\\\", RowBox[{StyleBox[\\\"n\
+\\\", \\\"TI\\\"], \\\",\\\", RowBox[{\\\"{\\\", StyleBox[\\\"k\\\", \\\"TI\\\
+\"], \\\"}\\\"}]}], \\\"]\\\"}]\) gives partitions into exactly \
+\!\(\*StyleBox[\\\"k\\\", \\\"TI\\\"]\) integers. \
+\\n\!\(\*RowBox[{\\\"IntegerPartitions\\\", \\\"[\\\", RowBox[{StyleBox[\\\"n\
+\\\", \\\"TI\\\"], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{SubscriptBox[StyleBox[\\\"k\\\", \\\"TI\\\"], StyleBox[\\\"min\\\", \
+\\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"k\\\", \\\"TI\\\"], \
+StyleBox[\\\"max\\\", \\\"TI\\\"]]}], \\\"}\\\"}]}], \\\"]\\\"}]\) gives \
+partitions into between \!\(\*SubscriptBox[StyleBox[\\\"k\\\", \\\"TI\\\"], \
+StyleBox[\\\"min\\\", \\\"TI\\\"]]\) and \
+\!\(\*SubscriptBox[StyleBox[\\\"k\\\", \\\"TI\\\"], StyleBox[\\\"max\\\", \
+\\\"TI\\\"]]\) integers. \\n\!\(\*RowBox[{\\\"IntegerPartitions\\\", \
+\\\"[\\\", RowBox[{StyleBox[\\\"n\\\", \\\"TI\\\"], \\\",\\\", \
+StyleBox[\\\"kspec\\\", \\\"TI\\\"], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{SubscriptBox[StyleBox[\\\"s\\\", \\\"TI\\\"], StyleBox[\\\"1\\\", \
+\\\"TR\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"s\\\", \\\"TI\\\"], \
+StyleBox[\\\"2\\\", \\\"TR\\\"]], \\\",\\\", StyleBox[\\\"\[Ellipsis]\\\", \\\
+\"TR\\\"]}], \\\"}\\\"}]}], \\\"]\\\"}]\) gives partitions involving only the \
+\!\(\*SubscriptBox[StyleBox[\\\"s\\\", \\\"TI\\\"], StyleBox[\\\"i\\\", \
+\\\"TI\\\"]]\). \\n\!\(\*RowBox[{\\\"IntegerPartitions\\\", \\\"[\\\", \
+RowBox[{StyleBox[\\\"n\\\", \\\"TI\\\"], \\\",\\\", StyleBox[\\\"kspec\\\", \
+\\\"TI\\\"], \\\",\\\", StyleBox[\\\"sspec\\\", \\\"TI\\\"], \\\",\\\", \
+StyleBox[\\\"m\\\", \\\"TI\\\"]}], \\\"]\\\"}]\) limits the result to the \
+first \!\(\*StyleBox[\\\"m\\\", \\\"TI\\\"]\) partitions. \"\>", "MSG"], 
+  "\[NonBreakingSpace]", 
+  ButtonBox[
+   StyleBox["\[RightSkeleton]", "SR"],
+   Active->True,
+   BaseStyle->"Link",
+   ButtonData->"paclet:ref/IntegerPartitions"]}]], "Print", "PrintUsage",
+ CellChangeTimes->{3.605586481767838*^9},
+ CellTags->"Info3605593681-1729529"]
+}, Open  ]],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+  "Aquesta", " ", "formula", " ", "calcula", " ", "el", " ", "nombre", " ", 
+   "de", " ", "particions", " ", "possibles", " ", "de", " ", "les", " ", "8",
+    " ", "boles", " ", "en", " ", "COM", " ", "A", " ", "MOLT", " ", "4", " ",
+    "capses"}],
+  FontSize->24]], "Input",
+ CellChangeTimes->{{3.605586573767202*^9, 3.60558661778365*^9}, {
+  3.6055867009639378`*^9, 3.6055867020733967`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{"JK1", " ", "=", " ", 
+   RowBox[{"IntegerPartitions", "[", 
+    RowBox[{"8", ",", " ", "4"}], "]"}]}],
+  FontSize->24]], "Input",
+ CellChangeTimes->{{3.60558651962672*^9, 3.605586558857809*^9}, {
+  3.6055866041764727`*^9, 3.605586636327231*^9}, {3.605586666551853*^9, 
+  3.605586671860985*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", "8", "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"7", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"6", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"6", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"5", ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"5", ",", "2", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"5", ",", "1", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "3", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "2", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "2", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "3", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "3", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "2", ",", "2", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "2", ",", "2", ",", "2"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.605586560174837*^9, 3.605586605678625*^9, 3.605586637549942*^9, {
+   3.6055866682650633`*^9, 3.605586673357464*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "JK1", "]"}]], "Input",
+ CellChangeTimes->{{3.6055866390596943`*^9, 3.6055866704864893`*^9}}],
+
+Cell[BoxData["15"], "Output",
+ CellChangeTimes->{{3.6055866493735247`*^9, 3.6055866743384523`*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+  "Aquesta", " ", "formula", " ", "calcula", " ", "el", " ", "nombre", " ", 
+   "de", " ", "particions", " ", "possibles", " ", "de", " ", "les", " ", "8",
+    " ", "boles", " ", "en", " ", "EXACTAMENT", " ", "4", " ", "capses"}],
+  FontSize->24]], "Input",
+ CellChangeTimes->{{3.6055866957559557`*^9, 3.605586709783539*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{"JK2", " ", "=", " ", 
+   RowBox[{"IntegerPartitions", "[", 
+    RowBox[{"8", ",", 
+     RowBox[{"{", "4", "}"}]}], "]"}]}],
+  FontSize->24]], "Input",
+ CellChangeTimes->{{3.605586659978113*^9, 3.605586684838784*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"5", ",", "1", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "2", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "3", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "2", ",", "2", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "2", ",", "2", ",", "2"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.605586685842564*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "JK2", "]"}]], "Input",
+ CellChangeTimes->{{3.6055866874731503`*^9, 3.6055866925255823`*^9}}],
+
+Cell[BoxData["5"], "Output",
+ CellChangeTimes->{3.605586693293181*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6052775673563538`*^9, 3.605277633546447*^9}, {
+  3.6052778062366886`*^9, 3.605277826066716*^9}, {3.605278256329527*^9, 
+  3.605278257078328*^9}},
+ FontSize->24],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.605277828256719*^9, 3.605277855306757*^9}, {
+  3.605278251852319*^9, 3.6052782526011205`*^9}},
+ FontSize->24],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.605277843766741*^9, 3.6052778468567452`*^9}},
+ FontSize->24],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6052775629263477`*^9, 3.605277565906352*^9}},
+ FontSize->24],
+
+Cell[CellGroupData[{
+
+Cell["", "Section",
+ CellChangeTimes->{{3.6052628886785107`*^9, 3.605262889339548*^9}, {
+  3.605270036539345*^9, 3.6052700371983824`*^9}},
+ FontSize->24],
+
+Cell["", "Text",
+ CellChangeTimes->{{3.605262878811946*^9, 3.6052628856373367`*^9}},
+ FontSize->24]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1920, 1025},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+FrontEndVersion->"8.0 for Linux x86 (64-bit) (November 7, 2010)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "Info3605436464-1126550"->{
+  Cell[21183, 620, 691, 15, 59, "Print",
+   CellTags->"Info3605436464-1126550"]},
+ "Info3605593681-1729529"->{
+  Cell[43279, 1210, 2571, 41, 133, "Print",
+   CellTags->"Info3605593681-1729529"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"Info3605436464-1126550", 50765, 1414},
+ {"Info3605593681-1729529", 50876, 1417}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 222, 5, 60, "Input"],
+Cell[CellGroupData[{
+Cell[804, 29, 256, 5, 125, "Title"],
+Cell[1063, 36, 92, 1, 29, "Input"],
+Cell[1158, 39, 375, 9, 75, "Text"],
+Cell[CellGroupData[{
+Cell[1558, 52, 233, 5, 89, "Section"],
+Cell[1794, 59, 1280, 27, 235, "Text"],
+Cell[3077, 88, 405, 13, 44, "Input"],
+Cell[3485, 103, 180, 4, 43, "Text"],
+Cell[CellGroupData[{
+Cell[3690, 111, 186, 5, 44, "Input"],
+Cell[3879, 118, 181, 5, 29, "Output"]
+}, Open  ]],
+Cell[4075, 126, 109, 2, 44, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4221, 133, 250, 8, 120, "Section"],
+Cell[4474, 143, 4354, 100, 817, "Text"],
+Cell[8831, 245, 1254, 36, 82, "Input"],
+Cell[CellGroupData[{
+Cell[10110, 285, 263, 6, 44, "Input"],
+Cell[10376, 293, 1823, 43, 48, "Output"]
+}, Open  ]],
+Cell[12214, 339, 238, 5, 44, "Input"],
+Cell[CellGroupData[{
+Cell[12477, 348, 237, 8, 92, "Subsection"],
+Cell[12717, 358, 1473, 56, 139, "Text"],
+Cell[14193, 416, 652, 13, 64, "Input"],
+Cell[14848, 431, 96, 1, 29, "Input"],
+Cell[14947, 434, 375, 8, 43, "Text"],
+Cell[CellGroupData[{
+Cell[15347, 446, 1062, 24, 44, "Input"],
+Cell[16412, 472, 97, 1, 29, "Output"]
+}, Open  ]],
+Cell[16524, 476, 330, 8, 36, "Input"],
+Cell[CellGroupData[{
+Cell[16879, 488, 528, 16, 44, "Input"],
+Cell[17410, 506, 73, 1, 29, "Output"]
+}, Open  ]],
+Cell[17498, 510, 92, 1, 29, "Input"],
+Cell[CellGroupData[{
+Cell[17615, 515, 110, 2, 42, "Subsubsection"],
+Cell[17728, 519, 952, 26, 107, "Text"],
+Cell[18683, 547, 303, 8, 36, "Input"],
+Cell[CellGroupData[{
+Cell[19011, 559, 656, 18, 44, "Input"],
+Cell[19670, 579, 170, 2, 29, "Output"]
+}, Open  ]],
+Cell[19855, 584, 109, 2, 44, "Input"],
+Cell[19967, 588, 94, 1, 29, "Input"],
+Cell[20064, 591, 955, 20, 216, "Text"],
+Cell[CellGroupData[{
+Cell[21044, 615, 136, 3, 44, "Input"],
+Cell[21183, 620, 691, 15, 59, "Print",
+ CellTags->"Info3605436464-1126550"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21911, 640, 167, 4, 44, "Input"],
+Cell[22081, 646, 70, 1, 29, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22188, 652, 171, 4, 44, "Input"],
+Cell[22362, 658, 73, 1, 29, "Output"]
+}, Open  ]],
+Cell[22450, 662, 237, 6, 44, "Input"],
+Cell[22690, 670, 263, 4, 44, "Input"],
+Cell[22956, 676, 1978, 57, 120, "Text"],
+Cell[24937, 735, 365, 8, 36, "Input"],
+Cell[CellGroupData[{
+Cell[25327, 747, 276, 6, 44, "Input"],
+Cell[25606, 755, 73, 1, 29, "Output"]
+}, Open  ]],
+Cell[25694, 759, 381, 10, 36, "Input"],
+Cell[CellGroupData[{
+Cell[26100, 773, 436, 11, 44, "Input"],
+Cell[26539, 786, 73, 1, 29, "Output"]
+}, Open  ]],
+Cell[26627, 790, 87, 1, 48, "Input"],
+Cell[CellGroupData[{
+Cell[26739, 795, 1210, 32, 119, "Input"],
+Cell[27952, 829, 234, 5, 29, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28223, 839, 1431, 40, 119, "Input"],
+Cell[29657, 881, 10715, 257, 206, "Output"]
+}, Open  ]],
+Cell[40387, 1141, 232, 4, 44, "Input"],
+Cell[40622, 1147, 162, 3, 44, "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40845, 1157, 169, 3, 64, "Subtitle"],
+Cell[41017, 1162, 997, 16, 395, "Text"],
+Cell[42017, 1180, 109, 2, 44, "Input"],
+Cell[42129, 1184, 318, 5, 44, "Input"],
+Cell[42450, 1191, 661, 10, 104, "Input"],
+Cell[CellGroupData[{
+Cell[43136, 1205, 140, 3, 44, "Input"],
+Cell[43279, 1210, 2571, 41, 133, "Print",
+ CellTags->"Info3605593681-1729529"]
+}, Open  ]],
+Cell[45865, 1254, 431, 9, 44, "Input"],
+Cell[CellGroupData[{
+Cell[46321, 1267, 330, 8, 44, "Input"],
+Cell[46654, 1277, 1204, 34, 29, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[47895, 1316, 131, 2, 29, "Input"],
+Cell[48029, 1320, 99, 1, 29, "Output"]
+}, Open  ]],
+Cell[48143, 1324, 361, 7, 44, "Input"],
+Cell[CellGroupData[{
+Cell[48529, 1335, 252, 7, 44, "Input"],
+Cell[48784, 1344, 490, 13, 29, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[49311, 1362, 131, 2, 29, "Input"],
+Cell[49445, 1366, 70, 1, 29, "Output"]
+}, Open  ]],
+Cell[49530, 1370, 209, 4, 44, "Input"],
+Cell[49742, 1376, 158, 3, 44, "Input"],
+Cell[49903, 1381, 109, 2, 44, "Input"],
+Cell[50015, 1385, 109, 2, 44, "Input"],
+Cell[CellGroupData[{
+Cell[50149, 1391, 153, 3, 76, "Section"],
+Cell[50305, 1396, 99, 2, 43, "Text"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

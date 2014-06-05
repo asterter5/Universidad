@@ -1,0 +1,220 @@
+
+package edu.ub.misionespacial.actors;
+
+import edu.ub.misionespacial.Actor;
+import edu.ub.misionespacial.Constants;
+import edu.ub.misionespacial.Colisio;
+import edu.ub.misionespacial.Context;
+import edu.ub.misionespacial.Habitacio;
+import edu.ub.misionespacial.Util;
+import edu.ub.misionespacial.Porta;
+import edu.ub.misionespacial.Fortalesa;
+
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
+
+/**
+ * Representa el nostre heroi.
+ * 
+ * @author danieldelrio@ub.edu
+ */
+public class Heroi extends AbstractActor {   
+    private Image[] imatges;
+    
+    public static final int AMPLADA = 40;
+    public static final int ALCADA = 71;
+    
+    private static final int FRAMES_CHANGE = 1;
+                
+    private boolean bPosChanged = false;
+    private int nFramesToChange = FRAMES_CHANGE;
+    int lastImage = 0;
+    private int deltaX = 10;
+    private int deltaY = 8;
+    private int direccio = -1;
+    private int[] armaPassword = {1, 2, 3, 4};
+    private boolean armaTrobat = false;    
+
+    private static final float DANY_PER_SEGON = 0.5f;
+    
+    /**
+     * Constructor.
+     */
+    public Heroi() {
+        init();
+    }
+    
+    public void inicialitzar() {
+        super.inicialitzar();
+	boolean armaTrobada = false;
+    }
+    
+    /**
+     * Obte un rectangle ambs el limits de l'heroi.
+     * 
+     * @return els limits, x,y, amplada i alcada
+     */
+    public Rectangle getLimits() {
+        return new Rectangle(x, y, AMPLADA, ALCADA);
+    }
+    
+    public void actualitzar(Context ctx) {
+        calcularNivellVida(ctx);
+        int desX = 0; 
+        int desY = 0;
+        bPosChanged = false;
+                
+        if (ctx.isKeyPressed(Context.KEY_DOWN)) {
+            desY = 1;
+            direccio = Constants.DIRECCIO_SUD;
+            bPosChanged = true;
+        } else if (ctx.isKeyPressed(Context.KEY_UP)) { 
+            desY = -1;
+            direccio = Constants.DIRECCIO_NORD;
+            bPosChanged = true;
+        } else if (ctx.isKeyPressed(Context.KEY_LEFT)) {
+            desX = -1;
+            direccio = Constants.DIRECCIO_OEST;
+            bPosChanged = true;
+        } else if (ctx.isKeyPressed(Context.KEY_RIGHT)) {
+            desX = 1;
+            direccio = Constants.DIRECCIO_EST;
+            bPosChanged = true;
+        }
+        
+        int auxX = x + (int)(deltaX * desX);
+        int auxY = y + (int)(deltaY * desY);        
+                
+        Porta porta = testPorta(ctx, auxX, auxY);
+        if (porta != null && porta.getNumPlantaDesti() != -1 && 
+                porta.getNumHabitacioDesti() != -1) {
+            
+            Fortalesa fortalesa = ctx.getJoc().getFortalesa();            
+            fortalesa.setPlanta(porta.getNumPlantaDesti());
+            fortalesa.setNumHabitacio(porta.getNumHabitacioDesti());
+            int[] posicio = porta.getPosicioHabitacioDesti();
+            if (posicio != null) {
+                x = posicio[0];
+                y = posicio[1];
+            }
+        } else if (!testMur(ctx, auxX, auxY)) {
+            x = auxX;
+            y = auxY;
+        }
+    }
+
+    public void setHaTrobatArmaSecreta(boolean x) {
+	armaTrobat = x;
+    }
+
+    public boolean haTrobatArmaSecreta() {
+	return armaTrobat;
+    }
+
+    public void desactivaArmaSecreta(int[] combinacioArma) {
+	boolean trobat = false;
+	int mata = 100;
+	int sumC = 0;
+	int sumR = 0;
+    	for (int j = 0; (j < 4) && !(trobat); j++) {
+		sumC = sumC + armaPassword[j];
+		sumR = sumR + combinacioArma[j];
+	}
+	System.out.println(sumC+", "+ sumR);
+	if (sumC != sumR && !(trobat)) {
+		vida = vida - mata; //Pobre Jack, amb aquesta condicio es quasi impossible que guanyi!
+	}
+    }
+    
+    public void tractarColisio(Colisio colisio) {
+    }
+
+    public void render(Graphics2D g) {
+        int nImg = 0;
+        if (bPosChanged) {
+        	nFramesToChange--;
+        	if (nFramesToChange == 0) {
+        		nFramesToChange = FRAMES_CHANGE;
+        		lastImage = (lastImage == 1) ? 0 : 1;
+        	}
+        }
+        
+        if (direccio == Constants.DIRECCIO_NORD) {
+        	nImg = 2 + lastImage;
+        } else {
+        	nImg = lastImage;
+        }
+        //Image image = imatges[nImg];
+        Image image = imatges[0];
+        g.drawImage(image, x, y, observer);
+    }
+
+    // private methods *********************************************************
+    
+    private void init() {
+        imatges = new Image[1];
+        for (int i=0; i<imatges.length; i++)
+        	imatges[i] = Util.carregarImatge("astronaut.png", AMPLADA*i, 0, AMPLADA, ALCADA); 
+    }
+    
+    private void calcularNivellVida(Context ctx) {
+        long t = ctx.getTempsFrame();
+        float dany = DANY_PER_SEGON * t / 1000.f;
+        setVida(Math.max(0, getVida() - dany));
+    }
+    
+    public void randomTeleport(Context context) {
+    	Fortalesa fortalesa = context.getJoc().getFortalesa();            
+        Actor heroi = context.getJoc().getHeroi();
+        Habitacio novaHabitacio = null;
+        Habitacio h = context.getHabitacio();
+        Habitacio[] habitacions = fortalesa.getHabitacions(fortalesa.getPlanta());
+        
+        if (habitacions.length > 1) {
+            boolean trobada = false;
+            int fila = 0;
+            int col = 0;
+            int numHabitacio = 0;
+            int[] posicio = null;
+            
+            while (!trobada) {
+                numHabitacio = (int)(Math.random() * habitacions.length);
+                while (h == habitacions[numHabitacio]) {
+                    numHabitacio = (int)(Math.random() * habitacions.length);
+                }
+                novaHabitacio = fortalesa.getHabitacio(fortalesa.getPlanta(), numHabitacio);
+                boolean lliure = false;
+                while (!lliure) {
+                    fila = (int)Math.max(0,(Math.random() * Constants.NUM_CELES_VERTICALS-2));
+                    col = (int)Math.max(0,(Math.random() * Constants.NUM_CELES_HORIZONTALS-2));
+                    char c1 = novaHabitacio.getValor(fila, col);
+                    char c2 = novaHabitacio.getValor(fila+1, col);
+                    char c3 = novaHabitacio.getValor(fila, col+1);
+                    char c4 = novaHabitacio.getValor(fila+1, col+1);
+                    lliure = (c1 == Constants.SIMBOL_TERRA &&
+                              c2 == Constants.SIMBOL_TERRA &&
+                              c3 == Constants.SIMBOL_TERRA &&
+                              c4 == Constants.SIMBOL_TERRA );
+
+                    // comprovar que cap actor esta dins la cela
+                    Actor[] actors = novaHabitacio.getActorsAsArray();
+                    int i = 0;
+
+                    int cela[] = null;
+                    while (i < actors.length && lliure) {
+                        cela = novaHabitacio.getCela(actors[i].getPosicioInicial()[0], 
+                                actors[i].getPosicioInicial()[1]);
+                        lliure = fila != cela[0] || col != cela[1];            
+                        i++;
+                    }
+                }
+                
+                posicio = novaHabitacio.getPosicioCela(fila, col);
+                trobada = !testMur(context, posicio[0], posicio[1], heroi.getLimits());
+            }                                
+            fortalesa.setNumHabitacio(numHabitacio);
+            heroi.setPosicio(posicio[0], posicio[1]);
+        }
+    }
+}

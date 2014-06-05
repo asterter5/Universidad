@@ -1,0 +1,1145 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     33344,       1136]
+NotebookOptionsPosition[     28584,        974]
+NotebookOutlinePosition[     29002,        992]
+CellTagsIndexPosition[     28959,        989]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"ASTOR", " ", "PRIETO", " ", "DEHGHANPOUR"}]], "Input",
+ CellChangeTimes->{{3.603773768054511*^9, 3.603773774720896*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Pr\[AGrave]ctica 4: Criptografia i codis\
+\>", "Title",
+ CellChangeTimes->{{3.413559558546875*^9, 3.4135595586875*^9}, {
+  3.603624797720231*^9, 3.6036247979322433`*^9}},
+ TextAlignment->Center],
+
+Cell["\<\
+En aquesta pr\[AGrave]ctica s'explica una aplicaci\[OAcute] de l'aritm\
+\[EGrave]tica modular a la criptografia. Encriptar un missatge consisteix en \
+canviar la cadena de car\[AGrave]cters que el componen per una altra de \
+manera que es pugui recuperar la cadena inicial; aquest proc\[EAcute]s de \
+recuperaci\[OAcute] de la cadena inicial s'anomena desencriptaci\[OAcute]. El \
+m\[EGrave]tode d'encriptaci\[OAcute] ser\[AGrave] m\[EAcute]s segur com m\
+\[EAcute]s dif\[IAcute]cil sigui de desencriptar per una persona no \
+autoritzada. A continuaci\[OAcute] es descriu un dels m\[EGrave]todes m\
+\[EAcute]s segurs d'encriptaci\[OAcute] de clau p\[UAcute]blica: el \
+m\[EGrave]tode RSA.\
+\>", "Text",
+ CellChangeTimes->{{3.4117353829375*^9, 3.411735400453125*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["El m\[EGrave]tode", "Subsubsection"],
+
+Cell[TextData[{
+ "Imaginem un conjunt d'empreses que estan interessades a comunicar-se entre \
+elles, per\[OGrave] secretament. En el nostre sistema, cada empresa ",
+ Cell[BoxData[
+  FormBox["A", TraditionalForm]]],
+ " tindr\[AGrave] assignades dues claus: una per encriptar ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["E", "A"], TraditionalForm]]],
+ " i  una altra per desencriptar ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["D", "A"], TraditionalForm]]],
+ ". En un directori disponible per a totes les empreses, hi figuraran totes \
+les claus d'encriptaci\[OAcute] ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["E", "A"], TraditionalForm]]],
+ ". Per tant, han de ser tals que no es pugui calcular ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["D", "A"], TraditionalForm]]],
+ " a partir de ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["E", "A"], TraditionalForm]]],
+ ". D'aquesta manera, si una empresa ",
+ Cell[BoxData[
+  FormBox["A", TraditionalForm]]],
+ " vol enviar un missatge a l'empresa ",
+ Cell[BoxData[
+  FormBox["B", TraditionalForm]]],
+ ", podr\[AGrave] encriptar-lo amb la clau ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["E", "B"], TraditionalForm]]],
+ ". Per\[OGrave] \[UAcute]nicament  l'empresa ",
+ Cell[BoxData[
+  FormBox["B", TraditionalForm]]],
+ " coneixer\[AGrave] la clau ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["D", "B"], TraditionalForm]]],
+ ", i aix\[IAcute] ning\[UAcute] m\[EAcute]s, ni tan sols l'empresa ",
+ Cell[BoxData[
+  FormBox["A", TraditionalForm]]],
+ ", podr\[AGrave] desxifrar el mensaje aix\[IAcute] encriptat."
+}], "Text",
+ CellChangeTimes->{3.41173545578125*^9}],
+
+Cell[TextData[{
+ "Suposem que hem associat, a la cadena de car\[AGrave]cters que compon el \
+nostre missatge, un nombre ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " mitjan\[CCedilla]ant algun procediment. \[CapitalEAcute]s a dir, que hem ",
+ StyleBox["codificat",
+  FontSlant->"Italic"],
+ " el nostre missatge amb un nombre, i que aquest nombre \[EAcute]s tal que ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"0", "<", "x", "<", "n"}], TraditionalForm]]],
+ ". A m\[EAcute]s, disposem de dos nombres ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ " i ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]]],
+ " tals que ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"e", "\[CenterDot]", "d"}], "\[Congruent]", 
+    RowBox[{"1", "   ", 
+     RowBox[{"(", 
+      RowBox[{"mod", " ", 
+       RowBox[{"\[Phi]", "(", "n", ")"}]}], ")"}]}]}], TraditionalForm]]],
+ ", on \[Phi] \[EAcute]s la funci\[OAcute] d'Euler. Si calculem ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"y", "=", 
+    RowBox[{"[", 
+     RowBox[{"el", " ", "residu", " ", "de", " ", "dividir", " ", 
+      SuperscriptBox["x", "e"], " ", "entre", " ", "n"}], "]"}]}], 
+   TraditionalForm]]],
+ ", llavors ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"y", "\[Congruent]", 
+    RowBox[{
+     SuperscriptBox["x", "e"], "  ", 
+     RowBox[{"(", 
+      RowBox[{"mod", " ", "n"}], ")"}]}]}], TraditionalForm]]],
+ ". I si calculem ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"z", "=", 
+    RowBox[{"[", 
+     RowBox[{"el", " ", "residu", " ", "de", " ", "dividir", " ", 
+      SuperscriptBox["y", "d"], " ", "entre", " ", "n"}], "]"}]}], 
+   TraditionalForm]]],
+ ", aleshores ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"z", "\[Congruent]", 
+    SuperscriptBox["y", "d"], "\[Congruent]", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      SuperscriptBox["x", "e"], ")"}], "d"], "\[Congruent]", 
+    SuperscriptBox["x", 
+     RowBox[{"e", "\[CenterDot]", "d"}]], "\[Congruent]", 
+    RowBox[{"x", "  ", 
+     RowBox[{"(", 
+      RowBox[{"mod", " ", "n"}], ")"}]}]}], TraditionalForm]]],
+ " pel Teorema Petit de Fermat, si ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"x", ",", "n"}], ")"}], "=", "1."}], TraditionalForm]]],
+ " Tant ",
+ Cell[BoxData[
+  FormBox["z", TraditionalForm]]],
+ " com ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ " son nombres entre 0 i ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ ", i ambd\[OAcute]s s\[OAcute]n congruents m\[OGrave]dul ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ "; per tant, ha de ser ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"z", "=", "x"}], TraditionalForm]]],
+ ". Aix\[IAcute], en calcular ",
+ Cell[BoxData[
+  FormBox["z", TraditionalForm]]],
+ " obtindrem el missatge de partida ",
+ StyleBox["x ",
+  FontSlant->"Italic"],
+ "i haurem ",
+ StyleBox["desencriptat y",
+  FontSlant->"Italic"],
+ ". Si cada empresa ",
+ Cell[BoxData[
+  FormBox["A", TraditionalForm]]],
+ " disposa dels seus ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "A"], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["e", "A"], TraditionalForm]]],
+ " i ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["d", "A"], TraditionalForm]]],
+ " particulars, la clau d'encriptaci\[OAcute] seran els nombres ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "A"], TraditionalForm]]],
+ " i ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["e", "A"], TraditionalForm]]],
+ ", (que tothom coneixer\[AGrave]) i el m\[EGrave]tode d'encriptaci\[OAcute] \
+ser\[AGrave] el c\[AGrave]lcul de ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"y", "=", 
+    RowBox[{"[", 
+     RowBox[{"el", " ", "residu", " ", "de", " ", "dividir", " ", 
+      SuperscriptBox["x", 
+       SubscriptBox["e", "A"]], " ", "entre", " ", 
+      SubscriptBox["n", "A"]}], "]"}]}], TraditionalForm]]],
+ ", mentre que la clau de desencriptaci\[OAcute] seran els nombres ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["n", "A"], TraditionalForm]]],
+ " i ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["d", "A"], TraditionalForm]]],
+ " (que nom\[EAcute]s l'empresa ",
+ Cell[BoxData[
+  FormBox["A", TraditionalForm]]],
+ " coneixer\[AGrave]) i el m\[EGrave]tode de desencriptaci\[OAcute], segons \
+el que s'ha explicat, ser\[AGrave] el c\[AGrave]lcul de ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"z", "=", 
+    RowBox[{
+     RowBox[{"[", 
+      RowBox[{"el", " ", "residu", " ", "de", " ", "dividir", " ", 
+       SuperscriptBox["y", 
+        SubscriptBox["d", "A"]], " ", "entre", " ", 
+       SubscriptBox["n", "A"]}], "]"}], " ", "=", "x"}]}], TraditionalForm]]],
+ ". Hem de saber triar, per tant, els nombres ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ " i ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]]],
+ " per tal que sigui impossible a la pr\[AGrave]ctica calcular ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]]],
+ " a partir de ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ " i ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ "."
+}], "Text",
+ CellChangeTimes->{
+  3.4117354686875*^9, {3.41173580625*^9, 3.411735807265625*^9}}],
+
+Cell[TextData[{
+ "Per tant, necessitem el seg\[UDoubleDot]ent:\n- un procediment de \
+codificaci\[OAcute], i.e., un procediment per a transformar cadenes de car\
+\[AGrave]cters en nombres i el procediment invers;\n- esbrinar com han de ser \
+",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ " i ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]]],
+ ";\n- definir funcions que sistematitzin tot el proc\[EAcute]s d'encriptaci\
+\[OAcute] i desencriptaci\[OAcute]."
+}], "Text",
+ CellChangeTimes->{{3.411735852703125*^9, 3.4117358533125*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Codificaci\[OAcute] i descodificaci\[OAcute]", "Subsubsection"],
+
+Cell[TextData[{
+ "Per tal d'escriure els nostres missatges utilitzarem car\[AGrave]cteres que \
+estan disponibles en ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ". Aix\[IAcute], escriurem el nostre missatge senzillament aix\[IAcute]:"
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"missatge", "=", "\"\<El meu missatge.\>\""}]], "Input"],
+
+Cell[BoxData["\<\"El meu missatge.\"\>"], "Output",
+ CellChangeTimes->{3.6037740046994*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "Les funcions ",
+ StyleBox["FromCharacterCode[]", "Program"],
+ " i ",
+ StyleBox["ToCharacterCode[]", "Program"],
+ " retornen el caracter associat a un nombre y el nombre associat a un car\
+\[AGrave]cter respectivament. Per exemple:"
+}], "Text",
+ CellChangeTimes->{{3.411735879875*^9, 3.41173588*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"xifresdelmissatge", "=", 
+  RowBox[{"ToCharacterCode", "[", "missatge", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "69", ",", "108", ",", "32", ",", "109", ",", "101", ",", "117", ",", "32", 
+   ",", "109", ",", "105", ",", "115", ",", "115", ",", "97", ",", "116", ",",
+    "103", ",", "101", ",", "46"}], "}"}]], "Output",
+ CellChangeTimes->{3.603774007361738*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"FromCharacterCode", "[", "xifresdelmissatge", "]"}]], "Input"],
+
+Cell[BoxData["\<\"El meu missatge.\"\>"], "Output",
+ CellChangeTimes->{3.6037740098016768`*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "Com que ",
+ StyleBox["ToCharacterCode[\"cadena de car\[AGrave]cters\"]", "Program"],
+ " d\[OAcute]na la llista de nombres associada a \"cadena de \
+car\[AGrave]cters\", i aquests estan entre 0 i 255, podem prendre el darrer \
+resultat com l'expressi\[OAcute] en base ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"c", "=", "256"}], TraditionalForm]]],
+ " d'un n\[UAcute]mero ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]]],
+ ". Utilitzarem la funci\[OAcute] ",
+ StyleBox["FromDigits[]", "Program"],
+ " per calcular aquest nombre. Per exemple:"
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"c", "=", "256"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"xifresdelmissatge", "=", 
+   RowBox[{"ToCharacterCode", "[", "missatge", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"x", "=", 
+  RowBox[{"FromDigits", "[", 
+   RowBox[{"xifresdelmissatge", ",", "c"}], "]"}]}]}], "Input"],
+
+Cell[BoxData["92278157474257570969382208047568872750"], "Output",
+ CellChangeTimes->{3.603774023727724*^9}]
+}, Open  ]],
+
+Cell["\<\
+Aix\[IAcute] ja tenim un procediment de codificaci\[OAcute]. La \
+funci\[OAcute] que automatitzaria aquest procediment seria:\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Codificar", "[", "message_String", "]"}], ":=", 
+  RowBox[{"FromDigits", "[", 
+   RowBox[{
+    RowBox[{"ToCharacterCode", "[", "message", "]"}], ",", "c"}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.41173595903125*^9, 3.411735964921875*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Codificar", "[", "missatge", "]"}]], "Input"],
+
+Cell[BoxData["92278157474257570969382208047568872750"], "Output",
+ CellChangeTimes->{3.603774100104825*^9}]
+}, Open  ]],
+
+Cell["\<\
+Necessitem la seva funci\[OAcute] inversa, que ser\[AGrave] la seg\
+\[UDoubleDot]ent:\
+\>", "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Descodificar", "[", "x_", "]"}], ":=", 
+  RowBox[{"FromCharacterCode", "[", 
+   RowBox[{"IntegerDigits", "[", 
+    RowBox[{"x", ",", "c"}], "]"}], "]"}]}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Descodificar", "[", "x", "]"}]], "Input"],
+
+Cell[BoxData["\<\"El meu missatge.\"\>"], "Output",
+ CellChangeTimes->{3.6037741396852503`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Elecci\[OAcute] de n, e i d", "Subsubsection"],
+
+Cell[TextData[{
+ "Suposem que tenim dos nombres primers ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]]],
+ " i ",
+ Cell[BoxData[
+  FormBox["q", TraditionalForm]]],
+ ", i sigui ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "=", 
+    RowBox[{"p", "\[CenterDot]", "q"}]}], TraditionalForm]]],
+ ", per exemple:"
+}], "Text"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "p", "=", 
+   "227465548443270988230178844993213400286017528413816682473026826520871"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"q", "=", "16940591868391669123292667945251"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"n", "=", 
+   RowBox[{"p", "*", "q"}]}], ";"}]}], "Input"],
+
+Cell[TextData[{
+ "Sabem que, si ",
+ Cell[BoxData[
+  FormBox["\[Phi]", TraditionalForm]]],
+ " \[EAcute]s la funci\[OAcute] d'Euler, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"\[Phi]", "(", "n", ")"}], "=", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"p", "-", "1"}], ")"}], "\[CenterDot]", 
+     RowBox[{"(", 
+      RowBox[{"q", "-", "1"}], ")"}]}]}], TraditionalForm]]],
+ "."
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Phi", "=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"p", "-", "1"}], ")"}], "*", 
+    RowBox[{"(", 
+     RowBox[{"q", "-", "1"}], ")"}]}]}], ";"}]], "Input"],
+
+Cell[TextData[{
+ "Suposem ara que ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ " \[EAcute]s un nombre qualsevol coprimer amb ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Phi]", "(", "n", ")"}], TraditionalForm]]],
+ ". Aleshores existeix un altre nombre ",
+ Cell[BoxData[
+  FormBox["d", TraditionalForm]]],
+ " tal que ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"e", "\[CenterDot]", "d"}], "\[Congruent]", 
+    RowBox[{"1", "  ", 
+     RowBox[{"(", 
+      RowBox[{"mod", " ", 
+       RowBox[{"\[Phi]", "(", "n", ")"}]}], ")"}]}]}], TraditionalForm]]],
+ ", \[EAcute]s a dir, l'invers de ",
+ Cell[BoxData[
+  FormBox["e", TraditionalForm]]],
+ " m\[OGrave]dul ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Phi]", "(", "n", ")"}], TraditionalForm]]],
+ ". Ho podem calcular amb la funci\[OAcute] ",
+ StyleBox["PowerMod[]", "Program"],
+ "."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"e", "=", "2135431321711165146751231213546132121"}], ";"}], "\n", 
+ RowBox[{"ExtendedGCD", "[", 
+  RowBox[{"e", ",", "Phi"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.603774506712399*^9, 3.6037745087110643`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "1164944019363668833682344991525118213459429519247141984414163084235594423\
+69264719156591483359404281", ",", 
+     RowBox[{"-", "64557463235355899184371159763471932"}]}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.603774194066723*^9, 3.603774510977256*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"d", "=", 
+   RowBox[{"PowerMod", "[", 
+    RowBox[{"e", ",", 
+     RowBox[{"-", "1"}], ",", "Phi"}], "]"}]}], ";"}]], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Encriptaci\[OAcute] i Desencriptaci\[OAcute]", "Subsubsection"],
+
+Cell["\<\
+Per encriptar un missatge hem de seguir els passos seg\[UDoubleDot]ents:\
+\>", "Text"],
+
+Cell[TextData[{
+ "x <- Codificar[missatge],\ny <- ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["x", "e"], TraditionalForm]]],
+ " (mod n)\nmissatgeencriptat <- Descodificar[y]"
+}], "Program"],
+
+Cell["\<\
+Per exemple, l'encriptaci\[OAcute] del nostre missatge ser\[AGrave] aix\
+\[IAcute]:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"missatge", "=", 
+  "\"\<Berlin, 10th May.\>\""}], "\[IndentingNewLine]", 
+ RowBox[{"x", "=", 
+  RowBox[{"Codificar", "[", "missatge", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"y", "=", 
+  RowBox[{"PowerMod", "[", 
+   RowBox[{"x", ",", "e", ",", "n"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"missatgeencriptat", "=", 
+  RowBox[{"Descodificar", "[", "y", "]"}]}]}], "Input",
+ CellChangeTimes->{{3.41173619925*^9, 3.411736199796875*^9}}],
+
+Cell[BoxData["\<\"Berlin, 10th May.\"\>"], "Output",
+ CellChangeTimes->{3.6037742544543257`*^9}],
+
+Cell[BoxData["22593482365051379016313342756574694832430"], "Output",
+ CellChangeTimes->{3.6037742544677143`*^9}],
+
+Cell[BoxData[\
+"36303144439088906665445048548626191485084171431730917567434714181271469933184\
+12058775226860610107081"], "Output",
+ CellChangeTimes->{3.603774254469742*^9}],
+
+Cell[BoxData["\<\"\.06\[Sterling]\.98\.81\[Micro]\[Micro]\[ARing]\[Paragraph]\
+0\[CapitalUAcute]G\[AHat]KoD90!\[Section]\.15\.83(\.19VN\[RegisteredTrademark]\
+\[RightGuillemet]g\[CapitalNTilde]\[Section]\.90\.aa\\\" C\.b3&{\.8b)\
+\[Paragraph]\[CapitalEAcute]\"\>"], "Output",
+ CellChangeTimes->{3.603774254482831*^9}]
+}, Open  ]],
+
+Cell["\<\
+El proc\[EAcute]s de desencriptaci\[OAcute] ser\[AGrave] an\[AGrave]leg al \
+d'encriptaci\[OAcute]:\
+\>", "Text"],
+
+Cell[TextData[{
+ "y <- Codificar[missatgeencriptat]\nz <- ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["y", "d"], TraditionalForm]]],
+ " (mod n)\nmissatgedesencriptat <- Descodificar[z]"
+}], "Program",
+ CellChangeTimes->{{3.41173626146875*^9, 3.4117362629375*^9}}],
+
+Cell["\<\
+Per exemple, l'encriptaci\[OAcute] del nostre missatge ser\[AGrave] aix\
+\[IAcute]:\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"y", "=", 
+  RowBox[{
+  "Codificar", "[", "missatgeencriptat", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"z", "=", 
+  RowBox[{"PowerMod", "[", 
+   RowBox[{"y", ",", "d", ",", "n"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"missatgedesencriptat", "=", 
+  RowBox[{"Descodificar", "[", "z", "]"}]}]}], "Input"],
+
+Cell[BoxData[\
+"36303144439088906665445048548626191485084171431730917567434714181271469933184\
+12058775226860610107081"], "Output",
+ CellChangeTimes->{3.603774282854052*^9}],
+
+Cell[BoxData["22593482365051379016313342756574694832430"], "Output",
+ CellChangeTimes->{3.6037742828669977`*^9}],
+
+Cell[BoxData["\<\"Berlin, 10th May.\"\>"], "Output",
+ CellChangeTimes->{3.60377428286915*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "Podem escriure ja les dues funcions ",
+ StyleBox["Encriptar[]", "Program"],
+ " i ",
+ StyleBox["Desencriptar[]", "Program"],
+ " que sistematitzen tot el proc\[EAcute]s:"
+}], "Text"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Encriptar", "[", 
+   RowBox[{"message_String", ",", "e_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"c", "=", "256"}], ",", "x", ",", "y"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"x", "=", 
+      RowBox[{"FromDigits", "[", 
+       RowBox[{
+        RowBox[{"ToCharacterCode", "[", "message", "]"}], ",", "c"}], "]"}]}],
+      ";", "\[IndentingNewLine]", 
+     RowBox[{"y", "=", 
+      RowBox[{"PowerMod", "[", 
+       RowBox[{"x", ",", "e", ",", "n"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"FromCharacterCode", "[", 
+      RowBox[{"IntegerDigits", "[", 
+       RowBox[{"y", ",", "c"}], "]"}], "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.411736283609375*^9, 3.4117363195*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Desencriptar", "[", 
+   RowBox[{"message_String", ",", "d_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"c", "=", "256"}], ",", "y", ",", "z"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"y", "=", 
+      RowBox[{"FromDigits", "[", 
+       RowBox[{
+        RowBox[{"ToCharacterCode", "[", "message", "]"}], ",", "c"}], "]"}]}],
+      ";", "\[IndentingNewLine]", 
+     RowBox[{"z", "=", 
+      RowBox[{"PowerMod", "[", 
+       RowBox[{"y", ",", "d", ",", "n"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"FromCharacterCode", "[", 
+      RowBox[{"IntegerDigits", "[", 
+       RowBox[{"z", ",", "c"}], "]"}], "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.411736288046875*^9, 3.41173632440625*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"missatge", "=", "\"\<17:00h, Trafalgar Sq.\>\""}], ";"}], "\n", 
+ RowBox[{"missatgeencriptat", "=", 
+  RowBox[{"Encriptar", "[", 
+   RowBox[{"missatge", ",", "e", ",", "n"}], "]"}]}]}], "Input"],
+
+Cell[BoxData["\<\"\.06\[UHat]\[PlusMinus]C\.b9\.15Q'\.11UC;;\.97\[Cent]S\.1aT.\
+BY\[CapitalOAcute]\.af\.af`i\[CapitalYAcute]4\[AE]\.1d\.9b\[CapitalOGrave]\
+\[Copyright]K\[SZ]g\[Cedilla]1\[ODoubleDot]{E\.01\"\>"], "Output",
+ CellChangeTimes->{3.6037744012049417`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Desencriptar", "[", 
+  RowBox[{"missatgeencriptat", ",", "d", ",", "n"}], "]"}]], "Input"],
+
+Cell[BoxData["\<\"17:00h, Trafalgar Sq.\"\>"], "Output",
+ CellChangeTimes->{3.603774404438991*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Exercicis", "Subsubsection"],
+
+Cell["\<\
+1.- Hem interceptat el missatge seg\[UDoubleDot]ent\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"m", "=", 
+  "\"\<o\.baO\[EGrave]\[Section]r\[ARing]\[ATilde]\[AAcute]Z \[Paragraph]\
+\[CapitalUDoubleDot]Y\>\""}]], "Input"],
+
+Cell[BoxData["\<\"o\.baO\[EGrave]\[Section]r\[ARing]\[ATilde]\[AAcute]Z \
+\[Paragraph]\[CapitalUDoubleDot]Y\"\>"], "Output",
+ CellChangeTimes->{3.603774758892066*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "     Tenint en compte que la clau p\[UAcute]blica utilitzada \[EAcute]s ",
+ StyleBox["n",
+  FontSlant->"Italic"],
+ "=4205157729991469792215491497898799 i ",
+ StyleBox["e",
+  FontSlant->"Italic"],
+ "=2882276240038930048024842207407837, feu els possibles per desxifrar el \
+missatge interceptat."
+}], "Text",
+ CellChangeTimes->{{3.41173642903125*^9, 3.411736458421875*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"n", " ", "=", " ", 
+  "4205157729991469792215491497898799"}], "\[IndentingNewLine]", 
+ RowBox[{
+  StyleBox["e",
+   FontSlant->"Italic"], 
+  StyleBox[" ",
+   FontSlant->"Italic"], "=", " ", 
+  "2882276240038930048024842207407837"}]}], "Input",
+ CellChangeTimes->{{3.6037746854494658`*^9, 3.60377468599407*^9}, {
+  3.6037747333380833`*^9, 3.603774752701461*^9}}],
+
+Cell[BoxData["4205157729991469792215491497898799"], "Output",
+ CellChangeTimes->{3.60377475413608*^9}],
+
+Cell[BoxData["2882276240038930048024842207407837"], "Output",
+ CellChangeTimes->{3.603774754137871*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"p", " ", "=", " ", 
+  RowBox[{"EulerPhi", "[", "n", "]"}]}]], "Input",
+ CellChangeTimes->{{3.603774840228139*^9, 3.603774866346854*^9}, {
+  3.603774922194653*^9, 3.6037749324981194`*^9}}],
+
+Cell[BoxData["4205157729991453177773875058245400"], "Output",
+ CellChangeTimes->{{3.603774860234774*^9, 3.603774867105752*^9}, 
+   3.6037749344962187`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"d", " ", "=", " ", 
+  RowBox[{"PowerMod", "[", 
+   RowBox[{"e", ",", " ", 
+    RowBox[{"-", "1"}], ",", " ", "p"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.603774938657625*^9, 3.603774957658059*^9}}],
+
+Cell[BoxData["2370363553182571249579157458491173"], "Output",
+ CellChangeTimes->{3.6037749585363407`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Desencriptar", "[", 
+  RowBox[{"m", ",", " ", "d", ",", " ", "n"}], "]"}]], "Input",
+ CellChangeTimes->{{3.603774756861452*^9, 3.60377475723376*^9}, {
+   3.6037748109933434`*^9, 3.603774836545774*^9}, 3.603774869786248*^9}],
+
+Cell[BoxData["\<\"Ens espien\"\>"], "Output",
+ CellChangeTimes->{3.6037748715294847`*^9, 3.6037749606493607`*^9}]
+}, Open  ]],
+
+Cell[TextData[{
+ "2.- Genereu una clau p\[UAcute]blica ",
+ "(",
+ StyleBox["n,e",
+  FontSlant->"Italic"],
+ ")",
+ " i una clau privada ",
+ StyleBox["d",
+  FontSlant->"Italic"],
+ ". Prou grans perqu\[EGrave] no es pugui recuperar ",
+ StyleBox["d",
+  FontSlant->"Italic"],
+ " a partir de ",
+ StyleBox["n",
+  FontSlant->"Italic"],
+ " i ",
+ StyleBox["e",
+  FontSlant->"Italic"],
+ " (fent servir ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ")."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"p", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"2", "^", "100"}], " ", "+", " ", 
+   RowBox[{"Random", "[", 
+    RowBox[{"Integer", ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", " ", 
+       RowBox[{"2", "^", "50"}]}], "}"}]}], "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"q", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"2", "^", "100"}], " ", "+", " ", 
+   RowBox[{"Random", "[", 
+    RowBox[{"Integer", ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", " ", 
+       RowBox[{"2", "^", "50"}]}], "}"}]}], "]"}]}]}]}], "Input",
+ CellChangeTimes->{{3.6037753255110607`*^9, 3.60377544657994*^9}}],
+
+Cell[BoxData["1267650600228230309962141455664"], "Output",
+ CellChangeTimes->{{3.603775412481873*^9, 3.603775447160061*^9}, 
+   3.6037760167465563`*^9}],
+
+Cell[BoxData["1267650600228229843974091497877"], "Output",
+ CellChangeTimes->{{3.603775412481873*^9, 3.603775447160061*^9}, 
+   3.603776016759777*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"While", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"PrimeQ", "[", "p", "]"}], " ", "\[Equal]", " ", "False"}], ",", 
+   " ", 
+   RowBox[{"p", " ", "=", " ", 
+    RowBox[{
+     RowBox[{"2", "^", "100"}], " ", "+", " ", 
+     RowBox[{"Random", "[", 
+      RowBox[{"Integer", ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", " ", 
+         RowBox[{"2", "^", "50"}]}], "}"}]}], "]"}]}]}]}], 
+  "]"}], "\[IndentingNewLine]", "p"}], "Input",
+ CellChangeTimes->{{3.603776018934737*^9, 3.6037760676132603`*^9}}],
+
+Cell[BoxData["1267650600228230357105522181601"], "Output",
+ CellChangeTimes->{3.6037760681156*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"While", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"PrimeQ", "[", "q", "]"}], " ", "\[Equal]", " ", "False"}], ",", 
+   " ", 
+   RowBox[{"q", "=", " ", 
+    RowBox[{
+     RowBox[{"2", "^", "100"}], " ", "+", " ", 
+     RowBox[{"Random", "[", 
+      RowBox[{"Integer", ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", " ", 
+         RowBox[{"2", "^", "50"}]}], "}"}]}], "]"}]}]}]}], 
+  "]"}], "\[IndentingNewLine]", "q"}], "Input",
+ CellChangeTimes->{{3.603776089252335*^9, 3.6037761024681997`*^9}}],
+
+Cell[BoxData["1267650600228229401731297372273"], "Output",
+ CellChangeTimes->{3.6037761029286947`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"n", " ", "=", " ", 
+  RowBox[{"p", "*", "q"}]}]], "Input",
+ CellChangeTimes->{{3.603776113174796*^9, 3.603776120120776*^9}}],
+
+Cell[BoxData["1606938044258991487217438487419222106123206236583325608149073"],\
+ "Output",
+ CellChangeTimes->{3.6037761206474943`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Phi2", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"p", "-", "1"}], ")"}], "*", 
+   RowBox[{"(", 
+    RowBox[{"q", "-", "1"}], ")"}]}]}]], "Input",
+ CellChangeTimes->{{3.603776214640287*^9, 3.603776235321849*^9}}],
+
+Cell[BoxData["1606938044258991487217438487416686804922749776824488788595200"],\
+ "Output",
+ CellChangeTimes->{3.6037762360185966`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"e", " ", "=", " ", 
+  RowBox[{"RandomPrime", "[", "Phi2", "]"}]}]], "Input",
+ CellChangeTimes->{{3.603776266906386*^9, 3.603776321928609*^9}, {
+  3.6037763726081457`*^9, 3.603776374592133*^9}}],
+
+Cell[BoxData["538774430562063025284800281238785082193916470799980321584261"], \
+"Output",
+ CellChangeTimes->{3.603776375239676*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"d", " ", "=", " ", 
+  RowBox[{"PowerMod", "[", 
+   RowBox[{"e", ",", " ", 
+    RowBox[{"-", "1"}], ",", " ", "Phi2"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6037763807853117`*^9, 3.603776392887312*^9}}],
+
+Cell[BoxData["1559014431611250229574892068071036149585427452404326432856141"],\
+ "Output",
+ CellChangeTimes->{3.6037763933836517`*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+ScreenStyleEnvironment->"Presentation",
+WindowSize->{1920, 1025},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+Magnification->0.75,
+FrontEndVersion->"8.0 for Linux x86 (64-bit) (November 7, 2010)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 144, 2, 38, "Input"],
+Cell[CellGroupData[{
+Cell[714, 26, 204, 5, 108, "Title"],
+Cell[921, 33, 776, 12, 86, "Text"],
+Cell[CellGroupData[{
+Cell[1722, 49, 42, 0, 34, "Subsubsection"],
+Cell[1767, 51, 1609, 48, 86, "Text"],
+Cell[3379, 101, 5086, 171, 169, "Text"],
+Cell[8468, 274, 600, 16, 111, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9105, 295, 69, 0, 34, "Subsubsection"],
+Cell[9177, 297, 255, 6, 36, "Text"],
+Cell[CellGroupData[{
+Cell[9457, 307, 79, 1, 38, "Input"],
+Cell[9539, 310, 91, 1, 38, "Output"]
+}, Open  ]],
+Cell[9645, 314, 317, 8, 37, "Text"],
+Cell[CellGroupData[{
+Cell[9987, 326, 114, 2, 38, "Input"],
+Cell[10104, 330, 293, 6, 38, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10434, 341, 86, 1, 38, "Input"],
+Cell[10523, 344, 95, 1, 38, "Output"]
+}, Open  ]],
+Cell[10633, 348, 571, 15, 63, "Text"],
+Cell[CellGroupData[{
+Cell[11229, 367, 335, 9, 93, "Input"],
+Cell[11567, 378, 107, 1, 38, "Output"]
+}, Open  ]],
+Cell[11689, 382, 149, 3, 36, "Text"],
+Cell[11841, 387, 279, 7, 38, "Input"],
+Cell[CellGroupData[{
+Cell[12145, 398, 69, 1, 38, "Input"],
+Cell[12217, 401, 107, 1, 38, "Output"]
+}, Open  ]],
+Cell[12339, 405, 109, 3, 36, "Text"],
+Cell[12451, 410, 200, 5, 38, "Input"],
+Cell[CellGroupData[{
+Cell[12676, 419, 65, 1, 38, "Input"],
+Cell[12744, 422, 95, 1, 57, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12888, 429, 52, 0, 34, "Subsubsection"],
+Cell[12943, 431, 321, 13, 38, "Text"],
+Cell[13267, 446, 341, 11, 93, "Input"],
+Cell[13611, 459, 401, 15, 38, "Text"],
+Cell[14015, 476, 195, 7, 38, "Input"],
+Cell[14213, 485, 857, 30, 37, "Text"],
+Cell[CellGroupData[{
+Cell[15095, 519, 246, 5, 66, "Input"],
+Cell[15344, 526, 349, 9, 57, "Output"]
+}, Open  ]],
+Cell[15708, 538, 161, 5, 38, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15906, 548, 69, 0, 34, "Subsubsection"],
+Cell[15978, 550, 96, 2, 36, "Text"],
+Cell[16077, 554, 192, 6, 93, "Program"],
+Cell[16272, 562, 107, 3, 36, "Text"],
+Cell[CellGroupData[{
+Cell[16404, 569, 464, 10, 120, "Input"],
+Cell[16871, 581, 96, 1, 57, "Output"],
+Cell[16970, 584, 112, 1, 57, "Output"],
+Cell[17085, 587, 173, 3, 57, "Output"],
+Cell[17261, 592, 317, 4, 59, "Output"]
+}, Open  ]],
+Cell[17593, 599, 123, 3, 36, "Text"],
+Cell[17719, 604, 266, 7, 93, "Program"],
+Cell[17988, 613, 107, 3, 36, "Text"],
+Cell[CellGroupData[{
+Cell[18120, 620, 333, 8, 93, "Input"],
+Cell[18456, 630, 173, 3, 57, "Output"],
+Cell[18632, 635, 112, 1, 57, "Output"],
+Cell[18747, 638, 93, 1, 57, "Output"]
+}, Open  ]],
+Cell[18855, 642, 198, 6, 37, "Text"],
+Cell[19056, 650, 856, 23, 147, "Input"],
+Cell[19915, 675, 863, 23, 147, "Input"],
+Cell[CellGroupData[{
+Cell[20803, 702, 230, 5, 66, "Input"],
+Cell[21036, 709, 266, 3, 57, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21339, 717, 114, 2, 38, "Input"],
+Cell[21456, 721, 98, 1, 57, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21603, 728, 34, 0, 34, "Subsubsection"],
+Cell[21640, 730, 75, 2, 36, "Text"],
+Cell[CellGroupData[{
+Cell[21740, 736, 148, 3, 38, "Input"],
+Cell[21891, 741, 166, 2, 57, "Output"]
+}, Open  ]],
+Cell[22072, 746, 389, 10, 36, "Text"],
+Cell[CellGroupData[{
+Cell[22486, 760, 385, 10, 66, "Input"],
+Cell[22874, 772, 102, 1, 57, "Output"],
+Cell[22979, 775, 103, 1, 57, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23119, 781, 211, 4, 38, "Input"],
+Cell[23333, 787, 155, 2, 57, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23525, 794, 224, 5, 38, "Input"],
+Cell[23752, 801, 105, 1, 57, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23894, 807, 247, 4, 38, "Input"],
+Cell[24144, 813, 113, 1, 57, "Output"]
+}, Open  ]],
+Cell[24272, 817, 458, 22, 36, "Text"],
+Cell[CellGroupData[{
+Cell[24755, 843, 610, 17, 66, "Input"],
+Cell[25368, 862, 152, 2, 57, "Output"],
+Cell[25523, 866, 150, 2, 57, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[25710, 873, 530, 15, 66, "Input"],
+Cell[26243, 890, 98, 1, 57, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26378, 896, 525, 15, 66, "Input"],
+Cell[26906, 913, 102, 1, 57, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27045, 919, 148, 3, 38, "Input"],
+Cell[27196, 924, 134, 2, 57, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27367, 931, 249, 7, 38, "Input"],
+Cell[27619, 940, 134, 2, 57, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27790, 947, 217, 4, 38, "Input"],
+Cell[28010, 953, 131, 2, 57, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28178, 960, 229, 5, 38, "Input"],
+Cell[28410, 967, 134, 2, 57, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,1560 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     49234,       1551]
+NotebookOptionsPosition[     44355,       1391]
+NotebookOutlinePosition[     45163,       1422]
+CellTagsIndexPosition[     45035,       1416]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"ASTOR", " ", "PRIETO", " ", "DEHGHANPOUR"}]], "Input",
+ CellChangeTimes->{{3.607767584285575*^9, 3.60776759169254*^9}}],
+
+Cell["\<\
+Pr\[AGrave]ctica 9:Successions recurrents\
+\>", "Title",
+ CellChangeTimes->{{3.4183829965*^9, 3.41838299659375*^9}, {
+  3.6072334221199093`*^9, 3.6072334525966525`*^9}, {3.6073197885273623`*^9, 
+  3.607319789679428*^9}},
+ TextAlignment->Center],
+
+Cell[TextData[{
+ "Donada una successi\[OAcute] ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "n"], TraditionalForm]]],
+ " de nombres reals direm que \[EAcute]s ",
+ StyleBox["una successi\[OAcute] recurrent d\[CloseCurlyQuote]ordre k",
+  FontColor->RGBColor[0, 0, 1]],
+ " si el terme \n",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", 
+    RowBox[{"n", "+", "k"}]], TraditionalForm]]],
+ " es pot calcular a partir dels k termes anteriors: ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "n"], TraditionalForm]]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", 
+    RowBox[{"n", "+", "1"}]], TraditionalForm]]],
+ ",...,",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", 
+    RowBox[{"n", "+", "k", "-", "1"}]], TraditionalForm]]],
+ ", amb una equaci\[OAcute] de recurr\[EGrave]ncia que no dep\[EGrave]n de n. \
+La successi\[OAcute] queda determinada per l\[CloseCurlyQuote]equaci\[OAcute] \
+de recurr\[EGrave]ncia i els k primers termes de la successi\[OAcute]. \n",
+ StyleBox["Recurr\[EGrave]ncies lineals homog\[EGrave]nies:", "Section"],
+ "\nSi l\[CloseCurlyQuote]equaci\[OAcute] de recurr\[EGrave]ncia \[EAcute]s \
+lineal la recurr\[EGrave]ncia s\[CloseCurlyQuote]anomena ",
+ StyleBox["lineal homog\[EGrave]nia",
+  FontColor->RGBColor[0, 0, 1]],
+ ". Si no fixem condicions inicials, la recurr\[EGrave]ncia t\[EAcute] \
+infinites solucions que depenen de tantes constants con \
+l\[CloseCurlyQuote]ordre. A m\[EAcute]s a m\[EAcute]s aquestes solucions \
+satisfan el principi de superposici\[OAcute], \[EAcute]s a dir:\n\n- La suma \
+de dues solucions \[EAcute]s tamb\[EAcute] una soluci\[OAcute].  \n- El \
+producte de una soluci\[OAcute] per una constant qualsevol tamb\[EAcute] \
+\[EAcute]s soluci\[OAcute].\n\n",
+ StyleBox["Per exemple:",
+  FontColor->GrayLevel[0]],
+ "\n\n",
+ StyleBox["Recurr\[EGrave]ncia lineal homogenea d\[CloseCurlyQuote]ordre 1: ",
+  FontColor->RGBColor[1, 0, 0]],
+ StyleBox[" L\[CloseCurlyQuote]equaci\[OAcute] general \[EAcute]s ",
+  FontColor->GrayLevel[0]],
+ "\n             \n                                            ",
+ Cell[BoxData[
+  FormBox[
+   FrameBox[
+    RowBox[{" ", 
+     RowBox[{
+      RowBox[{
+       SubscriptBox["a", "0"], "=", " ", "C"}], ",", "  ", 
+      RowBox[{
+       SubscriptBox["a", 
+        RowBox[{"n", "+", "1"}]], "=", " ", 
+       RowBox[{"r", "\[CenterDot]", 
+        SubscriptBox["a", "n"], " "}]}]}]}]], TraditionalForm]]],
+ "\n                           \nEs tracta de la ",
+ StyleBox["progressi\[OAcute] geom\[EAcute]trica de ra\[OAcute] r amb terme \
+inicial C",
+  FontColor->RGBColor[0, 0, 1]],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{" ", 
+    SubscriptBox["a", "n"]}], TraditionalForm]]],
+ "=C\[CenterDot]",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["r", "n"], TraditionalForm]]],
+ ".\nAmb el ",
+ StyleBox["Mathematica:",
+  FontSlant->"Italic"]
+}], "Text",
+ CellChangeTimes->{{3.607233466226432*^9, 3.6072339227905455`*^9}, {
+  3.607234072280096*^9, 3.6072340727601233`*^9}, {3.607234120673864*^9, 
+  3.6072341789341965`*^9}, {3.607236309418053*^9, 3.607236518233997*^9}, {
+  3.6072378214025335`*^9, 3.607237883996114*^9}, {3.6072379204201975`*^9, 
+  3.6072379218142767`*^9}, {3.6072379566592703`*^9, 3.607237957291306*^9}, {
+  3.6072380039119725`*^9, 3.6072380771641626`*^9}, {3.60723811261119*^9, 
+  3.6072381538765497`*^9}, {3.607238291484421*^9, 3.607238291484421*^9}, {
+  3.607239383853901*^9, 3.6072393870330825`*^9}, {3.6072400205433173`*^9, 
+  3.6072400208843365`*^9}, {3.607319795524763*^9, 3.607319849065825*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RecurrenceTable", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"a", "[", 
+       RowBox[{"n", "+", "1"}], "]"}], "\[Equal]", 
+      RowBox[{"r", "*", 
+       RowBox[{"a", "[", "n", "]"}]}]}], ",", 
+     RowBox[{
+      RowBox[{"a", "[", "0", "]"}], "\[Equal]", "C"}]}], "}"}], ",", "a", ",", 
+   RowBox[{"{", 
+    RowBox[{"n", ",", "1", ",", "10"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.607240156846113*^9, 3.607240163547497*^9}, {
+  3.607767666693443*^9, 3.607767667438385*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"C", " ", "r"}], ",", 
+   RowBox[{"C", " ", 
+    SuperscriptBox["r", "2"]}], ",", 
+   RowBox[{"C", " ", 
+    SuperscriptBox["r", "3"]}], ",", 
+   RowBox[{"C", " ", 
+    SuperscriptBox["r", "4"]}], ",", 
+   RowBox[{"C", " ", 
+    SuperscriptBox["r", "5"]}], ",", 
+   RowBox[{"C", " ", 
+    SuperscriptBox["r", "6"]}], ",", 
+   RowBox[{"C", " ", 
+    SuperscriptBox["r", "7"]}], ",", 
+   RowBox[{"C", " ", 
+    SuperscriptBox["r", "8"]}], ",", 
+   RowBox[{"C", " ", 
+    SuperscriptBox["r", "9"]}], ",", 
+   RowBox[{"C", " ", 
+    SuperscriptBox["r", "10"]}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.607240152222849*^9, 3.607240164977578*^9}, 
+   3.607767690299962*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RSolve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"a", "[", 
+     RowBox[{"n", "+", "1"}], "]"}], "\[Equal]", 
+    RowBox[{"r", " ", "*", 
+     RowBox[{"a", "[", "n", "]"}]}]}], ",", 
+   RowBox[{"a", "[", "n", "]"}], ",", " ", "n"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6072398033028917`*^9, 3.6072398368778124`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"a", "[", "n", "]"}], "\[Rule]", 
+    RowBox[{
+     SuperscriptBox["r", 
+      RowBox[{
+       RowBox[{"-", "1"}], "+", "n"}]], " ", 
+     RowBox[{"C", "[", "1", "]"}]}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{{3.6072398104583015`*^9, 3.6072398383738976`*^9}, 
+   3.607767695643398*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RSolve", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"a", "[", 
+       RowBox[{"n", "+", "1"}], "]"}], "\[Equal]", 
+      RowBox[{"r", "*", 
+       RowBox[{"a", "[", "n", "]"}]}]}], ",", 
+     RowBox[{
+      RowBox[{"a", "[", "0", "]"}], "\[Equal]", "4"}]}], "}"}], ",", 
+   RowBox[{"a", "[", "n", "]"}], ",", " ", "n"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6072398256431694`*^9, 3.607239851330639*^9}, {
+  3.607239885709605*^9, 3.6072399030765986`*^9}, {3.6072399354044476`*^9, 
+  3.607240013575919*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"a", "[", "n", "]"}], "\[Rule]", 
+    RowBox[{"4", " ", 
+     SuperscriptBox["r", "n"]}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{{3.6072398984223323`*^9, 3.6072399042076635`*^9}, 
+   3.6072399408097568`*^9, {3.607239976422794*^9, 3.607240014503972*^9}, 
+   3.6077676978091*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6072338907107105`*^9, 3.6072338914567537`*^9}}],
+
+Cell[TextData[{
+ StyleBox["Recurr\[EGrave]ncia lineal homogenea d\[CloseCurlyQuote]ordre 2: ",
+  FontColor->RGBColor[1, 0, 0]],
+ StyleBox["Un exemple \[EAcute]s",
+  FontColor->GrayLevel[0]],
+ StyleBox["\n",
+  FontColor->RGBColor[1, 0, 0]],
+ "\n                                         ",
+ Cell[BoxData[
+  FormBox[
+   FrameBox[
+    RowBox[{
+     RowBox[{
+      SubscriptBox["a", "0"], "=", "1"}], ",", " ", 
+     RowBox[{
+      SubscriptBox["a", "1"], "=", "1"}], ",", "  ", 
+     RowBox[{
+      SubscriptBox["a", 
+       RowBox[{"n", "+", "2"}]], "=", 
+      RowBox[{
+       SubscriptBox["a", 
+        RowBox[{"n", "+", "1"}]], " ", "+", " ", 
+       SubscriptBox["a", "n"]}]}]}]], TraditionalForm]]],
+ "\n               \n Es tracta de la ",
+ StyleBox["successi\[OAcute] de Fibonacci",
+  FontColor->RGBColor[0, 0, 1]],
+ ". \n\n Amb el ",
+ StyleBox["Mathematica:",
+  FontSlant->"Italic"]
+}], "Text",
+ CellChangeTimes->{{3.6072339558504367`*^9, 3.6072340441664877`*^9}, {
+   3.607238172546618*^9, 3.6072382860381093`*^9}, 3.6072400767865343`*^9, {
+   3.6073198962605247`*^9, 3.6073199025608845`*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.60723388736652*^9, 3.6072338881615653`*^9}, {
+  3.60723392933092*^9, 3.6072339465659056`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RecurrenceTable", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"a", "[", 
+       RowBox[{"n", "+", "2"}], "]"}], "\[Equal]", 
+      RowBox[{
+       RowBox[{"a", "[", 
+        RowBox[{"n", "+", "1"}], "]"}], "+", 
+       RowBox[{"a", "[", "n", "]"}]}]}], ",", 
+     RowBox[{
+      RowBox[{"a", "[", "0", "]"}], "\[Equal]", "1"}], ",", 
+     RowBox[{
+      RowBox[{"a", "[", "1", "]"}], "\[Equal]", "1"}]}], "}"}], ",", "a", ",", 
+   RowBox[{"{", 
+    RowBox[{"n", ",", "1", ",", "10"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.60724022182483*^9, 3.607240242281*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "1", ",", "2", ",", "3", ",", "5", ",", "8", ",", "13", ",", "21", ",", 
+   "34", ",", "55", ",", "89"}], "}"}]], "Output",
+ CellChangeTimes->{3.6072402431790514`*^9, 3.607767761066854*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RSolve", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"a", "[", 
+      RowBox[{"n", "+", "2"}], "]"}], "\[Equal]", 
+     RowBox[{
+      RowBox[{"a", "[", 
+       RowBox[{"n", "+", "1"}], "]"}], "+", 
+      RowBox[{"a", "[", "n", "]"}]}]}], "}"}], ",", 
+   RowBox[{"a", "[", "n", "]"}], ",", " ", "n"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6072402761309357`*^9, 3.6072402917298284`*^9}, {
+  3.607240343701801*^9, 3.6072403440248194`*^9}, {3.6072404260295095`*^9, 
+  3.607240427696605*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"a", "[", "n", "]"}], "\[Rule]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"C", "[", "1", "]"}], " ", 
+      RowBox[{"Fibonacci", "[", "n", "]"}]}], "+", 
+     RowBox[{
+      RowBox[{"C", "[", "2", "]"}], " ", 
+      RowBox[{"LucasL", "[", "n", "]"}]}]}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.607240292615879*^9, 3.6072403449188704`*^9, 
+  3.607240428584656*^9, 3.607767765036671*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "Fibonacci"}]], "Input",
+ CellChangeTimes->{{3.6072403009263544`*^9, 3.607240305642624*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox["\<\"\!\(\*RowBox[{\\\"Fibonacci\\\", \\\"[\\\", \
+StyleBox[\\\"n\\\", \\\"TI\\\"], \\\"]\\\"}]\) gives the Fibonacci number \
+\!\(\*SubscriptBox[StyleBox[\\\"F\\\", \\\"TI\\\"], StyleBox[\\\"n\\\", \
+\\\"TI\\\"]]\). \\n\!\(\*RowBox[{\\\"Fibonacci\\\", \\\"[\\\", \
+RowBox[{StyleBox[\\\"n\\\", \\\"TI\\\"], \\\",\\\", StyleBox[\\\"x\\\", \
+\\\"TI\\\"]}], \\\"]\\\"}]\) gives the Fibonacci polynomial \
+\!\(\*RowBox[{SubscriptBox[StyleBox[\\\"F\\\", \\\"TI\\\"], \
+StyleBox[\\\"n\\\", \\\"TI\\\"]], \\\"(\\\", StyleBox[\\\"x\\\", \\\"TI\\\"], \
+\\\")\\\"}]\). \"\>", "MSG"], "\[NonBreakingSpace]", 
+  ButtonBox[
+   StyleBox["\[RightSkeleton]", "SR"],
+   Active->True,
+   BaseStyle->"Link",
+   ButtonData->"paclet:ref/Fibonacci"]}]], "Print", "PrintUsage",
+ CellChangeTimes->{3.607767777707163*^9},
+ CellTags->"Info3607774972-3904844"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Fibonacci", "[", "1000", "]"}]], "Input",
+ CellChangeTimes->{{3.6072403560245056`*^9, 3.607240362460874*^9}}],
+
+Cell[BoxData[\
+"43466557686937456435688527675040625802564660517371780402481729089536555417949\
+051890403879840079255169295922593080322634775209689623239873322471161642996440\
+906533187938298969649928516003704476137795166849228875"], "Output",
+ CellChangeTimes->{3.607240363420929*^9, 3.607767787385067*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Fibonacci", "[", "19", "]"}]], "Input",
+ CellChangeTimes->{{3.607240365103025*^9, 3.607240369107254*^9}, {
+  3.6072404192801237`*^9, 3.607240419763151*^9}}],
+
+Cell[BoxData["4181"], "Output",
+ CellChangeTimes->{3.6072403699093*^9, 3.607240421068226*^9, 
+  3.607767790817144*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "LucasL"}]], "Input",
+ CellChangeTimes->{{3.6072404373301563`*^9, 3.607240444375559*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox["\<\"\!\(\*RowBox[{\\\"LucasL\\\", \\\"[\\\", StyleBox[\\\"n\\\", \
+\\\"TI\\\"], \\\"]\\\"}]\) gives the Lucas number \
+\!\(\*SubscriptBox[StyleBox[\\\"L\\\", \\\"TI\\\"], StyleBox[\\\"n\\\", \
+\\\"TI\\\"]]\).\\n\!\(\*RowBox[{\\\"LucasL\\\", \\\"[\\\", \
+RowBox[{StyleBox[\\\"n\\\", \\\"TI\\\"], \\\",\\\", StyleBox[\\\"x\\\", \
+\\\"TI\\\"]}], \\\"]\\\"}]\) gives the Lucas polynomial \
+\!\(\*RowBox[{SubscriptBox[StyleBox[\\\"L\\\", \\\"TI\\\"], \
+StyleBox[\\\"n\\\", \\\"TI\\\"]], \\\"(\\\", StyleBox[\\\"x\\\", \\\"TI\\\"], \
+\\\")\\\"}]\).\"\>", "MSG"], "\[NonBreakingSpace]", 
+  ButtonBox[
+   StyleBox["\[RightSkeleton]", "SR"],
+   Active->True,
+   BaseStyle->"Link",
+   ButtonData->"paclet:ref/LucasL"]}]], "Print", "PrintUsage",
+ CellChangeTimes->{3.607767794046875*^9},
+ CellTags->"Info3607774993-3904844"]
+}, Open  ]],
+
+Cell[TextData[{
+ "\n\nPer a determinar les solucions de la recurr\[EGrave]ncia:\n             \
+                        \n                                        ",
+ Cell[BoxData[
+  FormBox[
+   FrameBox[
+    RowBox[{" ", 
+     RowBox[{
+      RowBox[{
+       SubscriptBox["a", 
+        RowBox[{"n", "+", "2"}]], "+", " ", 
+       RowBox[{
+        SubscriptBox["c", "1"], "\[CenterDot]", 
+        SubscriptBox["a", 
+         RowBox[{"n", "+", "1"}]]}], "+", " ", 
+       RowBox[{
+        SubscriptBox["c", "0"], "\[CenterDot]", " ", 
+        SubscriptBox["a", "n"]}]}], " ", "=", "0"}]}]], TraditionalForm]]],
+ "\n                                        \n  considerem el",
+ StyleBox[" polinomi caracter\[IAcute]stic associat",
+  FontColor->RGBColor[0, 0, 1]],
+ ":\n  \n                                            ",
+ Cell[BoxData[
+  FormBox[
+   FrameBox[
+    RowBox[{" ", 
+     RowBox[{
+      RowBox[{"p", "(", "x", ")"}], "=", 
+      RowBox[{
+       SuperscriptBox["x", "2"], "+", 
+       RowBox[{
+        SubscriptBox["c", "1"], "\[CenterDot]", "x"}], "+", 
+       SubscriptBox["c", "0"]}]}]}]], TraditionalForm]]],
+ "\n \n  i en calculem les arrels, llavors tenim els cassos \
+seg\[UDoubleDot]ents:\n                    \n                    - Dues \
+arrels reals diferents: ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Alpha]", ",", 
+    RowBox[{"\[Beta]", "."}]}], TraditionalForm]]],
+ " La soluci\[OAcute] \[EAcute]s:\n                    \n                     \
+                           ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "n"], TraditionalForm]]],
+ " = ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["K", "1"], TraditionalForm]]],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[CenterDot]", 
+    SuperscriptBox["\[Alpha]", "n"]}], TraditionalForm]]],
+ " + ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["K", "2"], TraditionalForm]]],
+ "\[CenterDot]",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[Beta]", "n"], TraditionalForm]]],
+ "\n                    \n                    - Una arrel real doble: \
+\[Alpha]. La soluci\[OAcute] \[EAcute]s:\n                    \n              \
+                                 ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "n"], TraditionalForm]]],
+ " = ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["K", "1"], TraditionalForm]]],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[CenterDot]", 
+    SuperscriptBox["\[Alpha]", "n"]}], TraditionalForm]]],
+ " + ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["K", "2"], TraditionalForm]]],
+ "\[CenterDot]n\[CenterDot]",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[Alpha]", "n"], TraditionalForm]]],
+ "\n                    \n                    - Dues arrels complexes \
+conjugades: \[Alpha]\[PlusMinus]\[Beta]i. La soluci\[OAcute] \[EAcute]s:\n    \
+                \n                                               ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "n"], TraditionalForm]]],
+ " = ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["K", "1"], TraditionalForm]]],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[CenterDot]", 
+    SuperscriptBox["r", "n"]}], TraditionalForm]]],
+ "\[CenterDot] ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"Cos", "[", 
+    RowBox[{"\[Theta]", "\[CenterDot]", "n"}], "]"}], TraditionalForm]]],
+ " +",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"  ", 
+    SubscriptBox["K", "2"]}], TraditionalForm]]],
+ "\[CenterDot]",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["r", "n"], TraditionalForm]]],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[CenterDot]", 
+    RowBox[{"Sin", "[", 
+     RowBox[{"\[Theta]", "\[CenterDot]", "n"}], "]"}]}], TraditionalForm]]],
+ "\n                    \nEls coeficients ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["K", "1"], TraditionalForm]]],
+ ",",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{" ", 
+    SubscriptBox["K", "2"]}], TraditionalForm]]],
+ "  de la soluci\[OAcute] es determinen a partir de les condicions inicials.  \
+                  \n"
+}], "Text",
+ CellChangeTimes->{{3.6072342213666234`*^9, 3.6072344695988216`*^9}, {
+  3.607235309267848*^9, 3.6072353367684207`*^9}, {3.607238222275462*^9, 
+  3.6072382225394773`*^9}, {3.6072383152707815`*^9, 3.6072390806715593`*^9}, {
+  3.6072394002488384`*^9, 3.607239583873341*^9}, {3.6072396288289127`*^9, 
+  3.6072396618258*^9}, {3.6072403523302946`*^9, 3.6072403539343863`*^9}, {
+  3.607319959843161*^9, 3.6073199908129325`*^9}, {3.6073224772891507`*^9, 
+  3.607322512077141*^9}}],
+
+Cell["Exercici", "Subsection",
+ CellChangeTimes->{{3.607320002121579*^9, 3.607320016351393*^9}}],
+
+Cell[TextData[{
+ "Expresseu la soluci\[OAcute] general de les recurr\[EGrave]ncies seg\
+\[UDoubleDot]ents:\n\n1) ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{" ", 
+    SubscriptBox["a", 
+     RowBox[{"n", "+", "2"}]], " "}], TraditionalForm]]],
+ "+ 2",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[CenterDot]", 
+    SubscriptBox["a", 
+     RowBox[{"n", "+", "1"}]]}], TraditionalForm]]],
+ " + ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "n"], TraditionalForm]]],
+ " = 0 .                \n2)  ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["a", 
+     RowBox[{"n", "+", "2"}]], " "}], TraditionalForm]]],
+ "+",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", 
+    RowBox[{"n", "+", "1"}]], TraditionalForm]]],
+ " + ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "n"], TraditionalForm]]],
+ " = 0 .\n3) ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{" ", 
+    SubscriptBox["a", 
+     RowBox[{"n", "+", "2"}]], " "}], TraditionalForm]]],
+ "+",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", 
+    RowBox[{"n", "+", "1"}]], TraditionalForm]]],
+ " -2\[CenterDot] ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "n"], TraditionalForm]]],
+ " = 0.                 "
+}], "Text",
+ CellChangeTimes->{{3.6072342213666234`*^9, 3.6072344695988216`*^9}, {
+  3.607235309267848*^9, 3.6072353367684207`*^9}, {3.607238222275462*^9, 
+  3.6072382225394773`*^9}, {3.6072383152707815`*^9, 3.6072390806715593`*^9}, {
+  3.6072394002488384`*^9, 3.607239583873341*^9}, {3.6072396288289127`*^9, 
+  3.6072396618258*^9}, {3.6072403523302946`*^9, 3.6072403539343863`*^9}, {
+  3.607319959843161*^9, 3.607320021398682*^9}, {3.607767872071883*^9, 
+  3.607767877611293*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"x", "^", "2"}], "+", 
+      RowBox[{"2", "*", "x"}], "+", "1"}], "\[Equal]", "0"}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"RSolve", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"a", "[", 
+        RowBox[{"n", "+", "2"}], "]"}], "+", 
+       RowBox[{"2", " ", 
+        RowBox[{"a", "[", 
+         RowBox[{"n", "+", "1"}], "]"}]}], "+", 
+       RowBox[{"a", "[", "n", "]"}]}], "\[Equal]", "0"}], ",", 
+     RowBox[{"a", "[", "n", "]"}], ",", "n"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.6077678827927*^9, 3.607767896134331*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"x", "\[Rule]", 
+     RowBox[{"-", "1"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", "\[Rule]", 
+     RowBox[{"-", "1"}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.607767885262966*^9, 3.607767967398212*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"a", "[", "n", "]"}], "\[Rule]", 
+    RowBox[{
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"-", "1"}], ")"}], "n"], " ", 
+      RowBox[{"C", "[", "1", "]"}]}], "+", 
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"-", "1"}], ")"}], "n"], " ", "n", " ", 
+      RowBox[{"C", "[", "2", "]"}]}]}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.607767885262966*^9, 3.607767967450483*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"x", "^", "2"}], "+", "x", "+", "1"}], "\[Equal]", "0"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"RSolve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"a", "[", 
+      RowBox[{"n", "+", "2"}], "]"}], "+", 
+     RowBox[{"a", "[", 
+      RowBox[{"n", "+", "1"}], "]"}], "+", 
+     RowBox[{"a", "[", "n", "]"}]}], "\[Equal]", "0"}], ",", 
+   RowBox[{"a", "[", "n", "]"}], ",", "n"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.607767969384707*^9, 3.607767987769966*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"x", "\[Rule]", 
+     RowBox[{"-", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"-", "1"}], ")"}], 
+       RowBox[{"1", "/", "3"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", "\[Rule]", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"-", "1"}], ")"}], 
+      RowBox[{"2", "/", "3"}]]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.607767988868613*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"a", "[", "n", "]"}], "\[Rule]", 
+    RowBox[{
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", 
+          FractionBox["1", "2"]}], "-", 
+         FractionBox[
+          RowBox[{"\[ImaginaryI]", " ", 
+           SqrtBox["3"]}], "2"]}], ")"}], "n"], " ", 
+      RowBox[{"C", "[", "1", "]"}]}], "+", 
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", 
+          FractionBox["1", "2"]}], "+", 
+         FractionBox[
+          RowBox[{"\[ImaginaryI]", " ", 
+           SqrtBox["3"]}], "2"]}], ")"}], "n"], " ", 
+      RowBox[{"C", "[", "2", "]"}]}]}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.607767989368176*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"x", "^", "2"}], "+", "x", "-", "2"}], "\[Equal]", "0"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"RSolve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"a", "[", 
+      RowBox[{"n", "+", "2"}], "]"}], "+", 
+     RowBox[{"a", "[", 
+      RowBox[{"n", "+", "1"}], "]"}], "-", 
+     RowBox[{"2", " ", 
+      RowBox[{"a", "[", "n", "]"}]}]}], "\[Equal]", "0"}], ",", 
+   RowBox[{"a", "[", "n", "]"}], ",", "n"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.607767991396299*^9, 3.607768008955162*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"x", "\[Rule]", 
+     RowBox[{"-", "2"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", "\[Rule]", "1"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.607768009774859*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"a", "[", "n", "]"}], "\[Rule]", 
+    RowBox[{
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"-", "2"}], ")"}], "n"], " ", 
+      RowBox[{"C", "[", "1", "]"}]}], "+", 
+     RowBox[{"C", "[", "2", "]"}]}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.60776800986375*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.607233830595272*^9, 3.607233831509325*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6072342049136825`*^9, 3.6072342058167343`*^9}}],
+
+Cell["Exercici", "Subsection",
+ CellChangeTimes->{{3.607234510102138*^9, 3.6072345144323854`*^9}}],
+
+Cell[TextData[{
+ "Es coloreja un disc dividit en n sectors amb 5 colors diferents de manera \
+que dos sectors adjacents no siguin del mateix color. De quantes maneres es \
+pot fer?\n\n",
+ StyleBox["Soluci\[OAcute]:",
+  FontColor->RGBColor[1, 0.5, 0]],
+ " \nSi ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "n"], TraditionalForm]]],
+ " denota el nombre de maneres de colorejar el disc amb n sectors, es t\
+\[EAcute]:\n  ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"                                                       ", 
+    SubscriptBox["a", "2"]}], TraditionalForm]]],
+ "= 5\[CenterDot]4 \n                                         ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "3"], TraditionalForm]]],
+ "= 5\[CenterDot]4\[CenterDot]3  \n\nPer colorejar el disc amb n+2 sectors, \
+coloregem primer els n+1 primers sectors. Aix\[OGrave] es pot fer de dues \
+maneres: \n\n1)  El primer sector i el sector n+1 s\[OAcute]n del mateix \
+color.  Hi ha ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "n"], TraditionalForm]]],
+ " maneres.  Aleshores podem acabar de colorojar amb 4 colors diferents el \
+sector n+2. Obtenim 4\[CenterDot]",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "n"], TraditionalForm]]],
+ "  possibilitats.\n\n2) El primer sector i el sector n+1 s\[OAcute]n de \
+diferent color.  Hi ha ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", 
+    RowBox[{"n", "+", "1"}]], TraditionalForm]]],
+ " maneres. Aleshores podem acabar de colorojar amb 3 colors diferents el \
+sector n+2. Obtenim 3",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[CenterDot]", 
+    SubscriptBox["a", 
+     RowBox[{"n", "+", "1"}]]}], TraditionalForm]]],
+ "  possibilitats.\n\nEn total resulta:\n                                     \
+    \n                                         ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", 
+    RowBox[{"n", "+", "2"}]], TraditionalForm]]],
+ "= 3\[CenterDot] ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", 
+    RowBox[{"n", "+", "1"}]], TraditionalForm]]],
+ " + 4\[CenterDot] ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "n"], TraditionalForm]]],
+ "\n\n\nCalculeu els 10 primers termes de la successi\[OAcute] i la soluci\
+\[OAcute] general."
+}], "Text",
+ CellChangeTimes->{{3.6072349962989473`*^9, 3.6072352097671566`*^9}, {
+   3.607235264832306*^9, 3.607235288453657*^9}, {3.6072390896610737`*^9, 
+   3.6072391853265457`*^9}, 3.6073202158758054`*^9, 3.6073202593412914`*^9, {
+   3.6073203197307453`*^9, 3.607320328533249*^9}, {3.607320413417104*^9, 
+   3.607320444583887*^9}, {3.607320506203411*^9, 3.607320608479261*^9}, {
+   3.607320663120386*^9, 3.607320745293086*^9}}],
+
+Cell["", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"a", "[", "n_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"a", "[", "n", "]"}], "=", 
+   RowBox[{
+    RowBox[{"3", "*", 
+     RowBox[{"a", "[", 
+      RowBox[{"n", "-", "1"}], "]"}]}], "+", 
+    RowBox[{"4", "*", 
+     RowBox[{"a", "[", 
+      RowBox[{"n", "-", "2"}], "]"}]}]}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"a", "[", "2", "]"}], "=", "20"}], ";", 
+  RowBox[{
+   RowBox[{"a", "[", "3", "]"}], "=", "60"}]}]}], "Input",
+ CellChangeTimes->{{3.607768021083593*^9, 3.607768022328137*^9}, {
+  3.607768053416132*^9, 3.60776806300881*^9}}],
+
+Cell[BoxData["60"], "Output",
+ CellChangeTimes->{3.607768064127119*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"a", "[", "5", "]"}]], "Input",
+ CellChangeTimes->{{3.607768066008395*^9, 3.607768075708404*^9}}],
+
+Cell[BoxData["1020"], "Output",
+ CellChangeTimes->{3.607768079289568*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"a", "[", "4", "]"}]], "Input",
+ CellChangeTimes->{{3.607768080490967*^9, 3.607768082652034*^9}}],
+
+Cell[BoxData["260"], "Output",
+ CellChangeTimes->{3.607768083061781*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"Clear", "[", "a", "]"}]], "Input",
+ CellChangeTimes->{{3.607768113483247*^9, 3.607768116710968*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RecurrenceTable", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"a", "[", 
+       RowBox[{"n", "+", "2"}], "]"}], "\[Equal]", 
+      RowBox[{
+       RowBox[{"3", "*", 
+        RowBox[{"a", "[", 
+         RowBox[{"n", "+", "1"}], "]"}]}], "+", 
+       RowBox[{"4", "*", 
+        RowBox[{"a", "[", "n", "]"}]}]}]}], ",", 
+     RowBox[{
+      RowBox[{"a", "[", "2", "]"}], "\[Equal]", "20"}], ",", 
+     RowBox[{
+      RowBox[{"a", "[", "3", "]"}], "\[Equal]", "60"}]}], "}"}], ",", "a", 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"n", ",", "2", ",", "10"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.60776808402658*^9, 3.607768095757812*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "20", ",", "60", ",", "260", ",", "1020", ",", "4100", ",", "16380", ",", 
+   "65540", ",", "262140", ",", "1048580"}], "}"}]], "Output",
+ CellChangeTimes->{{3.607768102178707*^9, 3.607768120160765*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RSolve", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"a", "[", 
+       RowBox[{"n", "+", "2"}], "]"}], "\[Equal]", 
+      RowBox[{
+       RowBox[{"3", "*", 
+        RowBox[{"a", "[", 
+         RowBox[{"n", "+", "1"}], "]"}]}], "+", 
+       RowBox[{"4", "*", 
+        RowBox[{"a", "[", "n", "]"}]}]}]}], ",", 
+     RowBox[{
+      RowBox[{"a", "[", "2", "]"}], "\[Equal]", "20"}], ",", 
+     RowBox[{
+      RowBox[{"a", "[", "3", "]"}], "\[Equal]", "60"}]}], "}"}], ",", 
+   RowBox[{"a", "[", "n", "]"}], ",", "n"}], "]"}]], "Input",
+ CellChangeTimes->{{3.607768121803123*^9, 3.607768135194677*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"a", "[", "n", "]"}], "\[Rule]", 
+    RowBox[{
+     RowBox[{"4", " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"-", "1"}], ")"}], "n"]}], "+", 
+     SuperscriptBox["4", "n"]}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.607768136152596*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"n", "^", "2"}], "-", 
+    RowBox[{"4", "*", "n"}], "+", "4"}], "\[Equal]", "0"}], "]"}]], "Input",
+ CellChangeTimes->{{3.607768139241098*^9, 3.607768150222724*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"n", "\[Rule]", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"n", "\[Rule]", "2"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.607768151022152*^9}]
+}, Open  ]],
+
+Cell["", "Text",
+ CellChangeTimes->{3.6072353776307583`*^9}],
+
+Cell[BoxData[""], "DisplayFormula",
+ CellChangeTimes->{3.6072353807669373`*^9},
+ TextAlignment->Center],
+
+Cell["EXERCICI PER TRAMETRE:", "Subsection",
+ CellChangeTimes->{{3.607235445746654*^9, 3.607235456394263*^9}, {
+  3.6073236772327833`*^9, 3.607323685962283*^9}}],
+
+Cell["\<\
+Una persona puja una escala avan\[CCedilla]ant un o dos esglaons a cada pas.  \
+De quantes maneres diferents es pot pujar l\[CloseCurlyQuote]escala si t\
+\[EAcute] 25 esglaons? I si en t\[EAcute] n?  
+
+Heu d\[CloseCurlyQuote]escriure l\[CloseCurlyQuote]equaci\[OAcute] de recurr\
+\[EGrave]ncia amb les condicions inicials i la soluci\[OAcute]. \
+\>", "Text",
+ CellChangeTimes->{{3.60723555302979*^9, 3.6072355955622225`*^9}, {
+   3.6072356263449836`*^9, 3.6072356808381004`*^9}, {3.6072357271377487`*^9, 
+   3.6072357882552443`*^9}, 3.6072391929229803`*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"a", "[", "1", "]"}], "=", "1"}], ";", 
+  RowBox[{
+   RowBox[{"a", "[", "2", "]"}], "=", "2"}], ";", 
+  RowBox[{
+   RowBox[{"a", "[", "3", "]"}], "=", "3"}], ";", 
+  RowBox[{
+   RowBox[{"a", "[", "4", "]"}], "=", "5"}], ";", 
+  RowBox[{
+   RowBox[{"a", "[", "5", "]"}], "=", "8"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"a", "[", "3", "]"}], "=", 
+  RowBox[{
+   RowBox[{"2", "+", "1"}], "=", 
+   RowBox[{
+    RowBox[{"1", "+", "1", "+", "1"}], "=", 
+    RowBox[{"1", "+", "2"}]}]}]}], "\n", 
+ RowBox[{
+  RowBox[{"a", "[", "4", "]"}], "=", 
+  RowBox[{
+   RowBox[{"1", "+", "1", "+", "1", "+", "1"}], "=", 
+   RowBox[{
+    RowBox[{"1", "+", "2", "+", "1"}], "=", 
+    RowBox[{
+     RowBox[{"1", "+", "1", "+", "2"}], "=", 
+     RowBox[{
+      RowBox[{"2", "+", "1", "+", "1"}], "=", 
+      RowBox[{"2", "+", "2"}]}]}]}]}]}], "\n", 
+ RowBox[{
+  RowBox[{"a", "[", "5", "]"}], "=", 
+  RowBox[{
+   RowBox[{"1", "+", "1", "+", "1", "+", "1", "+", "1"}], "=", 
+   RowBox[{
+    RowBox[{"2", "+", "1", "+", "1", "+", "1"}], "=", 
+    RowBox[{
+     RowBox[{"1", "+", "2", "+", "1", "+", "1"}], "=", 
+     RowBox[{
+      RowBox[{"1", "+", "1", "+", "2", "+", "1"}], "=", 
+      RowBox[{
+       RowBox[{"1", "+", "1", "+", "1", "+", "2"}], "=", 
+       RowBox[{
+        RowBox[{"2", "+", "2", "+", "1"}], "=", 
+        RowBox[{
+         RowBox[{"2", "+", "1", "+", "2"}], "=", 
+         RowBox[{"1", "+", "2", "+", "2"}]}]}]}]}]}]}]}]}]}], "Input",
+ CellChangeTimes->{{3.607768313693515*^9, 3.607768314806859*^9}, {
+  3.607768377431222*^9, 3.607768388991513*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Ultim", " ", "pas", " ", "simple"}], " ", "\[Equal]", " ", 
+  RowBox[{
+   RowBox[{"Tenim", " ", "n"}], "-", 
+   RowBox[{
+   "1", " ", "maneres", " ", "per", " ", "a", " ", "arribar", " ", "a", " ", 
+    RowBox[{"\"\<n\>\"", "."}]}]}]}]], "Input",
+ CellChangeTimes->{{3.607768438915846*^9, 3.607768439190417*^9}, {
+  3.607768497221443*^9, 3.607768553003267*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Ultim", " ", "pas", " ", "doble"}], " ", "\[Equal]", " ", 
+  RowBox[{
+   RowBox[{"Tenim", " ", "n"}], "-", 
+   RowBox[{
+   "2", " ", "maneres", " ", "per", " ", "a", " ", "arribar", " ", "a", " ", 
+    RowBox[{"\"\<n\>\"", "."}]}]}]}]], "Input",
+ CellChangeTimes->{{3.607768537042651*^9, 3.607768563413466*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Clear", "[", "a", "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"a", "[", "n_", "]"}], ":=", 
+    RowBox[{
+     RowBox[{"a", "[", "n", "]"}], "=", 
+     RowBox[{
+      RowBox[{"a", "[", 
+       RowBox[{"n", "-", "1"}], "]"}], "+", 
+      RowBox[{"a", "[", 
+       RowBox[{"n", "-", "2"}], "]"}]}]}]}], "\n", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"a", "[", "0", "]"}], "=", "0"}], ";", 
+    RowBox[{
+     RowBox[{"a", "[", "1", "]"}], "=", "1"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.607768663834218*^9, 3.607768682171232*^9}}],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{3.607768683244689*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"a", "[", "3", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Fibonacci", "[", "3", "]"}]}], "Input",
+ CellChangeTimes->{{3.607768686332858*^9, 3.607768699892471*^9}, {
+  3.607768745752466*^9, 3.6077687476908*^9}}],
+
+Cell[BoxData["2"], "Output",
+ CellChangeTimes->{3.607768700440718*^9, 3.607768748890102*^9}],
+
+Cell[BoxData["2"], "Output",
+ CellChangeTimes->{3.607768700440718*^9, 3.607768748899426*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"a", "[", "10", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Fibonacci", "[", "10", "]"}]}], "Input",
+ CellChangeTimes->{{3.607768702680757*^9, 3.607768741286532*^9}}],
+
+Cell[BoxData["55"], "Output",
+ CellChangeTimes->{3.607768711104753*^9, 3.607768750425254*^9}],
+
+Cell[BoxData["55"], "Output",
+ CellChangeTimes->{3.607768711104753*^9, 3.607768750430623*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"a", "[", "n", "]"}], "=", 
+  RowBox[{
+   RowBox[{"a", "[", 
+    RowBox[{"n", "-", "1"}], "]"}], "+", 
+   RowBox[{"a", "[", 
+    RowBox[{"n", "-", "2"}], "]"}]}]}], "\n", 
+ RowBox[{
+  RowBox[{"a", "[", 
+   RowBox[{"n", "-", "1"}], "]"}], "=", 
+  RowBox[{
+   RowBox[{"a", "[", 
+    RowBox[{"n", "-", "2"}], "]"}], "+", 
+   RowBox[{"a", "[", 
+    RowBox[{"n", "-", "3"}], "]"}]}]}], "\n", 
+ RowBox[{
+  RowBox[{"a", "[", 
+   RowBox[{"n", "-", "2"}], "]"}], "=", 
+  RowBox[{
+   RowBox[{"a", "[", 
+    RowBox[{"n", "-", "3"}], "]"}], "+", 
+   RowBox[{"a", "[", 
+    RowBox[{"n", "-", "4"}], "]"}]}]}], "\n", "...", "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"a", "[", "0", "]"}], "=", 
+  RowBox[{
+   RowBox[{"a", "[", 
+    RowBox[{"n", "-", "n"}], "]"}], "+", 
+   RowBox[{"a", "[", 
+    RowBox[{"n", "-", 
+     RowBox[{"(", 
+      RowBox[{"n", "-", "1"}], ")"}]}], "]"}]}]}]}], "Input",
+ CellChangeTimes->{{3.607768632087955*^9, 3.607768633289103*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Per", " ", "a", " ", "\"\<n\>\"", " ", "esglaons", " ", "hi", " ", 
+  "han", " ", 
+  RowBox[{"2", "^", "0.689"}], "*", "n", " ", "formes", " ", "de", " ", 
+  "pujar", " ", "la", " ", 
+  RowBox[{"escala", ".", " "}]}]], "Input",
+ CellChangeTimes->{{3.607768636475349*^9, 3.607768660357956*^9}, {
+  3.607768716914457*^9, 3.607768720174546*^9}}],
+
+Cell["\<\
+Recurr\[EGrave]ncies lineals no homog\[EGrave]nies:\
+\>", "Section",
+ CellChangeTimes->{{3.6072358876199274`*^9, 3.607235916524581*^9}}],
+
+Cell[TextData[{
+ "Estudiarem el cas particular de recurr\[EGrave]ncies lineals d\
+\[CloseCurlyQuote]ordre \[LessEqual]2  no homog\[EGrave]nies. Aquestes recurr\
+\[EGrave]ncies s\[OAcute]n de la forma:\n                                     \
+                    ",
+ Cell[BoxData[
+  FormBox[
+   FrameBox[
+    RowBox[{" ", 
+     RowBox[{
+      RowBox[{
+       SubscriptBox["a", 
+        RowBox[{"n", "+", "2"}]], "+", 
+       RowBox[{
+        SubscriptBox["c", "1"], "\[CenterDot]", 
+        SubscriptBox["a", 
+         RowBox[{"n", "+", "1"}]]}], "+", 
+       RowBox[{
+        SubscriptBox["c", "0"], "\[CenterDot]", 
+        SubscriptBox["a", "n"]}]}], "=", " ", 
+      RowBox[{"f", 
+       RowBox[{"(", "n", ")"}]}]}]}]], TraditionalForm]]],
+ "\n on f(n) \[EAcute]s una funci\[OAcute] de n.\n \n La soluci\[OAcute] \
+queda determinada per les condicions inicials.  Si no fixem les condicions \
+inicials, la soluci\[OAcute] general no satisf\[AGrave] el principi de \
+superposici\[OAcute] per\[OGrave] es pot expressar com la suma d\
+\[CloseCurlyQuote]una soluci\[OAcute] particular m\[EAcute]s la soluci\
+\[OAcute] general de l\[CloseCurlyQuote]equaci\[OAcute] homog\[EGrave]nia \
+associada ",
+ Cell[BoxData[
+  RowBox[{" ", 
+   StyleBox[
+    RowBox[{
+     RowBox[{
+      SubscriptBox["a", 
+       RowBox[{"n", "+", "2"}]], "+", 
+      RowBox[{
+       SubscriptBox["c", "1"], "\[CenterDot]", 
+       SubscriptBox["a", 
+        RowBox[{"n", "+", "1"}]]}], "+", 
+      RowBox[{
+       SubscriptBox["c", "0"], "\[CenterDot]", 
+       SubscriptBox["a", "n"]}]}], "=", " "}], "Text",
+    FontColor->GrayLevel[0]]}]]],
+ "0.\n\nExemple:\n            ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"                                                       ", 
+    SubscriptBox["a", 
+     RowBox[{"n", "+", "1"}]]}], TraditionalForm]]],
+ "=3\[CenterDot]",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "n"], TraditionalForm]]],
+ "+2 ,  ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "0"], TraditionalForm]]],
+ "=1\n\n a) De quin ordre \[EAcute]s?\n b) Calculeu la soluci\[OAcute] \
+general de la homog\[EGrave]nia associada.\n c) Calculeu una soluci\[OAcute] \
+particular. \n d) Escriviu la soluci\[OAcute].\n\n\n"
+}], "Text",
+ CellChangeTimes->{{3.6072359533416867`*^9, 3.6072361034832745`*^9}, {
+   3.6072365431844234`*^9, 3.607236661349182*^9}, {3.607236739491652*^9, 
+   3.607236838534317*^9}, {3.6072369099394007`*^9, 3.607236928946488*^9}, 
+   3.607236994739251*^9, {3.6072370556257334`*^9, 3.607237087811575*^9}, {
+   3.6072372450715694`*^9, 3.6072372592743816`*^9}, {3.6072392217346277`*^9, 
+   3.6072393355591383`*^9}, {3.6072404997537265`*^9, 3.607240647464175*^9}, {
+   3.607240775738512*^9, 3.6072408041061344`*^9}, {3.6073207936898546`*^9, 
+   3.607320875833553*^9}, {3.6073209152648077`*^9, 3.6073209177909527`*^9}}],
+
+Cell["EXERCICI PER TRAMETRE:", "Subsection",
+ CellChangeTimes->{{3.607240656509692*^9, 3.60724066556221*^9}}],
+
+Cell[TextData[{
+ "\nConsidereu la seg\[UDoubleDot]ent recurr\[EGrave]ncia:\n\n                \
+             ",
+ Cell[BoxData["               "]],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", 
+    RowBox[{"n", "+", "1"}]], TraditionalForm]]],
+ "=",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{" ", 
+    SubscriptBox["a", "n"]}], TraditionalForm]]],
+ " + n,  ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["a", "0"], TraditionalForm]]],
+ " =1\n  \na) De quin ordre \[EAcute]s?\nb) Calculeu la soluci\[OAcute] \
+general de la homog\[EGrave]nia.\nc) Calculeu una soluci\[OAcute] particular \
+de la forma A\[CenterDot]",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["n", "2"], TraditionalForm]]],
+ " + B\[CenterDot]n .\nd) Escriviu la soluci\[OAcute].\n                  "
+}], "Text",
+ CellChangeTimes->{{3.6072359533416867`*^9, 3.6072361034832745`*^9}, {
+   3.6072365431844234`*^9, 3.607236661349182*^9}, {3.607236739491652*^9, 
+   3.607236838534317*^9}, {3.6072369099394007`*^9, 3.607236928946488*^9}, 
+   3.607236994739251*^9, {3.6072370556257334`*^9, 3.607237087811575*^9}, {
+   3.6072372450715694`*^9, 3.6072372592743816`*^9}, {3.6072392217346277`*^9, 
+   3.6072393355591383`*^9}, {3.6072404997537265`*^9, 
+   3.6072406408007936`*^9}, {3.6072406739606905`*^9, 
+   3.6072407942435703`*^9}, {3.6073209261284294`*^9, 3.607320966972766*^9}, {
+   3.607325129317838*^9, 3.6073251328410397`*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.607768935875813*^9, 3.607768944535737*^9}, 
+   3.607769147875747*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Clear", "[", "a", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"x", "^", "2"}], "-", "x"}], "\[Equal]", "0"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"RSolve", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"a", "[", 
+       RowBox[{"n", "+", "1"}], "]"}], "\[Equal]", 
+      RowBox[{
+       RowBox[{"a", "[", "n", "]"}], "+", "n"}]}], ",", 
+     RowBox[{
+      RowBox[{"a", "[", "0", "]"}], "\[Equal]", "1"}]}], "}"}], ",", 
+   RowBox[{"a", "[", "n", "]"}], ",", "n"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6072370464392085`*^9, 3.607237049861404*^9}, {
+  3.607768966504779*^9, 3.607769061171802*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"x", "\[Rule]", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"x", "\[Rule]", "1"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.607769020926196*^9, {3.607769051879128*^9, 3.607769063892878*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"a", "[", "n", "]"}], "\[Rule]", 
+    RowBox[{
+     FractionBox["1", "2"], " ", 
+     RowBox[{"(", 
+      RowBox[{"2", "-", "n", "+", 
+       SuperscriptBox["n", "2"]}], ")"}]}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.607769020926196*^9, {3.607769051879128*^9, 3.607769063955168*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"RSolve", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"a", "[", 
+      RowBox[{"n", "+", "1"}], "]"}], "\[Equal]", 
+     RowBox[{
+      RowBox[{"a", "[", "n", "]"}], "+", "n"}]}], "}"}], ",", 
+   RowBox[{"a", "[", "n", "]"}], ",", "n"}], "]"}]], "Input",
+ CellChangeTimes->{{3.607769014407428*^9, 3.607769017577263*^9}, 
+   3.607769066581058*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"a", "[", "n", "]"}], "\[Rule]", 
+    RowBox[{
+     RowBox[{
+      FractionBox["1", "2"], " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", "1"}], "+", "n"}], ")"}], " ", "n"}], "+", 
+     RowBox[{"C", "[", "1", "]"}]}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.607769067651338*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"De", " ", "ordre", " ", "2."}]], "Input",
+ CellChangeTimes->{{3.607769152449923*^9, 3.607769153643054*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.607769002130994*^9, 3.607769003808881*^9}, 
+   3.607769140875584*^9}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6072370433260303`*^9, 3.607237044699109*^9}}]
+},
+ScreenStyleEnvironment->"Presentation",
+CellGrouping->Manual,
+WindowSize->{1022, 523},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+ShowSelection->True,
+Magnification->0.5,
+FrontEndVersion->"9.0 for Linux x86 (32-bit) (February 7, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "Info3607774972-3904844"->{
+  Cell[10893, 335, 868, 17, 50, "Print",
+   CellTags->"Info3607774972-3904844"]},
+ "Info3607774993-3904844"->{
+  Cell[12735, 386, 849, 17, 51, "Print",
+   CellTags->"Info3607774993-3904844"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"Info3607774972-3904844", 44819, 1407},
+ {"Info3607774993-3904844", 44930, 1410}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 143, 2, 26, "Input"],
+Cell[691, 24, 254, 6, 73, "Title"],
+Cell[948, 32, 3513, 87, 356, "Text"],
+Cell[CellGroupData[{
+Cell[4486, 123, 543, 15, 26, "Input"],
+Cell[5032, 140, 720, 23, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5789, 168, 344, 9, 26, "Input"],
+Cell[6136, 179, 362, 11, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6535, 195, 563, 15, 26, "Input"],
+Cell[7101, 212, 353, 9, 26, "Output"]
+}, Open  ]],
+Cell[7469, 224, 96, 1, 26, "Input"],
+Cell[7568, 227, 1099, 32, 136, "Text"],
+Cell[8670, 261, 143, 2, 26, "Input"],
+Cell[CellGroupData[{
+Cell[8838, 267, 627, 18, 45, "Input"],
+Cell[9468, 287, 231, 5, 26, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9736, 297, 530, 14, 26, "Input"],
+Cell[10269, 313, 464, 13, 26, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10770, 331, 120, 2, 26, "Input"],
+Cell[10893, 335, 868, 17, 50, "Print",
+ CellTags->"Info3607774972-3904844"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11798, 357, 133, 2, 26, "Input"],
+Cell[11934, 361, 306, 4, 82, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12277, 370, 180, 3, 26, "Input"],
+Cell[12460, 375, 118, 2, 26, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12615, 382, 117, 2, 26, "Input"],
+Cell[12735, 386, 849, 17, 51, "Print",
+ CellTags->"Info3607774993-3904844"]
+}, Open  ]],
+Cell[13599, 406, 4366, 134, 494, "Text"],
+Cell[17968, 542, 96, 1, 33, "Subsection"],
+Cell[18067, 545, 1641, 56, 101, "Text"],
+Cell[CellGroupData[{
+Cell[19733, 605, 683, 20, 65, "Input"],
+Cell[20419, 627, 289, 9, 26, "Output"],
+Cell[20711, 638, 508, 16, 29, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21256, 659, 553, 16, 46, "Input"],
+Cell[21812, 677, 458, 16, 31, "Output"],
+Cell[22273, 695, 778, 26, 53, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23088, 726, 580, 17, 46, "Input"],
+Cell[23671, 745, 246, 8, 26, "Output"],
+Cell[23920, 755, 368, 12, 29, "Output"]
+}, Open  ]],
+Cell[24303, 770, 92, 1, 26, "Input"],
+Cell[24398, 773, 96, 1, 26, "Input"],
+Cell[24497, 776, 98, 1, 33, "Subsection"],
+Cell[24598, 779, 2614, 68, 411, "Text"],
+Cell[27215, 849, 16, 0, 25, "Text"],
+Cell[CellGroupData[{
+Cell[27256, 853, 593, 18, 46, "Input"],
+Cell[27852, 873, 71, 1, 26, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27960, 879, 120, 2, 26, "Input"],
+Cell[28083, 883, 73, 1, 26, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28193, 889, 120, 2, 26, "Input"],
+Cell[28316, 893, 72, 1, 26, "Output"]
+}, Open  ]],
+Cell[28403, 897, 124, 2, 26, "Input"],
+Cell[CellGroupData[{
+Cell[28552, 903, 695, 21, 26, "Input"],
+Cell[29250, 926, 245, 5, 26, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[29532, 936, 652, 19, 26, "Input"],
+Cell[30187, 957, 333, 11, 29, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30557, 973, 238, 6, 26, "Input"],
+Cell[30798, 981, 225, 7, 26, "Output"]
+}, Open  ]],
+Cell[31038, 991, 60, 1, 25, "Text"],
+Cell[31101, 994, 103, 2, 21, "DisplayFormula"],
+Cell[31207, 998, 161, 2, 33, "Subsection"],
+Cell[31371, 1002, 567, 10, 61, "Text"],
+Cell[31941, 1014, 1593, 48, 84, "Input"],
+Cell[33537, 1064, 396, 9, 26, "Input"],
+Cell[33936, 1075, 346, 8, 26, "Input"],
+Cell[CellGroupData[{
+Cell[34307, 1087, 607, 18, 84, "Input"],
+Cell[34917, 1107, 70, 1, 26, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35024, 1113, 232, 4, 46, "Input"],
+Cell[35259, 1119, 92, 1, 26, "Output"],
+Cell[35354, 1122, 92, 1, 26, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35483, 1128, 187, 3, 46, "Input"],
+Cell[35673, 1133, 93, 1, 26, "Output"],
+Cell[35769, 1136, 93, 1, 26, "Output"]
+}, Open  ]],
+Cell[35877, 1140, 983, 33, 103, "Input"],
+Cell[36863, 1175, 366, 7, 26, "Input"],
+Cell[37232, 1184, 146, 3, 61, "Section"],
+Cell[37381, 1189, 2815, 69, 324, "Text"],
+Cell[40199, 1260, 109, 1, 33, "Subsection"],
+Cell[40311, 1263, 1382, 33, 189, "Text"],
+Cell[41696, 1298, 118, 2, 26, "Input"],
+Cell[CellGroupData[{
+Cell[41839, 1304, 707, 20, 65, "Input"],
+Cell[42549, 1326, 274, 8, 26, "Output"],
+Cell[42826, 1336, 365, 11, 42, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[43228, 1352, 385, 11, 26, "Input"],
+Cell[43616, 1365, 371, 12, 42, "Output"]
+}, Open  ]],
+Cell[44002, 1380, 131, 2, 26, "Input"],
+Cell[44136, 1384, 118, 2, 26, "Input"],
+Cell[44257, 1388, 94, 1, 26, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
