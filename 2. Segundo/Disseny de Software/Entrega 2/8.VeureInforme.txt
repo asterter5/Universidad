@@ -1,0 +1,25 @@
+@startuml
+title Informe per mes per usuari
+actor Gerent as user
+participant MotoRental
+participant Controlador
+participant Consola
+user --> MotoRental: veureInformeUsuari()
+MotoRental -> Controlador : veureInformeUsuari()
+note right of Controlador
+    Mostra una llista de tots els informes per usuari
+    (DS 8a)
+end note
+note left of MotoRental #aqua 
+    informeUsuari: string
+    index: int 
+end note 
+loop usuari in llistaUsuaris
+    Controlador -> Consola : escriu(usuari)
+end loop
+MotoRental -> Consola : escriu("Index del usuari a veure el informe: ")
+MotoRental -> Consola : llegeix()
+Consola --> MotoRental : index
+MotoRental -> Controlador : informeUsuari = llistaInformes[index]
+Controlador -> Consola : escriu(informeUsuari)
+@enduml 

@@ -1,0 +1,11 @@
+@startuml
+title 1a. Crear nou Client
+participant MotoRental
+participant Controlador
+participant "nouUser : Client" as Client
+MotoRental --> Controlador: registrarNouUser(nom, pass)
+Controlador ->o Client
+activate Client
+Client -> Client: setNom(nom)
+Client -> Client: setPass(pass)
+@enduml 

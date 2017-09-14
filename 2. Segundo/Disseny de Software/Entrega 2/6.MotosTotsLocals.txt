@@ -1,0 +1,16 @@
+@startuml
+title Veure motos de tots els Locals
+actor Gerent as user
+participant MotoRental
+participant Controlador
+
+user --> MotoRental: veureTotesMotos()
+MotoRental -> Controlador: veureTotesMotos()
+loop local in llistaLocals
+    Controlador-> Controlador: getLlistaMotosPerLocal(local)
+    note right of Controlador 
+       (DS 6a)
+    end note
+    
+end loop
+@enduml

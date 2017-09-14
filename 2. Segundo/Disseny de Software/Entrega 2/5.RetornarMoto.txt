@@ -1,0 +1,63 @@
+@startuml
+title Retornar moto reservada
+actor Gerent as user
+participant MotoRental
+participant Controlador
+participant Consola
+participant "reserva : Reserva" as Reserva
+participant "goodReserva : Reserva" as gReserva
+user --> MotoRental: retornarMoto()
+note left of MotoRental #aqua
+        userCodi: string
+        estatMoto: int
+end note
+MotoRental-> Consola: escriu("Introdueix el codi de reserva: ")
+MotoRental-> Consola: llegeix()
+Consola --> MotoRental: userCodi
+MotoRental-> Consola: escriu("Estat de la moto?: ")
+MotoRental-> Consola: llegeix()
+Consola --> MotoRental: estatMoto
+note right of MotoRental
+        (estatMoto; 0 = correcte; 1 = desperfecte)
+end note
+MotoRental -> Controlador: retornarMoto(userCodi, estatMoto)
+note left of Controlador  #aqua
+        codiReserv: string
+        trobat:= false
+        goodReserva: Reserva
+end note
+loop reserva in llistaReserves
+    Controlador -> Reserva: getCodi()
+    Reserva --> Controlador: codiReserv
+    group if userCodi==codiReserv
+        Controlador-->Controlador: trobat:= true
+        Controlador-->Controlador: goodReserva:= reserva
+    end
+end loop
+note left of Controlador #aqua
+        dataActual: Date
+        dataFinal: Date
+        tempsFalta: int
+end note
+Controlador -> gReserva: getDataFinal()
+gReserva -> Controlador: dataFinal
+alt dataActual>dataFinal
+    Controlador -> Consola: escriu("La moto s'ha retornat fora de plaç.")
+    Controlador -> Controlador: tempsFalta:= dataFinal-dataActual
+    Controlador -> Controlador: crearFalta(tempsFalta, estatMoto)
+    note right of Controlador
+        (DS 5a)
+    end note
+    Controlador -> Consola: escriu("S'ha creat una falta per un ", tempsfalta)
+else
+    Controlador -> Consola: escriu("La moto s'ha retornat dins del plaç.")
+    group if estatMoto!=0
+        Controlador -> Controlador: crearFalta(0, estatMoto)
+        note right of Controlador
+        (DS 5a)
+        end note
+        Controlador -> Consola: escriu("S'ha creat una falta per mal estat.")
+    end group
+end 
+Controlador -> Consola: escriu("Tot correcte.")
+@enduml 

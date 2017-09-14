@@ -1,0 +1,55 @@
+@startuml
+class MotoRental {
+}
+class Persona {
+ nom
+ ..
+ cognom
+class Client {
+ DNI
+ ..
+ telefon
+ ..
+ isVip
+ ..
+ conteBank
+}
+class Falta {
+ cost
+}
+class Gerent {
+ uniqueID
+}
+class Local{
+ direccio
+ ..
+ tamany
+}
+class Vehicle {
+ model
+ ..
+ color
+ ..
+ ID
+ ..
+ estat
+}
+class Reserva{
+ temps
+ ..
+ codi
+}
+MotoRental "1" -- "*" Local : te
+Local "1" -- "*" Vehicle : disposa
+Client "1" -- "*" Falta : obte
+Falta "*" -- "1" Gerent : crea
+Client "1" -- "1" Reserva : solicita
+MotoRental "1" -- "*" Client : te
+Reserva "*" -- "1" Local : < origen
+Reserva "*" -- "1" Local : > desti
+Gerent "1" -- "1" Local : porta
+Reserva "1" -- "0 .. 1" Falta : pot tenir
+Vehicle "1" -- "1" Reserva : inclou
+Persona <|-- Client
+Persona <|-- Gerent
+@enduml 

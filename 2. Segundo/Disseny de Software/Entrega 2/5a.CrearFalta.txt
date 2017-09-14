@@ -1,0 +1,15 @@
+@startuml
+title 5a. Crear Falta
+participant Controlador
+participant "novaFalta : Falta" as Falta
+Controlador ->o Falta: crearFalta(tempsFalta, estatMoto)
+activate Falta 
+Falta -> Falta: setCost(tempsFalta + estatMoto*100)
+ 
+note right of Falta 
+    El cost de la Falta vindra establert
+    per el temps que s'ha tardat en retornarla
+    a partir de la dataFinal i amb un agreugant
+    per el estat.
+end note
+@enduml 

@@ -1,0 +1,103 @@
+@startuml
+title Reservar Moto
+actor UsuariLogat as user
+participant MotoRental
+participant Controlador
+participant Consola
+participant "**localRecollir** Local" as Local
+participant "**novaReserva** Reserva" as Reserva
+user --> MotoRental: reservarMoto()
+note left of MotoRental #aqua 
+    nom: string 
+end note
+MotoRental -> Consola: escriu("Introdueix el nom del local: ")
+MotoRental -> Consola: llegeix()
+note right: Introdueix un nom per a la cerca del local
+Consola --> MotoRental: nom
+note left of MotoRental #aqua 
+    nomLocal: string 
+    localRecollir: Local 
+    trobat:= false 
+end note 
+loop local in llistaLocals
+    MotoRental -> Controlador: nomLocal:= getNomLocal(local)
+    Controlador --> MotoRental: nomLocal
+    group if nom==nomLocal
+        MotoRental --> MotoRental: trobat:=true
+        MotoRental --> MotoRental: localRecollir = local
+    end group
+end loop
+group if trobat==false
+    MotoRental -> MotoRental : reservarMoto()
+end group
+note left of MotoRental #aqua 
+    llistaMotos: List<Vehicle> 
+end note
+MotoRental -> Controlador : getLlistaMotosDsiponiblesLocal(localRecollir)
+Controlador -> Local : getLlistaMotosDisponiblesLocal(localRecollir)
+note right: (DS 3a)
+activate Local
+Local --> Controlador: llistaMotos
+note right: Retorna la llista de vehicles en el local en questio
+Controlador --> MotoRental : llistaMotos
+deactivate Local
+loop moto in llistaMotos
+  
+    MotoRental -> Consola : escriu(moto)
+end loop
+note left of MotoRental #aqua 
+    index: int
+    motoDesitjada: string
+end note
+MotoRental -> Consola : escriu("Index de la moto desitjada: ")
+MotoRental -> Consola : llegeix()
+Consola --> MotoRental : index
+MotoRental -> MotoRental : motoDesitjada:= llistaMotos[index]
+    
+note left of MotoRental #aqua 
+    nomRetorn: string 
+end note
+MotoRental -> Consola : escriu("Introdueix el nom del local de tornada: ")
+MotoRental -> Consola : llegeix()
+Consola --> MotoRental : nomRetorn
+note left of MotoRental #aqua 
+    localArribada: Local 
+    trobat:= false 
+end note 
+loop local in llistaLocals
+    MotoRental -> Controlador: nomLocal:= local.getNomLocal()
+    Controlador --> MotoRental: nomLocal
+    group if nomRetorn==nomLocal
+        MotoRental --> MotoRental: trobat:=true
+        MotoRental --> MotoRental: localArribada = local
+    end group
+end loop
+note left of MotoRental #aqua 
+    dataInici: Date
+    dataFinal: Date
+    valid:= False
+end note
+group while [!valid]
+    MotoRental -> Consola : escriu("Data de recollida de la Moto: ")
+    MotoRental -> Consola : llegeix()
+    Consola --> MotoRental : dataInici
+    MotoRental -> Consola : escriu("Data de retorn de la Moto: ")
+    MotoRental -> Consola : llegeix()
+    Consola --> MotoRental : dataFinal  
+    group if dataInici < dataFinal
+        MotoRental --> MotoRental : valid:= True
+    end group
+    MotoRental -> Consola : escriu("Dates no valides, torna a intentar.")
+end group
+note left of MotoRental #aqua 
+    novaReserva: Reserva
+    codiReserva: string 
+end note
+MotoRental -> Controlador : novaReserva:= reservarMoto(localRecollir, localArribada, motoDesitjada, dataInici, dataFinal, UsuariLogat)
+MotoRental -> Controlador : getCodiReserva(novaReserva)
+Controlador -> Reserva : getCodiReserva()
+Reserva --> Controlador : codiReserva
+Controlador --> MotoRental : codiReserva
+MotoRental -> Consola : escriu("Reserva finalitzada amb exit.")
+MotoRental -> Consola : escriu(codiReserva)
+@enduml

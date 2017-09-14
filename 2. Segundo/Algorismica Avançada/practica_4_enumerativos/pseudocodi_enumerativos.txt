@@ -1,0 +1,17 @@
+def main(G):
+    pass
+
+def backtracking(G, cMin, cMax, solP):
+    if (solP.solucionPosible(G)):
+        if (solP < cMax):
+            cotaMax(G, cMax, solP)
+    
+    if (cMin + solP < cMax):
+        solP <- guarda una nueva asignacion mas
+        backtracking(G, cMin, cMax, solP)
+
+def cotaMin(G, cMin, solP):
+    pass
+
+def cotaMax(G, cMax, solP):
+    pass

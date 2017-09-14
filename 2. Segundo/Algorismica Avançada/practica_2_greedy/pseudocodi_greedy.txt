@@ -1,0 +1,18 @@
+def aparellament(G, nodes, vertex):
+  sol = [];
+  nod = nodes;
+  edg = vertex;
+
+  MyEdge = (0, 1, {10000});
+
+  si la llsta nod[] == buida:
+    return solucio;
+
+  for E in edg:
+    if E[2] <= MyEdge[2]:
+	MyEdge = E;
+  borrem MyEdge de la llista edg.
+  borrem els nodes usats de la llista nod.
+  
+  append el MyEdge al vector sol.
+  aparellament(G, nodes_restants, vertex_restants);

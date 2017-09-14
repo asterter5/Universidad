@@ -1,0 +1,24 @@
+@startuml
+title 3b. Crear Reserva
+participant Controlador
+participant "usuariLogat : Client" as Client
+participant "novaReserva : Reserva" as Reserva
+Controlador ->o Reserva: reservarMoto(localRecollir, localArribada, motoDesitjada, dataInici, dataFinal, usuariLogat)
+activate Reserva 
+Reserva -> Reserva: setLocals(localRecollir, localArribada)
+Reserva -> Reserva: setMoto(MotoDesitjada)
+Reserva -> Reserva: setTemps(dataInici, dataFinal)
+Reserva -> Reserva: setCodi(codiReserva)
+note right of Reserva 
+    el parametre "codiReserva" es un string generat
+    aleatoriament. 
+end note
+note right of Reserva 
+    guardem cada parametre necessari per
+    a guardar la nostra reserva. 
+end note
+
+Reserva --> Controlador : novaReserva
+deactivate Reserva
+
+@enduml  

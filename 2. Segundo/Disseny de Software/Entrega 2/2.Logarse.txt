@@ -1,0 +1,67 @@
+@startuml
+title Logar-se
+actor UsuariNoLogat as user
+participant MotoRental
+participant Controlador
+participant Consola
+participant Client
+user --> MotoRental: logIn()
+note left of MotoRental #aqua
+	   nom: string
+    pas: string
+end note
+MotoRental -> Consola: escriu("Introdueix nom usuari: ") 
+MotoRental -> Consola: llegeix() 
+note right: Llegeix un nom d'usuari
+Consola -->MotoRental: nom
+MotoRental -> Consola: escriu("Introdueix pass: ") 
+    MotoRental -> Consola: llegeix() 
+    note right: Llegeix la contrasenya
+    Consola -->MotoRental: pass
+note left of MotoRental #aqua
+    trobat:= false
+    nomU: string
+    passU: string
+    userU: Client
+    end note
+note left of MotoRental #aqua
+            isAdmin:=false
+        end note
+loop User in llistaUsers
+            MotoRental -> Controlador: nomU := getNom(User)
+            Controlador --> MotoRental : nomU
+            group if nomU==nom
+                MotoRental -->MotoRental: trobat:= true
+            end
+        end
+alt trobat
+    MotoRental -> Controlador: passU = userU.getPass()
+    Controlador -> Client: userU.getPass()
+    Client --> Controlador: passU
+    Controlador--> MotoRental : passU
+    alt passU==pass
+        
+        
+        MotoRental -> Controlador: userU.isAdmin()
+        note right: La contrasenya es correcta
+        Controlador -> Client: userU.isAdmin()
+        Client --> Controlador: isAdmin
+        Controlador--> MotoRental : isAdmin
+        
+        alt isAdmin
+            MotoRental -> MotoRental : menuAdmin()
+        else !isAdmin
+            MotoRental -> MotoRental : menuClient()           
+        end
+    
+    else passU!=pass
+        
+        MotoRental -> Consola: escriu("La contrasenya introduida es erronea")     
+        note right: La contrasenya es incorrecta    
+    end
+else !trobat
+    MotoRental -> Consola: escriu("L'usuari no existeix") 
+end
+MotoRental --> user
+note right: Reinicia el procés
+@enduml

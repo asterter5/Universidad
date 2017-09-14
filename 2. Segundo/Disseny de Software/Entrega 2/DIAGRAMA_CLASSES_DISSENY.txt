@@ -1,0 +1,136 @@
+@startuml
+
+package Vista <<Cloud>>{
+ class MotoRental{
+  mController : MRSAController
+  __
+ }
+
+ class Menu{
+ }
+}
+
+package Controlador <<Cloud>>{
+ class MRSAController{
+  llistaClients : ArrayList<Client>
+  ..
+  llistaLocals : ArrayList<Local>
+  __
+  void registrarNouUser(usuari)
+  ..
+  ArrayList<Vehicle> getLlistaMotosDisponiblesLocal()
+  ..
+  void reservarMoto(localRecollir, localArribada, motoDesitjada, dataInici, dataFinal, usuariLogat)
+  ..
+  String getCodiReserva(reserva)
+  ..
+  Boolean lliurarMoto(codiReserva)
+  ..
+  void showReservaForGerent(reserva)
+  ..
+  void retornarMoto(userCode, estatMoto)
+  ..
+  void crearFalta(tempsFalta, estatMoto)
+  ..
+  void veureTotesMotos()
+  ..
+  void getLlistaMotosPerLocal(nomLocal)
+  ..
+  void gestioLocal()
+  ..
+  void transferirMotos(localMes, localMenys, numMotos)
+  ..
+  void veureInformeUsuari()
+  ..
+  void generarInformeUsuaris()
+ }
+}
+
+package Model <<Cloud>>{
+class Persona{
+ nom : String
+ ..
+ cognom : String
+ __
+}
+
+class Client{
+ DNI : String
+ ..
+ telefon : Double
+ ..
+ isVip : Boolean
+ ..
+ conteBank : String
+ ..
+ llistaReserves : ArrayList<Reserva>
+ ..
+ llistaFaltes : ArrayList<Falta>
+ __
+}
+
+class Falta {
+ cost : Float
+ __
+}
+
+class Gerent {
+ uniqueID : String
+ __
+}
+
+class Local{
+ gerentLocal : Gerent
+ ..
+ nomLocal : String
+ ..
+ direccio : String
+ ..
+ tamany : int
+ ..
+ llistaVehicles : ArrayList<Vehicle>
+ __
+}
+
+class Vehicle {
+ model : String
+ ..
+ color : Colour
+ ..
+ ID : String
+ ..
+ estat : int
+ __
+}
+
+class Reserva{
+ dataInici : Date
+ ..
+ dataFinal : Date
+ ..
+ localRecollir : Local
+ ..
+ localArribada : Local
+ ..
+ motoReservada : Vehicle
+ ..
+ codiReserva : String
+ __
+ void showMotoLliure()
+}
+}
+
+MotoRental "1" -- "1" MRSAController : > inclou
+MotoRental "1" -- "1" Menu : > usa
+MRSAController "1" -- "*" Local : > te
+Local "1" -- "*" Vehicle : > disposa
+Client "1" -- "0..3" Falta : > obte
+Client "1" -- "1..*" Reserva : > solicita
+MRSAController "1" -- "*" Client : > te
+Reserva "1" -- "2" Local : > origen/destí
+Gerent "1" -- "1" Local : < te
+Vehicle "1" -- "1" Reserva : < inclou
+Persona <|-- Client
+Persona <|-- Gerent
+
+@enduml  

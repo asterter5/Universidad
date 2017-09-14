@@ -1,0 +1,48 @@
+@startuml
+left to right direction
+skinparam packageStyle rect
+actor Client as user <<Humà>> #red
+actor Persona as nologuser <<Humà>> #red
+actor Gerent as owner <<Humà>> #blue
+actor Sistema as time #yellow
+rectangle MotoRentals{
+(1. Registrarse) as UC1
+(2. Fer Log-in) as UC2
+(3. Fer reserva) as UC3
+(4. Donar-se de baixa) as UC4
+(5. Modificar la reserva) as UC5
+(6. Fer Log-out) as UC6
+(7. Veure motos disponinbles d'un local) as UC7
+(8. Finalitzar Reserva) as UC8
+(9. Entregar moto) as UC9
+(10. Veure informe) as UC10
+(11. Veure motos d'un local) as UC11
+(12. Veure locals menys 5 motos) as UC12
+(13. Veure locals mes de 75% motos) as UC13
+(14. Gestionar motos local) as UC14
+(15. Donar alta VIP) as UC15
+(16. Generar informe) as UC16
+(17. Crear penalitzacio) as UC17
+(18. Eliminar Client) as UC18
+(UC17) ..> (UC8) : extends
+(UC18) ..> (UC17) : extends
+(UC3) ..> (UC7) : include
+user --> (UC3)
+user --> (UC4)
+user --> (UC5)
+user --> (UC6)
+user --> (UC7)
+owner --> (UC8)
+owner --> (UC9)
+owner --> (UC10)
+owner --> (UC11)
+owner --> (UC12)
+owner --> (UC13)
+owner --> (UC14)
+owner --> (UC15)
+time --> (UC15)
+time --> (UC16)
+nologuser --> (UC1)
+nologuser --> (UC2)
+}
+@enduml 

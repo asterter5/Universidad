@@ -1,0 +1,42 @@
+@startuml
+title 8a. Generar Informes dels usuaris (automatic cada mes)
+actor Sistema as user
+participant MotoRental
+participant Controlador
+participant Consola
+participant "**r** Reserva" as Reserva
+participant "**f** Falta" as Falta
+user -> MotoRental : generarInformeUsuaris()
+activate MotoRental
+MotoRental -> Controlador : generarInformeUsuaris()
+activate Controlador
+note right of Controlador #aqua
+      llistaReserves:= List<Reserves>
+      llistaFaltes:= List<Falta>
+end note
+loop user in llistaUsuaris
+      Controlador -> Controlador : llistaReserves = getReservesUsuari(user)
+      Controlador -> Controlador : llistaFaltes = getFaltesUsuari(user)
+      activate Reserva
+      loop reserva in llistaReserves
+            Reserva -> Consola : escriu(reserva)
+            note right of Reserva
+                 el metode "escriu" printa totes les dades 
+                 necessaries de la reserva (Override toString() method).
+            end note
+            deactivate Reserva
+      end loop
+      activate Falta
+      loop falta in llistaFaltes
+            Falta -> Consola : escriu(falta)
+            note right of Falta
+                 el metode "escriu" printa totes les dades 
+                 necessaries de la falta (Override toString() method).
+            end note
+            deactivate Falta
+      end loop
+end loop
+deactivate Controlador
+deactivate MotoRental
+
+@enduml

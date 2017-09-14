@@ -1,0 +1,39 @@
+def grafo_tesoro():
+	nodeCount = 0;
+	treasureCount= 0;
+	pathCount = 0;
+
+	abrir ".dat"
+	f.read();
+	for line in f:
+		for Chr in line:
+			if Chr == ".":
+				crear node [nodeCount].
+				put data = "node".
+				nodeCount++;
+			else-if Chr == "X":
+				crear node [nodeCount].
+				put data = "wall".
+				nodeCount++;
+			else-if Chr == "$":
+				crear node [nodeCount].
+				put data = "TREASURE".
+				nodeCount++;
+				treasureCount++;
+		//TODO: Conectar los nodos del mapa...
+
+	treasures = []
+	visited = set() //all bool nodes to "false"
+	stack = [startNode]
+	while stack:
+		tmpNode = stack.pop()
+		if tmpNode not in visited:
+			visited[tmpNode] = true
+			push in stack all neighbors of tmpNode.
+			pathCount++;
+			if tmpNode.data = "TREASURE":
+				treasures.append("Tresor ", tmpNode," accesible a ", pathCount, " passes del origen.")
+	if treasures.length() != treasureCount:
+		treasures.append("Tresor nº ", treasures.lenght(), "inaccesible.")
+
+	return treasures

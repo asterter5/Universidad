@@ -1,0 +1,42 @@
+@startuml
+title Registrar-se
+actor UsuariNoLogat as user
+participant MotoRental
+participant Controlador
+participant Consola
+user --> MotoRental: registrarse()
+MotoRental -> Consola: escriu("Introdueix nom: ") 
+MotoRental -> Consola: llegeix() 
+note right: Llegeix un nom d'usuari
+Consola -->MotoRental: nom
+note left of MotoRental #aqua
+	   trobat:= false
+    nomU: string
+end note
+loop User in llistaUsers
+            MotoRental -> Controlador: nomU := getNom(User)
+            group if nomU==nom
+                MotoRental -->MotoRental: trobat:= true
+            end
+        end
+note left of MotoRental #aqua
+	     nouNom: string
+      nouPass: string
+end note
+alt !trobat
+    MotoRental -> Consola: escriu("Introdueix pass: ") 
+    MotoRental -> Consola: llegeix() 
+    note right: Llegeix la contrasenya
+    Consola -->MotoRental: pass
+    MotoRental --> MotoRental: nouNom:= nom
+    MotoRental --> MotoRental: nouPass:= pass
+    MotoRental -> Controlador: registrarNouUser(nouNom, nouPass)
+    note right: Crea un nou usuari amb les dades introduides
+    MotoRental -> Consola: escriu("Registre completat") 
+else trobat
+    MotoRental -> Consola: escriu("El nom ja existeix!") 
+    MotoRental -> MotoRental: registrarse()
+    note right: Reinicia el procés
+end
+MotoRental --> user
+@enduml

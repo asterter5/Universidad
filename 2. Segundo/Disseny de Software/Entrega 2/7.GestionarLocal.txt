@@ -1,0 +1,53 @@
+@startuml
+title 7. Gestio motos Local
+actor Gerent as user
+participant MotoRental
+participant Controlador
+participant Consola
+participant "local : Local" as Local
+user --> MotoRental: gestioLocal()
+MotoRental -> Controlador: gestioLocal()
+note left of Controlador #aqua
+   nomMore: string
+   nomLess: string
+   nomLocal: string
+   trobat1: bool
+   trobat2: bool
+   localMore: Local
+   localLess: Local
+end note
+Controlador -> Consola: escriu("Entra el nom d'un local amb mes de 75% de capacitat")
+Consola --> Controlador: nomMore
+Controlador -> Consola: escriu("Entra el nom d'un local amb menys de 5 motos")
+Consola --> Controlador: nomLess
+loop local in llistaLocals
+    Controlador -> Local: getNom()
+    Local--> Controlador : nomLocal
+    group if nomMore==nomLocal
+        Controlador --> Controlador : trobat1:=true
+        Controlador --> Controlador : localMore:= local
+    end group
+    group if nomLess==nomLocal
+        Controlador --> Controlador : trobat2:=true
+        Controlador --> Controlador : localLess:= local
+    end group
+end loop
+alt trobat1==false || trobat2==false
+    Controlador -> Controlador : gestioLocal()
+    note right of Controlador: En cas de valor erroni, es torna a iniciar el procés
+    Controlador -> Consola: escriu("Algun dels locals ha sigut introduit erroniament")
+else trobat1==true && trobat2==true
+    note left of Controlador #aqua
+         numMotos: int
+    end note
+    Controlador -> Consola: escriu("Cuantes motos vols transferir?")
+    Consola --> Controlador: numMotos
+    Controlador -> Controlador: transferirMotos(localMore, localLess, numMotos)
+    Controlador -> Consola: escriu("El equip de logistica ha estat avisat")
+    note right of Controlador
+        El avís al sistema de logistica no es algo
+        que sigui responsabilitat del software, per tant
+        utilitzarem aquet recurs.
+    end note
+end 
+@enduml 

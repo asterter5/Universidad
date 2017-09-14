@@ -1,0 +1,67 @@
+@startuml
+title Lliurar moto reservada
+
+actor Gerent as user
+
+participant MotoRental
+participant Controlador
+participant Consola
+participant "reserva : Reserva" as Reserva
+participant "goodReserva : Reserva" as gReserva
+
+user --> MotoRental: lliurarMoto()
+
+note left of MotoRental
+        userCodi: string
+        goodCodi: bool
+end note
+
+MotoRental-> Consola: escriu("Introdueix el codi de reserva: ")
+MotoRental-> Consola: llegeix()
+Consola --> MotoRental: userCodi
+
+MotoRental -> Controlador:  goodCodi := lliurarMoto(userCodi)
+
+note left of Controlador 
+        userCodi:= userCodi
+        codiReserv: string
+        trobat:= false
+        goodReserva: Reserva
+end note
+
+
+
+loop reserva in llistaReserves
+
+    Controlador -> Reserva: getCodi()
+    Reserva --> Controlador: codiReserv
+
+    group if userCodi==codiReserv
+        Controlador-->Controlador: trobat:= true
+    end
+end loop
+
+alt trobat 
+    Controlador --> MotoRental: true
+
+else !trobat
+    Controlador --> MotoRental: false
+end
+
+alt goodCodi
+    MotoRental--> Consola: escriu("Codi correcte! Procedir amb el lliurament de la moto")
+    MotoRental-> Controlador: showReservaForGerent(goodReserva)
+    Controlador -> gReserva: showMotoLliurar()
+
+note left of gReserva 
+        moto:= Vehicle
+end note
+    gReserva -> gReserva: moto:= getMoto()
+    gReserva -> Consola: escriu(moto)
+
+else !goodCodi
+    MotoRental--> Consola: escriu("Codi incorrecte.. Error escrivint?")
+    MotoRental --> user
+    note right: Reinicia el procés
+end
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+title Veure motos disponibles de un Local
+actor UsuariLogat as user
+participant MotoRental
+participant Controlador
+participant Local
+note left of Controlador #aqua 
+        localRecollida: string
+        llistaDisponibles: List<Vehicle>
+    end note
+user --> MotoRental: veureMotosDisponibles(localRecollida)
+MotoRental -> Controlador: getLlistaMotosDisponiblesLocal(localRecollida)
+Controlador -> Local: getLlistaMotosDisponiblesLocal(localRecollida)
+loop vehicle in llistaVehicles
+    group if vehicle.getDisponible() == True
+       Local -> Local : llistaDisponibles.add(vehicle)
+    end group
+end loop
+note right of Local
+       El nostre programa retorna una
+    llista de motos disponibles per al client
+    end note
+Local --> Controlador : llistaDisponibles
+Controlador --> MotoRental : llistaDisponibles
+@enduml 

@@ -1,0 +1,18 @@
+@startuml
+title Veure motos de un Local
+participant Controlador
+participant Consola
+participant Local
+note left of Controlador #aqua 
+        nomLocal: string
+    end note
+Controlador -> Local: getLlistaMotosPerLocal(nomLocal)
+note right of Local
+        En el nostre programa la llista de
+    motos a printar li pasara a la 
+    Consola la clase Local directament
+    end note
+loop moto in llistaVehicles
+    Local -> Consola: escriu(moto)
+end loop
+@enduml
